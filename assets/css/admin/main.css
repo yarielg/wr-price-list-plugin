@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap');
+
+
+.wp-page{
+    font-size: 12px;
+    font-weight: bold;
+    font-family: 'Nunito', sans-serif;
+}
+
+table.list-sap th{
+    font-size: 14px;
+}
+table.list-sap td{
+    padding: .2rem;
+    vertical-align: middle;
+}
+
+td.details-control {
+    background: url('../../img/open.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.shown td.details-control {
+    background: url('../../img/close.png') no-repeat center center;
+}
