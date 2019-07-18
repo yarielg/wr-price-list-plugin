@@ -49,17 +49,32 @@ class ProductController{
         return count($variations) > 0 ? $variations : [] ;
     }
 
+    function getImageVariationByIdVariation($id_variation){
+        global $wpdb;
+        $postmeta_table =  $wpdb->prefix . 'postmeta';
+        $variations = $wpdb->get_results("SELECT * FROM " . $postmeta_table . " WHERE meta_key = '_thumbnail_id'  AND post_id = '$id_variation'");
+
+        $variations = stdToArray($variations);
+        $image_url = -1;
+        if(count($variations)>0){
+            $variation_thumbnail_id = $variations[0];
+            $image_url = wp_get_attachment_image_url( $variations[0]['meta_value'], 'post-thumbnail' );
+        }
+
+        return $image_url ;
+    }
+
     function getVariations(){
         global $wpdb;
         $id = $_POST['id'];
         $posts_table = $wpdb->prefix . 'posts';
         $postmeta_table =  $wpdb->prefix . 'postmeta';
-        $variations = $wpdb->get_results("SELECT * FROM " .$posts_table. " INNER JOIN ".$postmeta_table." ON " .$posts_table. ".ID = ".$postmeta_table.".post_id WHERE ".$postmeta_table.".meta_key = '_thumbnail_id'  AND post_parent = '$id'");
+        $variations = $wpdb->get_results("SELECT * FROM " . $posts_table. " WHERE  post_parent = '$id'");
 
         $variations = stdToArray($variations);
         $final_variations = array();
         foreach ($variations as $variation){
-            $variation['image'] = wp_get_attachment_image_url( $variation['meta_value'], 'post-thumbnail' );
+            $variation['image'] = $this->getImageVariationByIdVariation($variation['post_id']) ?: null;
             array_push($final_variations,$variation);
         }
 

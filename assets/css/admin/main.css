@@ -23,6 +23,10 @@ tr.shown td.details-control {
     background: url('../../img/close.png') no-repeat center center;
 }
 
+table.tb-variations tr td{
+    background: #F5F5DC !important;
+}
+
 tr.no-variations td.details-control{
     background: none ;
     cursor: auto;

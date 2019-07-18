@@ -21,19 +21,17 @@
                 },
             },
             "columns": [
-
-                { "data" : "ID", "name": 'ID' },
-                { "data" : "image", "name": 'image' },
                 {
                     "className":      'details-control',
                     "orderable":      false,
                     "data":    null,
                     "defaultContent": '',
                 },
+
+                { "data" : "ID", "name": 'ID' },
+                { "data" : "image", "name": 'image' },
                 { "data" : "post_title", "name": 'post_title' },
-                { "data" : "post_parent", "name": 'post_parent' },
                 { "data" : "post_type", "name": 'post_type' },
-                { "data" : "post_status", "name": 'post_status' },
                 { "data" : "guid", "name": 'guid'}
             ],
             "createdRow": function( row, data, dataIndex ) {
@@ -54,10 +52,12 @@
             if ( row.child.isShown() ) {
                 row.child.hide();
                 tr.removeClass('shown');
+                $( ".tb-variations" ).hide( "slow" );
             }
             else {
                 row.child( format(row.data()) ).show();
                 tr.addClass('shown');
+                $( "table.tb-variations" ).slideDown( "slow" );
             }
         } );
 
@@ -80,7 +80,7 @@
                             "<thead><th>ID</th><th></th><th>Title</th><th>parent ID</th><th>Type</th><th>Status</th><th>View</th></thead>" +
                             "<tbody>";
                         for(var i=0;i<data.length;i++){
-                            variation_img = data[i]['image'] ? "<img src='"+ data[i]['image'] +"' width='50' height='50'>" : "<img src='https://imgplaceholder.com/120x120?text=Not+Found&font-size=25' width='50' height='50'>";
+                            variation_img = data[i]['image'] != -1 ? "<img src='"+ data[i]['image'] +"' width='50' height='50'>" : "<img src='https://imgplaceholder.com/120x120?text=Not+Found&font-size=25' width='50' height='50'>";
                             variation_tr += "<tr>" +
                                 "<td>"+ data[i]['ID'] +"</td>"+
                                 "<td>"+ variation_img  +"</td>"+
