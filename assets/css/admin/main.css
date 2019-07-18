@@ -8,7 +8,7 @@
 }
 
 table.list-sap th{
-    font-size: 14px;
+    font-size: 14px !important;
 }
 table.list-sap td{
     padding: .2rem;
@@ -21,10 +21,6 @@ td.details-control {
 }
 tr.shown td.details-control {
     background: url('../../img/close.png') no-repeat center center;
-}
-
-table.tb-variations tr td{
-    background: #E3E2DF !important;
 }
 
 tr.no-variations td.details-control{

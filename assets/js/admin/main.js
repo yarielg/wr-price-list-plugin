@@ -15,7 +15,7 @@
                 "dataSrc": function(data){
                     for(var i = 0; i < data.length; i++ ){
                         data[i]['guid'] = "<a class='btn btn-info btn-sm' href='" + data[i]['guid'] + "'>View</a>";
-
+                        data[i]['image'] = data[i]['image'] ? "<img src='"+ data[i]['image'] +"' width='50' height='50'>" : "<img src='https://imgplaceholder.com/120x120?text=Not+Found&font-size=25' width='50' height='50'>";
                     }
                     return data;
                 },
@@ -23,6 +23,7 @@
             "columns": [
 
                 { "data" : "ID", "name": 'ID' },
+                { "data" : "image", "name": 'image' },
                 {
                     "className":      'details-control',
                     "orderable":      false,
@@ -76,11 +77,13 @@
                 "success": function ( data ) {
                     if(data.length > 0 ){
                         variation_tr = "<table class='tb-variations' style='width: 100%;'>" +
-                            "<thead><th>ID</th><th>Title</th><th>parent ID</th><th>Type</th><th>Status</th><th>View</th></thead>" +
+                            "<thead><th>ID</th><th></th><th>Title</th><th>parent ID</th><th>Type</th><th>Status</th><th>View</th></thead>" +
                             "<tbody>";
                         for(var i=0;i<data.length;i++){
+                            variation_img = data[i]['image'] ? "<img src='"+ data[i]['image'] +"' width='50' height='50'>" : "<img src='https://imgplaceholder.com/120x120?text=Not+Found&font-size=25' width='50' height='50'>";
                             variation_tr += "<tr>" +
                                 "<td>"+ data[i]['ID'] +"</td>"+
+                                "<td>"+ variation_img  +"</td>"+
                                 "<td>"+ data[i]['post_title'] +"</td>"+
                                 "<td>"+ data[i]['post_parent'] +"</td>"+
                                 "<td>"+ data[i]['post_type'] +"</td>"+

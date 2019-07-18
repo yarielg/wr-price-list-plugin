@@ -11,6 +11,7 @@
 
                         <th></th>
                         <th>#</th>
+                        <th></th>
                         <th scope="col">Title</th>
                         <th scope="col">parent ID</th>
                         <th scope="col">Type</th>
