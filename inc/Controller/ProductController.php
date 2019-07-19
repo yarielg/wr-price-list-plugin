@@ -32,6 +32,7 @@ class ProductController{
             $product['variations'] = $this->getVariationByProductId($product['ID']);
             $image_values = wp_get_attachment_image_src( get_post_thumbnail_id($product['ID']), 'single-post-thumbnail' );
             $product['image'] = $image_values[0];
+            $product['price'] = 15;
             array_push($product_with_its_variations,$product);
         }
 
@@ -75,6 +76,7 @@ class ProductController{
         $final_variations = array();
         foreach ($variations as $variation){
             $variation['image'] = $this->getImageVariationByIdVariation($variation['post_id']) ?: null;
+            $variation['price'] = 15;
             array_push($final_variations,$variation);
         }
 

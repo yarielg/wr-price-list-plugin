@@ -10,10 +10,12 @@
                     <tr>
                         <th></th>
                         <th>ID</th>
-                        <th>#</th>
+                        <th></th>
 
                         <th scope="col">Title</th>
                         <th scope="col">Type</th>
+                        <th scope="col">Price</th>
+
                         <th scope="col">View</th>
                     </tr>
                     </thead>
