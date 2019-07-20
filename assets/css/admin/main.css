@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap');
 
 
-.wp-page{
+.wrpl-page{
     font-size: 12px;
     font-weight: bold;
     font-family: 'Nunito', sans-serif;
@@ -15,19 +15,19 @@ table.list-sap td{
     vertical-align: middle;
 }
 
-td.details-control {
+/*td.details-control {
     background: url('../../img/open.png') no-repeat center center;
     cursor: pointer;
 }
 tr.shown td.details-control {
     background: url('../../img/close.png') no-repeat center center;
-}
+}*/
 
-table tr.tb-variations{
+table tr.wrpl-variation-row{
     background: #F5F5DC !important;
 }
 
-tr.no-variations td.details-control{
+/*tr.no-variations td.details-control{
     background: none ;
     cursor: auto;
-}
+}*/

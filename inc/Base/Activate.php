@@ -23,7 +23,7 @@ class Activate{
 
         $sql1 = "CREATE TABLE $table_name1 (
           id mediumint(9) NOT NULL AUTO_INCREMENT,
-          description text NOT NULL,
+          description varchar(100) NOT NULL,
           PRIMARY KEY  (id)
         ) ENGINE=InnoDB $charset_collate;";
 

@@ -22,10 +22,10 @@ class Enqueue{
 		wp_enqueue_style( 'bootstrap_css', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' );
 
        // wp_enqueue_style('datatable_css', 'https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css' );
-        wp_enqueue_style('datatable_css', PLUGIN_URL . '/assets/css/admin/datatables.min.css'  );
-        wp_enqueue_style('datatable_css', PLUGIN_URL . '/assets/css/admin/editor.dataTables.min.css'  );
+        //wp_enqueue_style('datatable_css', PLUGIN_URL . '/assets/css/admin/datatables.min.css'  );
+      //  wp_enqueue_style('datatable_css', PLUGIN_URL . '/assets/css/admin/editor.dataTables.min.css'  );
 
-        wp_enqueue_style('main_admin_styles',  PLUGIN_URL . '/assets/css/admin/main.css' );
+        //wp_enqueue_style('main_admin_styles',  PLUGIN_URL . '/assets/css/admin/main.css' );
 
 
 		wp_enqueue_script( 'bootstrap_js', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js');
@@ -34,12 +34,12 @@ class Enqueue{
 
 		//wp_enqueue_script( 'datatable_js', 'https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js');
 
-		wp_enqueue_script( 'datatable_js', PLUGIN_URL . '/assets/js/admin/datatables.min.js');
-        wp_enqueue_script( 'datatable_js', PLUGIN_URL . '/assets/js/admin/dataTables.editor.min.js');
+		//wp_enqueue_script( 'datatable_js', PLUGIN_URL . '/assets/js/admin/datatables.min.js');
+       // wp_enqueue_script( 'datatable_js', PLUGIN_URL . '/assets/js/admin/dataTables.editor.min.js');
 
-		wp_enqueue_script('main_js', PLUGIN_URL . '/assets/js/admin/main.js',array ('jquery'), '1.0', true );
-        wp_enqueue_script( 'main_js');
-        wp_localize_script( 'main_js', 'parameters',['ajax_url'=> admin_url('admin-ajax.php')]);
+		//wp_enqueue_script('main_js', PLUGIN_URL . '/assets/js/admin/main.js',array ('jquery'), '1.0', true );
+       // wp_enqueue_script( 'main_js');
+       // wp_localize_script( 'main_js', 'parameters',['ajax_url'=> admin_url('admin-ajax.php')]);
 	}
 
 	function enqueue_frontend(){

@@ -3,16 +3,72 @@
     jQuery(document).ready(function(){
 
         var tbody = $('#products_dt tbody');
+        var select_list = $('#price_list');
+
+        select_list.change(function(){
+            alert(select_list.val());
+        });
+
+
 
         editor = new $.fn.dataTable.Editor( {
-            ajax: parameters.ajax_url,
             table: "#products_dt",
             idSrc:  'ID',
             fields: [ {
                 label: "Price:",
-                name: "price"
+                name: "price",
+                attr:  {
+                    type: 'number',
+                    maxlength: 10,
+                    placeholder: 'Price'
+                }
             }]
         });
+
+        //when the price change this event is called, so here we change the prices
+        editor.on( 'preEdit', function ( e, json, data, id ) {
+                if(data['price']>0 && data['price'] < 100000){ //validating the price is correct
+                    $.ajax( {
+                        type: 'POST',
+                        url:  parameters.ajax_url,
+                        data:{
+                            'id': data['ID'],
+                            'action':'edit_price',
+                            'price':data['price']
+                        },
+                        dataType: "json",
+                        success: function (json) {
+
+                        },
+                        error : function(jqXHR, excepetion){
+                            var msg = '';
+                            if (jqXHR.status === 0) {
+                                msg = 'Not connect.\n Verify Network.';
+                            } else if (jqXHR.status == 404) {
+                                msg = 'Requested page not found. [404]';
+                            } else if (jqXHR.status == 500) {
+                                msg = 'Internal Server Error [500].';
+                            } else if (exception === 'parsererror') {
+                                msg = 'Requested JSON parse failed.';
+                            } else if (exception === 'timeout') {
+                                msg = 'Time out error.';
+                            } else if (exception === 'abort') {
+                                msg = 'Ajax request aborted.';
+                            } else {
+                                msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                            }
+                            alert(msg);
+                        }
+
+                    } );
+                }else{
+                    alert('You type a wrong price, Price must be a valid number!');
+                }
+
+
+        } );
+
+        /**/
 
         // Activate an inline edit on click of a table cell
         $('#products_dt').on( 'click', 'tbody td.price', function (e) {
@@ -36,12 +92,12 @@
                 },
             },
             "columns": [
-                { //for row details
+               /* { //this is for row details, if you include this you have to include a th as well in thead table
                     "className":      'details-control',
                     "orderable":      false,
                     "data":    null,
                     "defaultContent": '',
-                },
+                },*/
 
                 { "data" : "ID", "name": 'ID' },
                 { "data" : "image", "name": 'image' },
@@ -51,23 +107,31 @@
                 { "data" : "guid", "name": 'guid'}
             ],
             "createdRow": function( row, data, dataIndex ) {
-                // Set the data-status attribute, and add a class
-                if(data['variations'].length == 0){
-                    $( row ).addClass('no-variations');
+                if(data['post_type'] == 'product_variation'){
+                    $(row).addClass('wrpl-variation-row');
+                }
 
-                }            }
-           // "order": [[1, 'asc']]
+                /*if(data['variations'].length == 0){
+                    $( row ).addClass('has-no-variations');
+                }*/
+
+               /* if( data['variations'].length === 0){
+                    $( row ).addClass('wrpl-simple-product');
+                }else{
+                    $( row ).addClass('wrpl-variation-product');
+                }*/
+            }
         });
 
 
         //show icon for row details and aldo add and remove variations depending on which product you choose.
-        tbody.on('click', 'td.details-control', function () {
+     /*   tbody.on('click', 'td.details-control', function () {
             var tr = $(this).closest('tr');
             var row = table.row( tr );
             var rowsChilds = format(row.data(), row); //get a raw html belong to all tr variations
             var html = $.parseHTML( rowsChilds); //parsing raw html to jquery elements
             if (tr.hasClass('shown')) {
-                
+
                 tr.removeClass('shown'); //Add class shown for change to open icon
                 $("#products_dt").find("tr.tb-variations").remove(); //Deleting all tr variations
             }
@@ -79,12 +143,11 @@
                 }
 
             }
-        } );
+        } );*/
 
         //format for the row details
-        //format for the row details
-        function format ( rowData,row ) {
-
+       /* function format ( rowData,row ) {
+            console.log(row.index());
             var table =  ('Loading...');
 
             $.ajax( {
@@ -104,11 +167,11 @@
                             table += "<tr role='row' class='no-variations tb-variations' id='tr-variation-"+i+"'>" +
                                 "<td></td>"+
                                 "<td class='id' data-dt-row="+row.index()+" data-dt-column='1'>"+ data[i]['ID'] +"</td>"+
-                                "<td class='imgage' data-dt-row="+row.index()+" data-dt-column='2'>"+ variation_img  +"</td>"+
+                                "<td class='image' data-dt-row="+row.index()+" data-dt-column='2'>"+ variation_img  +"</td>"+
                                 "<td class='title' data-dt-row="+row.index()+" data-dt-column='3'>"+ data[i]['post_title'] +"</td>"+
                                 "<td class='type' data-dt-row="+row.index()+" data-dt-column='4'>"+ data[i]['post_type'] +"</td>"+
                                 "<td class='price' data-dt-row="+row.index()+" data-dt-column='5'>"+ data[i]['price'] +"</td>"+
-                                "<td class='' data-dt-row="+row.index()+" data-dt-column='6'><a class='btn btn-info btn-sm' href='" + data[i]['guid'] + "'>View</a></td>"+
+                                "<td class='view' data-dt-row="+row.index()+" data-dt-column='6'><a class='btn btn-info btn-sm' href='" + data[i]['guid'] + "'>View</a></td>"+
                                 "</tr>";
                         }
 
@@ -122,7 +185,7 @@
                 }
             } );
             return table;
-        }
+        }*/
 
     });
 

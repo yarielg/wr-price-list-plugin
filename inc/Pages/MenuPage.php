@@ -8,9 +8,6 @@
 
 namespace Inc\Pages;
 
-/**
- * @class description: This class is used for create new pages inside of the menu plugin
- */
 class MenuPage{
 
 		public $porperties = array();
