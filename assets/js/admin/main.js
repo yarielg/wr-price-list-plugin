@@ -1,7 +1,7 @@
 (function($){
 
     jQuery(document).ready(function(){
-
+        var table = $('#products_dt');
         var tbody = $('#products_dt tbody');
         var select_list = $('#price_list');
 
@@ -18,7 +18,7 @@
                 label: "Price:",
                 name: "price",
                 attr:  {
-                    type: 'number',
+                    type: 'decimal',
                     maxlength: 10,
                     placeholder: 'Price'
                 }
@@ -40,7 +40,7 @@
                         success: function (json) {
 
                         },
-                        error : function(jqXHR, excepetion){
+                        error : function(jqXHR, exception){
                             var msg = '';
                             if (jqXHR.status === 0) {
                                 msg = 'Not connect.\n Verify Network.';
@@ -71,11 +71,11 @@
         /**/
 
         // Activate an inline edit on click of a table cell
-        $('#products_dt').on( 'click', 'tbody td.price', function (e) {
+        table.on( 'click', 'tbody td.price', function (e) {
             editor.inline( this );
         } );
 
-        var table = $('#products_dt').DataTable( {
+        table.DataTable( {
             "stateSave": true,
             "ajax": {
                 "url": parameters.ajax_url,
@@ -87,6 +87,7 @@
                     for(var i = 0; i < data.length; i++ ){
                         data[i]['guid'] = "<a class='btn btn-info btn-sm' href='" + data[i]['guid'] + "'>View</a>";
                         data[i]['image'] = data[i]['image'] ? "<img src='"+ data[i]['image'] +"' width='50' height='50'>" : "<img src='https://imgplaceholder.com/120x120?text=Not+Found&font-size=25' width='50' height='50'>";
+                        data[i]['post_type'] = data[i]['post_status'] == 'trash' ? data[i]['post_type'] + ' (trash)': data[i]['post_type'];
                     }
                     return data;
                 },
@@ -103,7 +104,7 @@
                 { "data" : "image", "name": 'image' },
                 { "data" : "post_title", "name": 'post_title' },
                 { "data" : "post_type", "name": 'post_type' },
-                { "data" : "price", "name": 'price' ,"render": $.fn.dataTable.render.number( ',', '.', 0, '$' ),"class" : 'price'},
+                { "data" : "price", "name": 'price' ,"render": function ( data, type, row ) { return '$'+ data;},"class" : 'price'},
                 { "data" : "guid", "name": 'guid'}
             ],
             "createdRow": function( row, data, dataIndex ) {

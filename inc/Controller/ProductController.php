@@ -20,14 +20,15 @@ class ProductController{
         add_action( 'wp_ajax_nopriv_edit_price', array($this,'editPrice' ));
         add_action( 'wp_ajax_edit_price', array($this,'editPrice' ));
 
-
+        add_filter( 'woocommerce_variable_sale_price_html', array($this,'iconic_variable_price_format'), 10, 2 );
+        add_filter( 'woocommerce_variable_price_html', array($this,'iconic_variable_price_format'), 10, 2 );
     }
 
     function getProducts(){
         global $wpdb;
 
         $products = $wpdb->get_results(
-            $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "posts WHERE post_type IN (%s,%s) AND post_status NOT IN (%s)", 'product','product_variation','auto-draft')
+            $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "posts  LEFT JOIN $wpdb->prefix" . "postmeta ON ID=post_id WHERE post_type IN (%s,%s) AND post_status NOT IN (%s) AND meta_key = %s", 'product','product_variation','auto-draft','_regular_price')
         );
 
         $products = stdToArray($products);
@@ -36,7 +37,7 @@ class ProductController{
            if(! $this->isProductHasVariations($product['ID'])){ //not including products with variations
                 $image_values = wp_get_attachment_image_src( get_post_thumbnail_id($product['ID']), 'single-post-thumbnail' );
                 $product['image'] = $image_values[0];
-                $product['price'] = 15;
+                $product['price'] = $product['meta_value'];
                 array_push($product_with_its_variations,$product);
             }
         }
@@ -101,16 +102,56 @@ class ProductController{
     }*/
 
     function editPrice(){
-        global $wpdb;
         $post_id = $_POST['id'];
         $price = $_POST['price'];
 
+        update_post_meta($post_id, '_regular_price', $price);
+       // update_post_meta($post_id, '_sale_price', '');
+        update_post_meta($post_id, '_price', $price);
 
-        $posts_table = $wpdb->prefix . 'posts';
-        $postmeta_table =  $wpdb->prefix . 'postmeta';
-        $variations = $wpdb->get_results("SELECT * FROM " . $posts_table. " WHERE  post_parent = '$id'");
 
-        echo json_encode(560);
+        echo json_encode(array('msg' => 'Price updated'));
         wp_die();
+    }
+
+    function getMinMaxPriceVariation($id){
+        global $wpdb;
+
+        $variations = $wpdb->get_results(
+            $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "posts INNER JOIN $wpdb->prefix" . "postmeta ON ID=post_id WHERE post_type = %s AND post_parent = $id AND meta_key = %s", 'product_variation','_regular_price')
+        );
+
+        $variations = stdToArray($variations);
+        $max = 0;
+        $min = PHP_FLOAT_MAX;
+        foreach($variations as $variation){
+            if($variation['meta_value'] > $max){
+                $max = $variation['meta_value'];
+            }
+            if($variation['meta_value'] < $min){
+                $min = $variation['meta_value'];
+            }
+        }
+        return array('min' => $min, 'max' => $max);
+    }
+
+    function iconic_variable_price_format( $price, $product ) {
+
+      //  $prefix = sprintf('%s: ', __('From', 'iconic'));
+
+       // $min_price_regular = 7;//$product->get_variation_regular_price( 'min', true );
+       // $min_price_sale    = 5;//$product->get_variation_sale_price( 'min', true );
+       // $max_price = 4;//$product->get_variation_price( 'max', true );
+       // $min_price = 4;//$product->get_variation_price( 'min', true );
+
+        $product_parent_id = $product->get_id();
+
+        /*$price = ( $min_price_sale == $min_price_regular ) ?
+            wc_price( $min_price_regular ) :
+            '<del>' . wc_price( $min_price_regular ) . '</del>' . '<ins>' . wc_price( $min_price_sale ) . '</ins>';*/
+
+        $min_max = $this->getMinMaxPriceVariation($product_parent_id);
+        return wc_price($min_max['min']) . " - " .  wc_price($min_max['max']);
+
     }
 }
