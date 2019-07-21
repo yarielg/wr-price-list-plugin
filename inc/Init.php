@@ -11,6 +11,7 @@ final class Init{
 			Base\Enqueue::class,
 
             Controller\ProductController::class,
+            //Controller\PriceListController::class,
 			//Functions\User::class,
 			//Functions\CheckAvailability::class,
 			//Functions\PriceListInventory::class

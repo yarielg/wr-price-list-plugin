@@ -18,55 +18,92 @@
                 label: "Price:",
                 name: "price",
                 attr:  {
-                    type: 'decimal',
+                    type: 'number',
                     maxlength: 10,
-                    placeholder: 'Price'
+                    placeholder: 'Regular Price'
+                }
+            },{
+                label: "Sale Price:",
+                name: "sale_price",
+                attr:  {
+                    type: 'number',
+                    maxlength: 10,
+                    placeholder: 'Sale Price'
                 }
             }]
         });
 
-        //when the price change this event is called, so here we change the prices
-        editor.on( 'preEdit', function ( e, json, data, id ) {
-                if(data['price']>0 && data['price'] < 100000){ //validating the price is correct
-                    $.ajax( {
-                        type: 'POST',
-                        url:  parameters.ajax_url,
-                        data:{
-                            'id': data['ID'],
-                            'action':'edit_price',
-                            'price':data['price']
-                        },
-                        dataType: "json",
-                        success: function (json) {
-
-                        },
-                        error : function(jqXHR, exception){
-                            var msg = '';
-                            if (jqXHR.status === 0) {
-                                msg = 'Not connect.\n Verify Network.';
-                            } else if (jqXHR.status == 404) {
-                                msg = 'Requested page not found. [404]';
-                            } else if (jqXHR.status == 500) {
-                                msg = 'Internal Server Error [500].';
-                            } else if (exception === 'parsererror') {
-                                msg = 'Requested JSON parse failed.';
-                            } else if (exception === 'timeout') {
-                                msg = 'Time out error.';
-                            } else if (exception === 'abort') {
-                                msg = 'Ajax request aborted.';
-                            } else {
-                                msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                            }
-                            alert(msg);
-                        }
-
-                    } );
-                }else{
-                    alert('You type a wrong price, Price must be a valid number!');
+        function editPriceAjaxRequest(data){
+            $.ajax( {
+                type: 'POST',
+                url:  parameters.ajax_url,
+                data:{
+                    'id': data['ID'],
+                    'action':'edit_price',
+                    'price':data['price'],
+                    'sale_price':data['sale_price']
+                },
+                dataType: "json",
+                success: function (json) {
+                    console.log(json);
+                },
+                error : function(jqXHR, exception){
+                    var msg = '';
+                    if (jqXHR.status === 0) {
+                        msg = 'Not connect.\n Verify Network.';
+                    } else if (jqXHR.status == 404) {
+                        msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status == 500) {
+                        msg = 'Internal Server Error [500].';
+                    } else if (exception === 'parsererror') {
+                        msg = 'Requested JSON parse failed.';
+                    } else if (exception === 'timeout') {
+                        msg = 'Time out error.';
+                    } else if (exception === 'abort') {
+                        msg = 'Ajax request aborted.';
+                    } else {
+                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                    alert(msg);
                 }
 
+            } );
+        }
 
+        var old_data = null;
+        editor.on( 'initEdit', function ( e, node, data, items, type ) {
+            old_data = data;
         } );
+
+
+        //when the price change this event is called, so here we change the prices
+        editor.on( 'preEdit', function ( e, json, data, id ) {
+            var row = datatable.row( '#' + id );
+            if(!isNaN(data['price']) && !isNaN(data['sale_price']) && data['price'] >= 0 && data['sale_price'] >= 0){
+                if(data['sale_price'] <= data['price'] ){
+                    editPriceAjaxRequest(data);
+
+                }else{
+                    alert('The regular price must be higher than the sale price, if you want $' + data['price'] + ' as regular price you must set sale price to 0 or set sale price below of $' +data['sale_price'] );
+                    datatable.ajax.reload();
+                }
+            }else{
+
+                alert('You must have to enter a valid number starting from 0');
+
+                datatable.ajax.reload();
+
+            }
+        } );
+
+        $(document).ajaxStart(function(){
+            $(".wrpl_loader").css("display", "block");
+            $("#modal-overlay").show();
+        });
+        $(document).ajaxComplete(function(){
+            $(".wrpl_loader").css("display", "none");
+            $("#modal-overlay").hide();
+        });
 
         /**/
 
@@ -75,8 +112,10 @@
             editor.inline( this );
         } );
 
-        table.DataTable( {
+        var datatable = table.DataTable( {
             "stateSave": true,
+            "deferRender": true,
+            rowId: 'ID',
             "ajax": {
                 "url": parameters.ajax_url,
                 "type": "POST",
@@ -87,7 +126,7 @@
                     for(var i = 0; i < data.length; i++ ){
                         data[i]['guid'] = "<a class='btn btn-info btn-sm' href='" + data[i]['guid'] + "'>View</a>";
                         data[i]['image'] = data[i]['image'] ? "<img src='"+ data[i]['image'] +"' width='50' height='50'>" : "<img src='https://imgplaceholder.com/120x120?text=Not+Found&font-size=25' width='50' height='50'>";
-                        data[i]['post_type'] = data[i]['post_status'] == 'trash' ? data[i]['post_type'] + ' (trash)': data[i]['post_type'];
+                        data[i]['post_type'] = data[i]['post_type'];
                     }
                     return data;
                 },
@@ -105,6 +144,7 @@
                 { "data" : "post_title", "name": 'post_title' },
                 { "data" : "post_type", "name": 'post_type' },
                 { "data" : "price", "name": 'price' ,"render": function ( data, type, row ) { return '$'+ data;},"class" : 'price'},
+                { "data" : "sale_price", "name": 'sale_price' ,"render": function ( data, type, row ) { return '$'+ data;},"class" : 'price'},
                 { "data" : "guid", "name": 'guid'}
             ],
             "createdRow": function( row, data, dataIndex ) {

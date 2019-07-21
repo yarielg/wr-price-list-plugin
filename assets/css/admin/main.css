@@ -31,3 +31,37 @@ table tr.wrpl-variation-row{
     background: none ;
     cursor: auto;
 }*/
+
+/* block screen */
+#modal-overlay {
+    position: fixed;
+    z-index: 1000;
+    top : -500px;
+    left: -500px;
+    background: black;
+    display: block;
+    opacity: .6;
+    filter: alpha(opacity=60);
+    width: 3000px;
+    height: 4000px;
+    color:red !important;
+}
+/*preload efect*/
+.wrpl_loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    position: fixed;
+    top: 50%;
+    left:50%;
+    height: 120px;
+    z-index: 1002;
+    animation: spin 2s linear infinite;
+}
+
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

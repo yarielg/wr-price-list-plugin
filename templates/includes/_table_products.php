@@ -7,7 +7,8 @@
 
         <th scope="col">Title</th>
         <th scope="col">Type</th>
-        <th scope="col">Price</th>
+        <th scope="col">Regular Price</th>
+        <th scope="col">Sale Price</th>
 
         <th scope="col">View</th>
     </tr>

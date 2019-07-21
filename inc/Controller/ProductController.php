@@ -28,7 +28,7 @@ class ProductController{
         global $wpdb;
 
         $products = $wpdb->get_results(
-            $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "posts  LEFT JOIN $wpdb->prefix" . "postmeta ON ID=post_id WHERE post_type IN (%s,%s) AND post_status NOT IN (%s) AND meta_key = %s", 'product','product_variation','auto-draft','_regular_price')
+            $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "posts  LEFT JOIN $wpdb->prefix" . "postmeta ON ID=post_id WHERE post_type IN (%s,%s) AND post_status NOT IN (%s,%s) AND meta_key = %s", 'product','product_variation','auto-draft','trash','_regular_price')
         );
 
         $products = stdToArray($products);
@@ -38,11 +38,25 @@ class ProductController{
                 $image_values = wp_get_attachment_image_src( get_post_thumbnail_id($product['ID']), 'single-post-thumbnail' );
                 $product['image'] = $image_values[0];
                 $product['price'] = $product['meta_value'];
+                $product['sale_price'] = $this->getSalesPrice($product['ID']);
                 array_push($product_with_its_variations,$product);
             }
         }
         echo json_encode($product_with_its_variations);
         wp_die();
+    }
+
+    function getSalesPrice($id){
+        global $wpdb;
+
+        $products = $wpdb->get_results(
+            $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "postmeta WHERE post_id = %d AND meta_key = %s", $id ,'_sale_price')
+        );
+        $products = stdToArray($products);
+        if(count($products)>0){
+            return $products[0]['meta_value'];
+        }
+        return -1;
     }
 
     function getVariationByProductId($id){
@@ -104,16 +118,31 @@ class ProductController{
     function editPrice(){
         $post_id = $_POST['id'];
         $price = $_POST['price'];
+        $sale_price = $_POST['sale_price'];
 
+       // $price_old = get_post_meta($post_id,'_regular_price');
+
+        $result = array('failure' => 'ERROR');
+
+        update_post_meta($post_id, '_sale_price', $sale_price);
         update_post_meta($post_id, '_regular_price', $price);
-       // update_post_meta($post_id, '_sale_price', '');
-        update_post_meta($post_id, '_price', $price);
 
+        if($sale_price == 0){
+            delete_post_meta($post_id, '_sale_price');
+            update_post_meta($post_id,'_price',$price);
 
-        echo json_encode(array('msg' => 'Price updated'));
+            $result = array('success' => 'Price updated');
+        }if($sale_price < $price && $sale_price > 0){
+            update_post_meta($post_id, '_regular_price', $price);
+            update_post_meta($post_id, '_price', $sale_price);
+            $result = array('success' => 'Price updated');
+        }
+
+        echo json_encode($result);
         wp_die();
     }
 
+    //return max and min price variation for a specific product
     function getMinMaxPriceVariation($id){
         global $wpdb;
 

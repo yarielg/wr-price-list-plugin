@@ -1,5 +1,8 @@
 <div class="wrpl-page">
 
+    <div id="modal-overlay"></div>
+    <div class="wrpl_loader"></div>
+
     <div class="container-fluid">
         <h1 class="mt-3">Change your price quick</h1>
         <br>
@@ -8,11 +11,7 @@
                 <p>Choose a Price list to start change price quickly: </p>
             </div>
             <div class="col-5">
-                <select class="custom-select custom-select-md " name="price_list" id="price_list">
-                    <option value="default" selected>Default Woocommerce</option>
-                    <option value="distributor" selected>Distributor</option>
-                    <option value="dealer" selected>Dealer</option>
-                </select>
+                <?php include 'includes/_select_price_list.php' ?>
             </div>
         </div>
         <div class="row mt-3">
