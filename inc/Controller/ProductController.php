@@ -28,7 +28,7 @@ class ProductController{
         global $wpdb;
 
         $products = $wpdb->get_results(
-            $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "posts  LEFT JOIN $wpdb->prefix" . "postmeta ON ID=post_id WHERE post_type IN (%s,%s) AND post_status NOT IN (%s,%s) AND meta_key = %s", 'product','product_variation','auto-draft','trash','_regular_price')
+            $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "posts  LEFT JOIN $wpdb->prefix" . "postmeta ON ID=post_id WHERE post_type IN (%s,%s) AND post_status NOT IN (%s,%s) AND meta_key = %s", 'product','product_variation','auto-draft','trash')
         );
 
         $products = stdToArray($products);
@@ -56,7 +56,7 @@ class ProductController{
         if(count($products)>0){
             return $products[0]['meta_value'];
         }
-        return -1;
+        return 0;
     }
 
     function getVariationByProductId($id){
