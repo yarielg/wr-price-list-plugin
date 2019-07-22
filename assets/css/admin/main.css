@@ -32,14 +32,38 @@ table tr.wrpl-variation-row{
     cursor: auto;
 }*/
 
+input:required:invalid, input:focus:invalid {
+    background-image: url(../../img/invalid.png);
+    background-size: 12px;
+    background-position: right center;
+    background-repeat: no-repeat;
+    width: 10px;
+    color: red;
+}
+input:required:valid {
+    background-image: url(../../img/valid.png);
+    background-size: 12px;
+    background-position: right center;
+    background-repeat: no-repeat;
+    width: 10px;
+}
+
+/*Deactive spinner input number text*/
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+
+}
+
 /* block screen */
 #modal-overlay {
+    display: none;
     position: fixed;
     z-index: 1000;
     top : -500px;
     left: -500px;
     background: black;
-    display: block;
     opacity: .6;
     filter: alpha(opacity=60);
     width: 3000px;
@@ -48,6 +72,7 @@ table tr.wrpl-variation-row{
 }
 /*preload efect*/
 .wrpl_loader {
+    display: none;
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid #3498db; /* Blue */
     border-radius: 50%;

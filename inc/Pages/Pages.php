@@ -30,6 +30,7 @@ class Pages{
                     wp_enqueue_style('editor_datatable_css', PLUGIN_URL . '/assets/css/admin/editor.dataTables.min.css'  );
                     wp_enqueue_style('main_admin_styles',  PLUGIN_URL . '/assets/css/admin/main.css' );
 
+
                     wp_enqueue_script( 'datatable_js', PLUGIN_URL . '/assets/js/admin/datatables.min.js');
                     wp_enqueue_script( 'datatable_js', PLUGIN_URL . '/assets/js/admin/dataTables.editor.min.js');
 
