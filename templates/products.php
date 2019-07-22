@@ -17,7 +17,7 @@
         <div class="row mt-3">
             <div class="container-fluid">
                 <div class="row px-3">
-                    <div class="col-12">
+                    <div class="col-12" id="datatable_container">
 
                         <?php include 'includes/_table_products.php'?>
 

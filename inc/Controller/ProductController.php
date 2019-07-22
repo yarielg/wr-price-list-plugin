@@ -26,50 +26,75 @@ class ProductController{
 
     function getProducts(){
         global $wpdb;
+        $price_list = $_POST['price_list'];
 
-        $products = $wpdb->get_results(
-            $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "posts  LEFT JOIN $wpdb->prefix" . "postmeta ON ID=post_id WHERE post_type IN (%s,%s) AND post_status NOT IN (%s,%s) AND meta_key = %s", 'product','product_variation','auto-draft','trash','_sku')
-        );
+            $products = $wpdb->get_results(
+                $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "posts  LEFT JOIN $wpdb->prefix" . "postmeta ON ID=post_id WHERE post_type IN (%s,%s) AND post_status NOT IN (%s,%s) AND meta_key = %s", 'product','product_variation','auto-draft','trash','_sku')
+            );
 
-        $products = stdToArray($products);
-        $product_with_its_variations = array();
-        foreach ($products as $product){
-           if(! $this->isProductHasVariations($product['ID'])){ //not including products with variations
-                $image_values = wp_get_attachment_image_src( get_post_thumbnail_id($product['ID']), 'single-post-thumbnail' );
-                $product['image'] = $image_values[0];
-                $product['price'] = $this->getRegularPrice($product['ID']);
-                $product['sku'] = $product['meta_value'];
-                $product['sale_price'] = $this->getSalesPrice($product['ID']);
-                array_push($product_with_its_variations,$product);
+            $products = stdToArray($products);
+            $products_data = array();
+            foreach ($products as $product){
+                if(! $this->isProductHasVariations($product['ID'])){ //not including products with variations
+                    $image_values = wp_get_attachment_image_src( get_post_thumbnail_id($product['ID']), 'single-post-thumbnail' );
+                    $product['image'] = $image_values[0];
+                    $product['price'] = $this->getRegularPrice($product['ID'],$price_list);
+                    $product['sku'] = $product['meta_value'];
+                    $product['sale_price'] = $this->getSalesPrice($product['ID'],$price_list);
+                    array_push($products_data,$product);
+                }
             }
-        }
-        echo json_encode($product_with_its_variations);
+
+
+        echo json_encode($products_data);
         wp_die();
     }
 
-    function getSalesPrice($id){
+    function getSalesPrice($id,$price_list){
         global $wpdb;
 
-        $products = $wpdb->get_results(
-            $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "postmeta WHERE post_id = %d AND meta_key = %s", $id ,'_sale_price')
-        );
-        $products = stdToArray($products);
-        if(count($products)>0){
-            return $products[0]['meta_value'];
+        if($price_list == 'default'){
+            $products = $wpdb->get_results(
+                $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "postmeta WHERE post_id = %d AND meta_key = %s", $id ,'_sale_price')
+            );
+            $products = stdToArray($products);
+            if(count($products)>0){
+                return $products[0]['meta_value'];
+            }
+        }else{
+            $products = $wpdb->get_results(
+                $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "wr_price_lists_price WHERE id_product = %d AND id_price_list = %d", $id ,$price_list)
+            );
+            $products = stdToArray($products);
+            if(count($products)>0){
+                return $products[0]['sale_price'];
+            }
         }
+
         return 0;
     }
 
-    function getRegularPrice($id){
+    function getRegularPrice($id,$price_list){
         global $wpdb;
 
-        $products = $wpdb->get_results(
-            $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "postmeta WHERE post_id = %d AND meta_key = %s", $id ,'_regular_price')
-        );
-        $products = stdToArray($products);
-        if(count($products)>0){
-            return $products[0]['meta_value'];
+        if($price_list == 'default'){
+            $products = $wpdb->get_results(
+                $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "postmeta WHERE post_id = %d AND meta_key = %s", $id ,'_regular_price')
+            );
+            $products = stdToArray($products);
+            if(count($products)>0){
+                return $products[0]['meta_value'];
+            }
+        }else{
+            $products = $wpdb->get_results(
+                $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "wr_price_lists_price WHERE id_product = %d AND id_price_list = %d", $id ,$price_list)
+            );
+            $products = stdToArray($products);
+            if(count($products)>0){
+                return $products[0]['price'];
+            }
         }
+
         return 0;
     }
 
@@ -129,20 +154,44 @@ class ProductController{
         wp_die();
     }*/
 
+    function updateOrInsertPrice($id,$price_list,$price,$sale_price){
+        global $wpdb;
+        $products = $wpdb->get_results(
+            $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "wr_price_lists_price WHERE id_price_list = %d AND id_product = %d", $price_list,$id)
+        );
+        $products = stdToArray($products);
+        if(count($products)>0){
+            $wpdb->query("UPDATE $wpdb->prefix" . "wr_price_lists_price SET price='$price',sale_price = '$sale_price' WHERE id_price_list='$price_list' AND id_product = '$id'");
+
+        }else{
+            $wpdb->query("INSERT INTO $wpdb->prefix" . "wr_price_lists_price (id_price_list, id_product, price, sale_price) VALUES ('$price_list', '$id', '$price','$sale_price')");
+        }
+    }
+
     function editPrice(){
+        global $wpdb;
+
         $post_id = $_POST['id'];
         $price = $_POST['price'];
         $sale_price = $_POST['sale_price'];
+        $price_list = $_POST['price_list'];
 
-        if($sale_price < $price && $sale_price > 0 ){ //S<R and S>0
-            update_post_meta($post_id, '_regular_price', $price);
-            update_post_meta($post_id, '_price', $sale_price);
-            update_post_meta($post_id, '_sale_price', $sale_price);
-            $result = array('success' => 'Sale Price Updated and Regular Price Updated');
+        if($price_list == 'default'){
+
+            if($sale_price < $price && $sale_price > 0 ){ //S<R and S>0
+                update_post_meta($post_id, '_regular_price', $price);
+                update_post_meta($post_id, '_price', $sale_price);
+                update_post_meta($post_id, '_sale_price', $sale_price);
+                $result = array('success' => 'Sale Price Updated and Regular Price Updated');
+            }else{
+                update_post_meta($post_id, '_regular_price', $price);
+                update_post_meta($post_id, '_price', $price);
+                delete_post_meta($post_id, '_sale_price');
+                $result = array('success' => 'Regular Price Updated and Sale Price Deleted');
+            }
+
         }else{
-            update_post_meta($post_id, '_regular_price', $price);
-            update_post_meta($post_id, '_price', $price);
-            delete_post_meta($post_id, '_sale_price');
+            $this->updateOrInsertPrice($post_id,$price_list,$price,$sale_price);
             $result = array('success' => 'Regular Price Updated and Sale Price Deleted');
         }
         echo json_encode($result);

@@ -31,6 +31,8 @@ class Activate{
           id mediumint(9) NOT NULL AUTO_INCREMENT,
           id_price_list INT NOT NULL,
           id_product INT NOT NULL,
+          price INT NOT NULL,
+          sale_price INT NOT NULL,
           PRIMARY KEY  (id)
         ) ENGINE=InnoDB $charset_collate;";
 
