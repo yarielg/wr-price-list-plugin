@@ -11,7 +11,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 
-class PriceListInventory{
+class PriceList{
 
 	public function register(){
 

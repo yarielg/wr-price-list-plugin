@@ -90,3 +90,52 @@ input[type=number]::-webkit-outer-spin-button {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+/*tabs style*/
+
+#wrpl_tabs .tab-content {
+    background-color: #f2f2f2;
+    padding : 5px 15px;
+    -webkit-box-shadow: 8px -1px 9px -7px rgba(0,0,0,0.48);
+    box-shadow: 8px -1px 9px -7px rgba(0,0,0,0.48);
+}
+
+#wrpl_tabs ul li{
+    margin-right: 7px;
+    font-size: 15px;
+    list-style: none;
+    padding: 0;
+    margin-bottom: 0;
+}
+#wrpl_tabs ul li a{
+    text-decoration: none;
+    padding: 18px;
+    margin-right: 8px;
+    margin-bottom: 10px;
+}
+#wrpl_tabs ul li  a.active{
+    background:#f2f2f2 ;
+    border-radius: 8px 8px 0 0;
+    -webkit-box-shadow: 8px -1px 9px -7px rgba(0,0,0,0.48);
+    box-shadow: 8px -1px 9px -7px rgba(0,0,0,0.48);
+}
+
+
+#wrpl_tabs *{
+    outline: none !important;
+    border: 0 !important;
+}
+ul.nav-pills{
+    margin-bottom: 17px;
+}
+
+/* remove border radius for the tab */
+
+#wrpl_tabs .nav-pills > li > a {
+
+}
+.tab-pane{
+    padding-top: 10px;
+}
+
+
