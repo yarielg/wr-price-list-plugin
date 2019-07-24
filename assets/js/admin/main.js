@@ -88,7 +88,7 @@
                       $("#modal-overlay").hide();
                   },
                   success: function (json) {
-                      // console.log(json);
+                      console.log(json);
                   },
                   error : function(jqXHR, exception){
                       var msg = '';
@@ -133,7 +133,6 @@
 
               var price = parseFloat('' + data['price']);
               var sale_price = parseFloat('' + data['sale_price']);
-
               if(!isNaN(price) && !isNaN(sale_price) && price > 0 && sale_price >= 0 && price !== '' && sale_price !== ''){
                   if(price > sale_price){
                       editPriceAjaxRequest(price, sale_price, data['ID']);
@@ -189,6 +188,17 @@
           });
       }
 
+      //helper for get the parameters from current url
+        function getUrlParam(key) {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+                vars[key] = value;
+            });
+            if(vars[key]){
+                return vars[key];
+            }
+            return -1;
+        }
     });
 
 })(jQuery);

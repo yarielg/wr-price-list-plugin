@@ -18,7 +18,6 @@ class Activate{
 
         $table_name1 = $wpdb->prefix . 'wr_price_lists';
         $table_name2 = $wpdb->prefix . 'wr_price_lists_price';
-        $table_name3 = $wpdb->prefix . 'posts';
 
 
         $sql1 = "CREATE TABLE $table_name1 (
@@ -31,15 +30,16 @@ class Activate{
           id mediumint(9) NOT NULL AUTO_INCREMENT,
           id_price_list INT NOT NULL,
           id_product INT NOT NULL,
-          price INT NOT NULL,
-          sale_price INT NOT NULL,
+          price varchar(11) NOT NULL,
+          sale_price varchar(11) NOT NULL,
           PRIMARY KEY  (id)
         ) ENGINE=InnoDB $charset_collate;";
+
 
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
         dbDelta( $sql1 );
         dbDelta( $sql2 );
-	}	
+	}
 
 		
 

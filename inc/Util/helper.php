@@ -9,3 +9,21 @@ function stdToArray($stds){
     }
     return $php_array;
 }
+
+function wrpl_roles() {
+
+    global $wp_roles;
+
+    $roles = $wp_roles->roles;
+
+    return $roles;
+
+}
+
+function wrpl_valid_name($name){
+    $valid_id = str_replace(" ","_",$name);
+    $valid_id = strtolower($valid_id);
+    return $valid_id;
+}
+
+
