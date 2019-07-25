@@ -200,6 +200,7 @@
             return -1;
         }
 
+
         //modal remove price list
         //data-* attributes to scan when populating modal values
         $('[data-toggle="modal"].wrpl_remove_price_list').on('click', function (e) {

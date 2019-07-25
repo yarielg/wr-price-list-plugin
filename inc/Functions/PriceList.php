@@ -34,10 +34,12 @@ class PriceList{
 		add_filter('woocommerce_product_variation_get_regular_price', array( $this, 'custom_regular_price' ), 99, 2 );
 		add_filter('woocommerce_product_variation_get_price', array( $this, 'custom_price' ), 99, 2 );
 
-        add_filter( 'woocommerce_format_sale_price', array( $this, 'custom_price_template') , 20, 3 );
+       // add_filter( 'woocommerce_format_sale_price', array( $this, 'custom_price_template') , 20, 3 );
 
         add_filter( 'woocommerce_variable_sale_price_html', array($this,'wrpl_variation_price_range'), 10, 2 );
         add_filter( 'woocommerce_variable_price_html', array($this,'wrpl_variation_price_range'), 10, 2 );
+
+       // add_filter( 'woocommerce_get_price_html', array($this,'PREFIX_woocommerce_price_html'), 100, 2 );
 
 	}
 
@@ -58,7 +60,7 @@ class PriceList{
         $price_list = $this->price_list_controller->wrpl_get_user_price_list();
         $sp = $this->product_controller->getSalesPrice($product->get_id(),$price_list);
         $rp = $this->product_controller->getRegularPrice($product->get_id(),$price_list);
-        if(!empty($p) && $p>0){
+        if($sp>0){
             return $sp;
 
         }
@@ -83,6 +85,22 @@ class PriceList{
         return wc_price($min_max['min']) . " - " .  wc_price($min_max['max']);
 
     }
+
+    function PREFIX_woocommerce_price_html( $price, $product ){
+        if(!$product->has_child()){
+            if($this->custom_sale_price($price,$product) != $this->custom_regular_price($price,$product)){
+                $html_price = '<del>' . wc_price($this->custom_regular_price($price,$product)) . '</del>  ' . wc_price($this->custom_sale_price($price,$product)) ;
+            }else{
+                $html_price =  wc_price($this->custom_regular_price($price,$product));
+            }
+            return $html_price;
+        }else{
+
+            //put sale range
+        }
+    }
+
+
 
 }
 

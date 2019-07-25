@@ -26,9 +26,11 @@ class Pages{
             $page_product =  add_submenu_page( 'wrpl-main-menu', 'Products', 'Products','manage_options', 'wrpl-products-menu', array($this,'products'));
             add_action( 'load-' . $page_product, function(){
                 add_action( 'admin_enqueue_scripts',function (){
+
                     wp_enqueue_style('datatable_css', PLUGIN_URL . '/assets/css/admin/datatables.min.css'  );
                     wp_enqueue_style('editor_datatable_css', PLUGIN_URL . '/assets/css/admin/editor.dataTables.min.css'  );
                     wp_enqueue_style('main_admin_styles',  PLUGIN_URL . '/assets/css/admin/main.css' );
+
 
 
                     wp_enqueue_script( 'datatable_js', PLUGIN_URL . '/assets/js/admin/datatables.min.js');

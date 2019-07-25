@@ -37,7 +37,7 @@ if(isset($_POST['wrpl_remove_pl_action'])){
                 <?php
                     foreach ($roles as $role){
                         echo '
-                            <li class="list-group-item p-1 d-flex justify-content-between align-items-center">'.
+                            <li class="list-group-item p-1 d-flex justify-content-between align-items-center pepe">'.
                             $role['name'] .
                             ' <input type="text" name="role_description" value="' . $role['name'] . '" hidden><button class="btn btn-danger btn-sm wrpl_remove_role wrpl-trash" name="wrpl_remove_role" data-toggle="modal" data-target="" data-role-id=""></button>
                             </li>
