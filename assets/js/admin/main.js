@@ -199,6 +199,26 @@
             }
             return -1;
         }
+
+        //modal remove price list
+        //data-* attributes to scan when populating modal values
+        $('[data-toggle="modal"].wrpl_remove_price_list').on('click', function (e) {
+            // convert target (e.g. the button) to jquery object
+            var $target = $(e.target);
+            // modal targeted by the button
+            var modalSelector = $target.data('target');
+
+            // iterate over each possible data-* attribute
+                // retrieve the dom element corresponding to current attribute
+                var $modalAttribute = $(modalSelector + ' #wrpl-pl');
+                var dataValue = $target.data('pl-id');
+
+                // if the attribute value is empty, $target.data() will return undefined.
+                // In JS boolean expressions return operands and are not coerced into
+                // booleans. That way is dataValue is undefined, the left part of the following
+                // Boolean expression evaluate to false and the empty string will be returned
+                $modalAttribute.val(dataValue || '');
+        });
     });
 
 })(jQuery);

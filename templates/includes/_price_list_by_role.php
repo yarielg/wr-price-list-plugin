@@ -1,6 +1,5 @@
 <?php
 
-$roles = stdToArray(wrpl_roles());
 if(isset($_POST['wrpl_save_roles'])){
    $price_list_controller->wrpl_save_price_list_role($roles);
 }
@@ -13,9 +12,6 @@ if(isset($_POST['wrpl_save_roles'])){
 
 
 <?php
-
-
-
 
     $rows = '<form action="" method="post" class="container-fluid">';
     foreach ($roles as $role){
@@ -38,7 +34,6 @@ if(isset($_POST['wrpl_save_roles'])){
                         </div>
                         
                     </div>';
-
     }
     $rows .= '<input type="submit" name="wrpl_save_roles" class="btn btn-info btn-sm ml-3 my-3 float-right" value="Save">
              </form>';

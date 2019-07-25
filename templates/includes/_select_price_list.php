@@ -1,6 +1,4 @@
-<?php
-$plists = $price_list_controller->wrpl_get_price_lists();
-?>
+
 
 <select class="custom-select custom-select-md " name="price_list" id="price_list">
     <option value="default" selected>Default Woocommerce</option>

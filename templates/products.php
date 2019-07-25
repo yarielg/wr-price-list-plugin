@@ -1,6 +1,8 @@
 <?php
 use Inc\Controller\PriceListController;
 $price_list_controller =  new PriceListController(); //Init all the function about price list
+$plists = $price_list_controller->wrpl_get_price_lists();
+$roles = stdToArray(wrpl_roles());
 $tab = $_GET['tab'];
 ?>
 
@@ -26,7 +28,14 @@ $tab = $_GET['tab'];
                     <a id="price_list_by_roles"
                        href="<?php echo ADMIN_URL . 'admin.php?page=wrpl-products-menu&tab=price_list_by_roles'?>"
                        class="<?php echo $tab == 'price_list_by_roles'  ? 'active' : '' ?>">
-                        Price Lists
+                        Price by Role
+                    </a>
+                </li>
+                <li>
+                    <a id="create_prices_list_and_role"
+                       href="<?php echo ADMIN_URL . 'admin.php?page=wrpl-products-menu&tab=create_prices_list_and_role'?>"
+                       class="<?php echo $tab == 'create_prices_list_and_role'  ? 'active' : '' ?>">
+                        Price Lists & Roles
                     </a>
                 </li>
             </ul>
@@ -67,8 +76,14 @@ $tab = $_GET['tab'];
 
                 <?php
 
+                    }else if($tab == 'create_prices_list_and_role'){
+                ?>
+                        <div class="tab-pane show active" id="create_prices_list_and_role">
+                            <?php include 'includes/_create_price_list_and_role.php' ?>
+                        </div>
+                <?php
                     }
-                    ?>
+                ?>
             </div> <!-- END div.wrpl_container_tab -->
         </div> <!-- END div#wrpl_tabs -->
 

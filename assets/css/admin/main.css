@@ -123,7 +123,6 @@ input[type=number]::-webkit-outer-spin-button {
 
 #wrpl_tabs *{
     outline: none !important;
-    border: 0 !important;
 }
 ul.nav-pills{
     margin-bottom: 17px;
@@ -138,4 +137,15 @@ ul.nav-pills{
     padding-top: 10px;
 }
 
+ul.list-group li{
+    font-size: 12px !important;
+}
 
+/* BUTTONS ICON */
+.wrpl-trash:before {
+    content: "\f182";
+    -webkit-font-smoothing: antialiased;
+    font: normal 15px/1 'dashicons';
+    color: #fff;
+    vertical-align: middle;
+}
