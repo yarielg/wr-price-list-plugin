@@ -24,7 +24,7 @@ class Activate{
           id mediumint(9) NOT NULL AUTO_INCREMENT,
           description varchar(100) NOT NULL,
           PRIMARY KEY  (id)
-        ) ENGINE=InnoDB $charset_collate;";
+        ) $charset_collate;";
 
         $sql2 = "CREATE TABLE $table_name2 (
           id mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -33,7 +33,7 @@ class Activate{
           price varchar(11) NOT NULL,
           sale_price varchar(11) NOT NULL,
           PRIMARY KEY  (id)
-        ) ENGINE=InnoDB $charset_collate;";
+        )  $charset_collate;";
 
 
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );

@@ -152,6 +152,9 @@
               "stateSave": true,
               "deferRender": true,
               "rowId": 'ID',
+              "serverSide": true,
+              "bServerSide":true,
+              "bPaginate":'paging',
               "ajax": {
                   "url": parameters.ajax_url,
                   "type": "POST",
@@ -160,12 +163,15 @@
                       'price_list': price_list
                   },
                   "dataSrc": function(data){
+                      data = data.data;
                       for(var i = 0; i < data.length; i++ ){
+
                           data[i]['guid'] = "<a class='btn btn-info btn-sm' href='" + data[i]['guid'] + "'>View</a>";
                           data[i]['image'] = data[i]['image'] ? "<img src='"+ data[i]['image'] +"' width='50' height='50'>" : "<img src='https://imgplaceholder.com/120x120?text=Not+Found&font-size=25' width='50' height='50'>";
                           data[i]['post_type'] = data[i]['post_type'];
                           //data[i]['sale_price'] = data[i]['sale_price'] == 0 ? 'NOT DEFINED' : data[i]['sale_price'];
                       }
+                      console.log(data);
                       return data;
                   },
               },

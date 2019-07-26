@@ -21,12 +21,25 @@ class ProductController{
     function getProducts(){
         global $wpdb;
         $price_list = $_POST['price_list'];
+        $start = $_POST['start'];
+        $length = $_POST['length'];
+        $search = $_POST['search']['value'];
+        $draw = $_POST['draw'];
+
 
             $products = $wpdb->get_results(
                 $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "posts  LEFT JOIN $wpdb->prefix" . "postmeta ON ID=post_id WHERE post_type IN (%s,%s) AND post_status NOT IN (%s,%s) AND meta_key = %s", 'product','product_variation','auto-draft','trash','_sku')
             );
-
-            $products = stdToArray($products);
+            $products_with_search  = $wpdb->get_results(
+                 $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "posts  LEFT JOIN $wpdb->prefix" . "postmeta ON ID=post_id WHERE post_type IN (%s,%s) AND post_status NOT IN (%s,%s) AND meta_key = %s AND meta_value LIKE '%$search%' ORDER BY post_id LIMIT %d,%d", 'product','product_variation','auto-draft','trash','_sku',$start,$length)
+            );
+            $count_products = count($products);
+            if($search == ""){
+                $count_products_with_search = $count_products;
+            }else{
+                $count_products_with_search = count($products_with_search);
+            }
+            $products = stdToArray($products_with_search);
             $products_data = array();
             foreach ($products as $product){
                 if(! $this->isProductHasVariations($product['ID'])){ //not including products with variations
@@ -40,7 +53,7 @@ class ProductController{
             }
 
 
-        echo json_encode($products_data);
+        echo json_encode(array('data'=>$products_data,'recordsTotal'=>$count_products,'recordsFiltered'=>$count_products_with_search,'draw'=>$draw));
         wp_die();
     }
 
@@ -173,8 +186,9 @@ class ProductController{
     }
 
     //return max and min price variation for a specific product
-    function getMinMaxPriceVariation($id,$price_list){
+    function getMinMaxPriceVariation($id,$price_list,$price_type){
         global $wpdb;
+        $key = $price_type == '_regular_price' ? 'price' : 'sale_price';
         $max = 0;
         $min = PHP_FLOAT_MAX;
         if($price_list>0){
@@ -183,16 +197,16 @@ class ProductController{
             );
             $variations = stdToArray($variations);
             foreach($variations as $variation){
-                if($variation['price'] > $max){
-                    $max = $variation['price'];
+                if($variation[$key] > $max){
+                    $max = $variation[$key];
                 }
-                if($variation['price'] < $min){
-                    $min = $variation['price'];
+                if($variation[$key] < $min){
+                    $min = $variation[$key];
                 }
             }
         }else{
             $variations = $wpdb->get_results(
-                $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "posts INNER JOIN $wpdb->prefix" . "postmeta ON ID=post_id WHERE post_type = %s AND post_parent = $id AND meta_key = %s", 'product_variation','_regular_price')
+                $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "posts INNER JOIN $wpdb->prefix" . "postmeta ON ID=post_id WHERE post_type = %s AND post_parent = $id AND meta_key = %s", 'product_variation',$price_type)
             );
 
             $variations = stdToArray($variations);
