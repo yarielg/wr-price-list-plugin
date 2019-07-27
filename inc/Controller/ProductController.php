@@ -18,42 +18,46 @@ class ProductController{
 
     }
 
+    function getAllProducts(){
+        global $wpdb;
+        $products = $wpdb->get_results(
+            $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "posts  LEFT JOIN $wpdb->prefix" . "postmeta ON ID=post_id WHERE post_type IN (%s,%s) AND post_status NOT IN (%s,%s) AND meta_key = %s", 'product','product_variation','auto-draft','trash','_sku')
+        );
+        return $products;
+    }
+
     function getProducts(){
         global $wpdb;
         $price_list = $_POST['price_list'];
         $start = $_POST['start'];
         $length = $_POST['length'];
-        $search = $_POST['search']['value'];
-        $draw = $_POST['draw'];
+        $search = trim($_POST['search']['value']);
 
+        $all_products = $this->getAllProducts();
+        $count_products = count($all_products);
 
-            $products = $wpdb->get_results(
-                $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "posts  LEFT JOIN $wpdb->prefix" . "postmeta ON ID=post_id WHERE post_type IN (%s,%s) AND post_status NOT IN (%s,%s) AND meta_key = %s", 'product','product_variation','auto-draft','trash','_sku')
-            );
-            $products_with_search  = $wpdb->get_results(
-                 $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "posts  LEFT JOIN $wpdb->prefix" . "postmeta ON ID=post_id WHERE post_type IN (%s,%s) AND post_status NOT IN (%s,%s) AND meta_key = %s AND meta_value LIKE '%$search%' ORDER BY post_id LIMIT %d,%d", 'product','product_variation','auto-draft','trash','_sku',$start,$length)
-            );
-            $count_products = count($products);
-            if($search == ""){
-                $count_products_with_search = $count_products;
-            }else{
-                $count_products_with_search = count($products_with_search);
+        $products_with_search  = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "posts  LEFT JOIN $wpdb->prefix" . "postmeta ON ID=post_id WHERE post_type IN ('product_variation','product') AND post_status NOT IN ('auto-draft','trash') AND meta_key = '_sku' AND ( post_title LIKE '%$search%' OR meta_value LIKE '%$search%') ORDER BY post_id LIMIT $start,$length");
+
+        if($search == ""){
+            $count_products_with_search = $count_products;
+        }else{
+            $count_products_with_search = count($products_with_search);
+        }
+        $products = stdToArray($products_with_search);
+        $products_data = array();
+        foreach ($products as $product){
+            if(! $this->isProductHasVariations($product['ID'])){ //not including products with variations
+                $image_values = wp_get_attachment_image_src( get_post_thumbnail_id($product['ID']), 'single-post-thumbnail' );
+                $product['image'] = $image_values[0];
+                $product['price'] = $this->getRegularPrice($product['ID'],$price_list);
+                $product['sku'] = $product['meta_value'];
+                $product['sale_price'] = $this->getSalesPrice($product['ID'],$price_list);
+                array_push($products_data,$product);
             }
-            $products = stdToArray($products_with_search);
-            $products_data = array();
-            foreach ($products as $product){
-                if(! $this->isProductHasVariations($product['ID'])){ //not including products with variations
-                    $image_values = wp_get_attachment_image_src( get_post_thumbnail_id($product['ID']), 'single-post-thumbnail' );
-                    $product['image'] = $image_values[0];
-                    $product['price'] = $this->getRegularPrice($product['ID'],$price_list);
-                    $product['sku'] = $product['meta_value'];
-                    $product['sale_price'] = $this->getSalesPrice($product['ID'],$price_list);
-                    array_push($products_data,$product);
-                }
-            }
+        }
 
 
-        echo json_encode(array('data'=>$products_data,'recordsTotal'=>$count_products,'recordsFiltered'=>$count_products_with_search,'draw'=>$draw));
+        echo json_encode(array('data'=>$products_data,'recordsTotal'=>$count_products,'recordsFiltered'=>$count_products_with_search));
         wp_die();
     }
 
@@ -156,12 +160,13 @@ class ProductController{
     }
 
     function editPrice(){
-        global $wpdb;
 
         $post_id = $_POST['id'];
         $price = $_POST['price'];
         $sale_price = $_POST['sale_price'];
         $price_list = $_POST['price_list'];
+
+
 
         if($price_list == 'default'){
 
@@ -181,7 +186,8 @@ class ProductController{
             $this->updateOrInsertPrice($post_id,$price_list,$price,$sale_price);
             $result = array('success' => 'Regular Price Updated and Sale Price Deleted');
         }
-        echo json_encode($result);
+        echo json_encode(array('regular'=> $price,'sale'=>$sale_price));
+        wp_reset_query();
         wp_die();
     }
 
@@ -193,14 +199,14 @@ class ProductController{
         $min = PHP_FLOAT_MAX;
         if($price_list>0){
             $variations = $wpdb->get_results(
-                $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "wr_price_lists_price INNER JOIN $wpdb->prefix" . "posts ON id_product = $wpdb->prefix" . "posts.ID WHERE post_parent = 35 AND id_price_list = %d",$price_list)
+                $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "wr_price_lists_price INNER JOIN $wpdb->prefix" . "posts ON id_product = $wpdb->prefix" . "posts.ID WHERE post_parent = $id AND id_price_list = %d",$price_list)
             );
             $variations = stdToArray($variations);
             foreach($variations as $variation){
                 if($variation[$key] > $max){
                     $max = $variation[$key];
                 }
-                if($variation[$key] < $min){
+                if($variation[$key] < $min && $variation[$key] != 0){ //la variación menor no pueder ser 0, en caso que sea 0 no se tomara para mostrar en el product page ya que existe una condicion en PriceLIst.php en el metodo wrpl_woocommerce_price_html() if(  $min_max_sale['min']>0 && $min_max_sale['min']<$min_max['min']) que si 0 o menor
                     $min = $variation[$key];
                 }
             }

@@ -149,3 +149,11 @@ ul.list-group li{
     color: #fff;
     vertical-align: middle;
 }
+.wrpl-edit:before {
+    content: "\f464";
+    -webkit-font-smoothing: antialiased;
+    font: normal 15px/1 'dashicons';
+    color: #fff;
+    vertical-align: middle;
+}
+

@@ -24,7 +24,7 @@ if(isset($_POST['wrpl_save_roles'])){
 
         $rows .= '<div class="row ml-3 mb-2">
                         <div class="col-3">
-                            <label for="staticEmail" >' .$role['name']. ':</label>                      
+                            <label >' .$role['name']. ':</label>                      
                         </div>
                         <div class="col-9">
                             <select name="' . wrpl_valid_name($role['name'])  .'" class="form-control form-control-sm">

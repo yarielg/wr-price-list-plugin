@@ -33,7 +33,7 @@ class PriceListController
         }
     }
 
-    function wrpl_get_user_price_list() //relation between price list and role are ave in options table of wp (wrpl-nameofpricelist,price_list_value)
+    function wrpl_get_user_price_list() //relation between price list and role are in options table of wp (wrpl-nameofpricelist,price_list_value)
     {
         if (is_user_logged_in()) {
             $user = wp_get_current_user();
@@ -74,5 +74,51 @@ class PriceListController
         $result = $wpdb->get_results("UPDATE $wpdb->prefix" . "options SET option_value = 'default' WHERE option_value = '$id'");
         $result = $wpdb->get_results("DELETE FROM $wpdb->prefix" . "wr_price_lists_price WHERE id_price_list = '$id'");
         return $result;
+    }
+
+    function wrpl_edit_price_list($name,$id){
+        global $wpdb;
+        if(!$this->wrpl_exist_price_list_name($name)){
+            $wpdb->query("UPDATE $wpdb->prefix" . "wr_price_lists SET description='$name' WHERE id='$id'");
+            return true;
+        }
+        return false;
+    }
+
+    function wr_exist_role($name){
+        global $wp_roles;
+        $roles = $wp_roles->roles;
+        if(in_array($name,$roles)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    function wrpl_add_role($name){
+        if(!$this->wr_exist_role($name)){
+            $result = add_role(
+                wrpl_valid_name($name),
+                __( $name ),
+                array(
+                    'read' => true,  // true allows this capability
+                )
+            );
+            if ( null !== $result ) {
+                update_option('wrpl_role-'.wrpl_valid_name($name),$name);
+                return true;
+            }
+            else {
+                return false;
+            }
+        }else return false;
+    }
+
+    function wrpl_remove_role($name){
+        wp_roles()->remove_role( wrpl_valid_name($name) );
+        delete_option('wrpl_role-' . wrpl_valid_name($name));
+    }
+
+    function wrpl_edit_role($role_name,$role_name_old){
+        return true;
     }
 }

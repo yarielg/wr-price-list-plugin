@@ -40,10 +40,17 @@ class PriceList{
 
         add_filter( 'woocommerce_get_price_html', array($this,'wrpl_woocommerce_price_html'), 100, 2 );
 
+        $this->wp_cache_flush();
+    }
+
+    function wp_cache_flush() {
+        global $wp_object_cache;
+
+        return $wp_object_cache->flush();
     }
 
     function custom_price($price,$product){
-        $price_list = $this->price_list_controller->wrpl_get_user_price_list();
+        $price_list = $this->price_list_controller->wrpl_get_user_price_list(); //get price list of the logging user
         $rp = $this->product_controller->getRegularPrice($product->get_id(),$price_list);
         $sp = $this->product_controller->getSalesPrice($product->get_id(),$price_list);
         return $sp == 0 ? $rp : $sp;

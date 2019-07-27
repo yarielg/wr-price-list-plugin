@@ -67,7 +67,7 @@
           } );
 
           //edit price ajax call
-          function editPriceAjaxRequest(price, sale_price,id){
+          function editPriceAjaxRequest(price, sale_price,id,data){
               $.ajax( {
                   type: 'POST',
                   url:  parameters.ajax_url,
@@ -88,7 +88,9 @@
                       $("#modal-overlay").hide();
                   },
                   success: function (json) {
-                      console.log(json);
+                      data['price'] = json.regular;
+                      data['sale_price'] - json.sale;
+                     datatable.row('#'+id).data(data).draw(false);
                   },
                   error : function(jqXHR, exception){
                       var msg = '';
@@ -121,10 +123,10 @@
           //set old data
           function setOldValue(id){
               setTimeout(function(){
-                  var cell_price = $('#'+id+' .price');
-                  var cell_sale_price = $('#'+id+' .sale_price');
-                  cell_price.html(oldata['price']);
-                  cell_sale_price.html(oldata['sale_price']);
+                 // var cell_price = $('#'+id+' .price');
+                 // var cell_sale_price = $('#'+id +' .sale_price');
+                 // cell_price.html(oldata['price']);
+                  console.log(oldata);
                   datatable.row('#'+id).data(oldata).draw(false);
               }, 1000);
           }
@@ -135,7 +137,7 @@
               var sale_price = parseFloat('' + data['sale_price']);
               if(!isNaN(price) && !isNaN(sale_price) && price > 0 && sale_price >= 0 && price !== '' && sale_price !== ''){
                   if(price > sale_price){
-                      editPriceAjaxRequest(price, sale_price, data['ID']);
+                      editPriceAjaxRequest(price, sale_price, data['ID'],data);
 
                   }else{
                       setOldValue(id);
@@ -155,6 +157,10 @@
               "serverSide": true,
               "bServerSide":true,
               "bPaginate":'paging',
+              "processing": true,
+              "language":{
+                  "processing": 'loading...'
+              },
               "ajax": {
                   "url": parameters.ajax_url,
                   "type": "POST",
@@ -166,12 +172,11 @@
                       data = data.data;
                       for(var i = 0; i < data.length; i++ ){
 
-                          data[i]['guid'] = "<a class='btn btn-info btn-sm' href='" + data[i]['guid'] + "'>View</a>";
-                          data[i]['image'] = data[i]['image'] ? "<img src='"+ data[i]['image'] +"' width='50' height='50'>" : "<img src='https://imgplaceholder.com/120x120?text=Not+Found&font-size=25' width='50' height='50'>";
-                          data[i]['post_type'] = data[i]['post_type'];
+                          data[i]['guid'] = "<a class='btn btn-info btn-sm py-0' href='" + data[i]['guid'] + "'>View</a>";
+                          data[i]['image'] = data[i]['image'] ? "<img src='"+ data[i]['image'] +"' width='25' height='25'>" : "<img src='https://imgplaceholder.com/120x120?text=Not+Found&font-size=25' width='25' height='25'>";
+                          data[i]['post_type'] = data[i]['post_type'] == 'product_variation' ? 'variation' : 'product';
                           //data[i]['sale_price'] = data[i]['sale_price'] == 0 ? 'NOT DEFINED' : data[i]['sale_price'];
                       }
-                      console.log(data);
                       return data;
                   },
               },
@@ -187,7 +192,7 @@
                   { "data" : "guid", "name": 'guid'}
               ],
               "createdRow": function( row, data, dataIndex ) {
-                  if(data['post_type'] == 'product_variation'){
+                  if(data['post_type'] == 'variation'){
                       $(row).addClass('wrpl-variation-row');
                   }
               }
@@ -225,6 +230,44 @@
                 // booleans. That way is dataValue is undefined, the left part of the following
                 // Boolean expression evaluate to false and the empty string will be returned
                 $modalAttribute.val(dataValue || '');
+        });
+
+        $('[data-toggle="modal"].wrpl_edit_price_list').on('click', function (e) {
+            var $target = $(e.target);
+            var modalSelector = $target.data('target');
+
+            var $modalAttribute = $(modalSelector + ' #wrpl-edit-pl');
+            var $modalAttribute1 = $(modalSelector + ' #wrpl-edit-pl-id');
+            var dataValue = $target.data('pl-name');
+            var dataValue1 = $target.data('pl-id');
+
+            $modalAttribute.val(dataValue || '');
+            $modalAttribute1.val(dataValue1 || '');
+        });
+
+        //edit role name
+        $('[data-toggle="modal"].wrpl_edit_role').on('click', function (e) {
+            var $target = $(e.target);
+            var modalSelector = $target.data('target');
+
+            var $modalAttribute = $(modalSelector + ' #wrpl-edit-role');
+            var $modalAttribute1 = $(modalSelector + ' #wrpl-edit-old_role');
+            var dataValue = $target.data('role-name');
+
+            $modalAttribute.val(dataValue || '');
+            $modalAttribute1.val(dataValue || '');
+        });
+        //remove role
+        $('[data-toggle="modal"].wrpl_remove_role').on('click', function (e) {
+            var $target = $(e.target);
+            var modalSelector = $target.data('target');
+
+            var $modalAttribute = $(modalSelector + ' #wrpl-edit-role');
+
+            var dataValue = $target.data('role-name');
+
+            $modalAttribute.val(dataValue || '');
+
         });
     });
 
