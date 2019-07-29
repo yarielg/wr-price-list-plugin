@@ -27,14 +27,12 @@ class Pages{
             add_action( 'load-' . $page_product, function(){
                 add_action( 'admin_enqueue_scripts',function (){
 
-                    wp_enqueue_style('datatable_css', PLUGIN_URL . '/assets/css/admin/datatables.min.css'  );
-                    wp_enqueue_style('editor_datatable_css', PLUGIN_URL . '/assets/css/admin/editor.dataTables.min.css'  );
+                    wp_enqueue_style('wrtable_css', PLUGIN_URL . '/assets/css/admin/wrtable.min.css'  );
                     wp_enqueue_style('main_admin_styles',  PLUGIN_URL . '/assets/css/admin/main.css' );
 
 
 
-                    wp_enqueue_script( 'datatable_js', PLUGIN_URL . '/assets/js/admin/datatables.min.js');
-                    wp_enqueue_script( 'datatable_js', PLUGIN_URL . '/assets/js/admin/dataTables.editor.min.js');
+                    wp_enqueue_script( 'wrtable_js', PLUGIN_URL . '/assets/js/admin/wrtable.min.js');
 
                     wp_enqueue_script('main_js', PLUGIN_URL . '/assets/js/admin/main.js',array ('jquery'), '1.0', true );
                     wp_enqueue_script( 'main_js');

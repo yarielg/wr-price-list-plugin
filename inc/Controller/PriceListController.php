@@ -38,7 +38,7 @@ class PriceListController
         if (is_user_logged_in()) {
             $user = wp_get_current_user();
             $roles = ( array )$user->roles;
-            return get_option('wrpl-'.$roles[0]) ? get_option('wrpl-'.$roles[0]) : 'default';
+            return get_option('wrpl-'.$roles[1]) ? get_option('wrpl-'.$roles[1]) : 'default';
         }else{
             return 'default';
         }
@@ -104,7 +104,7 @@ class PriceListController
                 )
             );
             if ( null !== $result ) {
-                update_option('wrpl_role-'.wrpl_valid_name($name),$name);
+                update_option('wrpl_role-'.wrpl_valid_name($name),$name); //specifying that this role was created by WRPL
                 return true;
             }
             else {
@@ -114,11 +114,37 @@ class PriceListController
     }
 
     function wrpl_remove_role($name){
-        wp_roles()->remove_role( wrpl_valid_name($name) );
-        delete_option('wrpl_role-' . wrpl_valid_name($name));
+        wp_roles()->remove_role( wrpl_valid_name($name) ); //Removing  wp role
+        delete_option('wrpl_role-' . wrpl_valid_name($name)); //Removing wrpl role option
+        delete_option('wrpl-' . wrpl_valid_name($name)); //removing relation role-price list/
     }
 
     function wrpl_edit_role($role_name,$role_name_old){
-        return true;
+
+        global $wpdb;
+        $result = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "options WHERE option_name = 'wp_user_roles'");
+        $unserialize_roles = unserialize(stdToArray($result)[0]['option_value']); //unserialize the array roles
+        $role = $unserialize_roles[wrpl_valid_name($role_name_old)]; //get the old role to replace it
+        $capabilities = $role['capabilities']; //copy the old role capabilities
+
+
+        if(!array_key_exists(wrpl_valid_name($role_name),$unserialize_roles)){
+            unset($unserialize_roles[wrpl_valid_name($role_name_old)]); //removing the role to the roles array
+            $unserialize_roles[wrpl_valid_name($role_name)] = array('name'=>$role_name,'capabilities' => $capabilities); //changin key name to  the new role
+
+            $serialized_roles = serialize($unserialize_roles);
+            $result = $wpdb->query("UPDATE $wpdb->prefix" . "options SET option_value = '$serialized_roles'  WHERE option_name = 'wp_user_roles'");
+            if($result>0 ){ //if exist a connection between the old role and any price list 1-remove it and add the new one
+
+                $price_list = get_option('wrpl-' . wrpl_valid_name($role_name_old)) ?: 'default'; //get the pricelist of the old role
+                delete_option('wrpl-' . wrpl_valid_name($role_name_old)); //delete the connection between the old role with the price list
+                delete_option('wrpl_role-' . wrpl_valid_name($role_name_old)); //delete all price list option this option allow difference the role creted by wrpl and the others
+                update_option('wrpl-' . wrpl_valid_name($role_name),$price_list); //creating the new connection with the new role
+                update_option('wrpl_role-' . wrpl_valid_name($role_name),$role_name); //this option allow have the control wich role ware created by WRPL
+                return $unserialize_roles;
+            }
+        }
+        return false;
+
     }
 }

@@ -30,8 +30,23 @@ if(isset($_POST['wrpl_remove_role_action'])){
 if(isset($_POST['wrpl_edit_role_action'])){
     $role_name = $_POST['wrpl_role_name'];
     $role_name_old = $_POST['wrpl_role_old_name'];
-    $price_list_controller->wrpl_edit_role($role_name,$role_name_old);
-    var_dump(stdToArray(wrpl_roles()));
-    //$roles = );
+    $was_updated = $price_list_controller->wrpl_edit_role($role_name,$role_name_old);
+    if($was_updated){
+        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Role updated! </strong> The role was successfully updated.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+               </div>';
+        $roles = $was_updated;
+    }else{
+        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error updating role! </strong>The role was not updated.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+               </div>';
+    }
+
 }
 ?>
