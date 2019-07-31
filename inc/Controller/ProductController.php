@@ -186,7 +186,7 @@ class ProductController{
             $this->updateOrInsertPrice($post_id,$price_list,$price,$sale_price);
             $result = array('success' => 'Regular Price Updated and Sale Price Deleted');
         }
-        echo json_encode(array('regular'=> $price,'sale'=>$sale_price));
+
         wp_reset_query();
         wp_die();
     }
@@ -232,4 +232,41 @@ class ProductController{
         return array('min' => $min, 'max' => $max);
     }
 
+
+    function wrpl_import_products($products,$price_list){
+
+        $results = array();
+        foreach($products as $product){
+            $sku = trim($product[0]);
+            $product_id = wc_get_product_id_by_sku($sku);
+            if($product_id > 0){ // if the sku exists
+                $regular_price = floatval($product[1]);
+                $sale_price = floatval($product[2]);
+
+                if($price_list == 'default'){
+
+                    if($sale_price < $regular_price && $sale_price > 0 ){
+                        array_push($results, array('type' => 'success','msg' => 'The product with sku: ' . $sku . ' was updated' ));
+                        update_post_meta($product_id, '_regular_price', $regular_price);
+                        update_post_meta($product_id, '_price', $sale_price);
+                        update_post_meta($product_id, '_sale_price', $sale_price);
+                    }else{
+                        update_post_meta($product_id, '_regular_price', $regular_price);
+                        update_post_meta($product_id, '_price', $regular_price);
+                        delete_post_meta($product_id, '_sale_price');
+                        array_push($results, array('type' => 'success','msg' => 'The product with sku: ' . $sku . ' was updated' ));
+                    }
+
+                }else{
+                    $this->updateOrInsertPrice($product_id,$price_list,$regular_price,$sale_price);
+                    array_push($results, array('type' => 'success','msg' => 'The product with sku: ' . $sku . ' was updated' ));
+                }
+
+            } else{
+                array_push($results, array('type' => 'failure','msg' => 'The product with sku: ' . $sku . ' was not found' ));
+            }
+
+        }//endforeach
+        return $results;
+    }
 }

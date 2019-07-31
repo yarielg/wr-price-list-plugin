@@ -62,7 +62,8 @@ class PriceListController
         $plist = preg_replace('/\s+/', ' ',$plist); //removing extra spacing
         if(!$this->wrpl_exist_price_list_name($plist)){
             $wpdb->query("INSERT INTO $wpdb->prefix" . "wr_price_lists (description) VALUES ('$plist')");
-            return true;
+
+            return $wpdb->insert_id;
         }else{
             return false;
         }

@@ -2,14 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="35a345d5-9d05-4145-b7f2-358a23529e57" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/assets/css/admin/datatables.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/admin/wrtable.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/admin/editor.dataTables.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/admin/dataTables.editor.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/admin/datatables.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/admin/wrtable.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/wr_price_list.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/wr_price_list.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/admin/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/admin/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/admin/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/admin/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/front/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/front/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/inc/Controller/PriceListController.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/Controller/PriceListController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inc/Pages/Pages.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/Pages/Pages.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inc/Util/helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/Util/helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/includes/requests/_role_request.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/includes/requests/_role_request.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inc/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/Controller/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/products.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/products.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,7 +18,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
       <executable />
@@ -27,48 +28,12 @@
     <favorites_list name="wr_price_list" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/inc/Controller/PriceListController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="40" column="78" selection-start-line="40" selection-start-column="78" selection-end-line="40" selection-end-column="78" />
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/inc/Functions/PriceList.php">
+        <entry file="file://$PROJECT_DIR$/templates/includes/_import_export.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="52" column="57" lean-forward="true" selection-start-line="52" selection-start-column="57" selection-end-line="52" selection-end-column="57" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/inc/Controller/ProductController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="87" column="13" selection-start-line="87" selection-start-column="13" selection-end-line="87" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/inc/Util/helper.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/includes/_create_price_list_and_role.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="34" lean-forward="true" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
+            <state relative-caret-position="306">
+              <caret line="18" column="39" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -76,23 +41,81 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/products.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="5" lean-forward="true" selection-start-column="5" selection-end-column="5" />
+            <state relative-caret-position="51">
+              <caret line="3" column="22" selection-start-line="3" selection-end-line="3" selection-end-column="22" />
+              <folding>
+                <element signature="e#6#45#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/includes/requests/_role_request.php">
+        <entry file="file://$PROJECT_DIR$/inc/Functions/PriceList.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="87">
-              <caret line="29" column="43" lean-forward="true" selection-start-line="29" selection-start-column="43" selection-end-line="29" selection-end-column="43" />
+            <state relative-caret-position="85">
+              <caret line="9" selection-start-line="9" selection-end-line="9" selection-end-column="39" />
               <folding>
-                <element signature="e#308#315#1" expanded="true" />
-                <element signature="e#329#336#1" expanded="true" />
+                <element signature="e#61#100#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/includes/requests/_import_price_list_request.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="33" column="16" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="16" />
+              <folding>
+                <element signature="e#341#348#1" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/inc/Controller/PriceListController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="59" column="13" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/inc/Controller/ProductController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="259" column="22" lean-forward="true" selection-start-line="259" selection-start-column="22" selection-end-line="259" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/uploads/test.csv">
+          <provider editor-type-id="csv-text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="11" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="csv-table-editor">
+            <state showInfoPanel="false" fixedHeaders="false" autoColumnWidthOnOpen="false" rowLines="3">
+              <column index="0" width="100" />
+              <column index="1" width="100" />
+              <column index="2" width="100" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/includes/_table_products.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/includes/_price_list_by_role.php">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -100,6 +123,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>UPDATE</find>
+      <find>PriceListController</find>
+      <find>$product_controller</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -108,10 +133,20 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/includes/_create_price_list_and_role.php" />
         <option value="$PROJECT_DIR$/inc/Util/helper.php" />
         <option value="$PROJECT_DIR$/templates/includes/requests/_role_request.php" />
+        <option value="$PROJECT_DIR$/templates/includes/requests/_import_export.php" />
+        <option value="$PROJECT_DIR$/assets/js/front/main.js" />
+        <option value="$PROJECT_DIR$/assets/css/admin/main.css" />
+        <option value="$PROJECT_DIR$/templates/includes/_create_price_list_and_role.php" />
+        <option value="$PROJECT_DIR$/assets/js/admin/main.js" />
+        <option value="$PROJECT_DIR$/templates/includes/_import_export.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/templates/products.php" />
         <option value="$PROJECT_DIR$/inc/Controller/PriceListController.php" />
+        <option value="$PROJECT_DIR$/templates/includes/requests/_import_price_list_request.php" />
+        <option value="$PROJECT_DIR$/inc/Controller/ProductController.php" />
+        <option value="$PROJECT_DIR$/uploads/test.csv" />
       </list>
     </option>
   </component>
@@ -119,17 +154,6 @@
     <include_path>
       <path value="$PROJECT_DIR$/vendor/composer" />
     </include_path>
-  </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/.idea/wr_price_list.iml" />
-        <option value="$PROJECT_DIR$/.idea/php.xml" />
-        <option value="$PROJECT_DIR$/.idea/misc.xml" />
-        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
-        <option value="$PROJECT_DIR$/.idea/modules.xml" />
-      </list>
-    </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="13" />
@@ -221,6 +245,14 @@
               <item name="includes" type="462c0819:PsiDirectoryNode" />
               <item name="requests" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="wr_price_list" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test-integration" type="462c0819:PsiDirectoryNode" />
+              <item name="wp-content" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="wr_price_list" type="462c0819:PsiDirectoryNode" />
+              <item name="uploads" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -228,11 +260,17 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../php/projects/cms" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\wamp64\www\test-integration\wp-content\plugins\wr_price_list\templates\includes" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -256,25 +294,21 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1564410012931</updated>
-      <workItem from="1564410014917" duration="13681000" />
+      <workItem from="1564410014917" duration="23453000" />
+      <workItem from="1564514741277" duration="6989000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13681000" />
+    <option name="totallyTimeSpent" value="30442000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info id="Favorites" sideWeight="0.5008183" side_tool="true" weight="0.24962178" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49918166" visible="true" weight="0.24962178" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49918166" visible="true" weight="0.25340393" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Favorites" order="2" sideWeight="0.5008183" side_tool="true" weight="0.24962178" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -282,10 +316,15 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Database" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.3289689" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -309,20 +348,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/products.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="5" lean-forward="true" selection-start-column="5" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/includes/_create_price_list_and_role.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="34" lean-forward="true" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/includes/requests/_role_request.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="87">
@@ -334,26 +359,154 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/inc/Controller/ProductController.php">
+    <entry file="file://$PROJECT_DIR$/assets/js/front/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="87" column="13" selection-start-line="87" selection-start-column="13" selection-end-line="87" selection-end-column="13" />
+        <state>
+          <caret column="2" selection-start-column="2" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/includes/modals/__edit_role_modal.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="27" column="62" selection-start-line="27" selection-start-column="62" selection-end-line="27" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/css/admin/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/admin/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="285" column="63" selection-start-line="285" selection-start-column="63" selection-end-line="285" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/Init.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/includes/_create_price_list_and_role.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="6" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/includes/_select_price_list.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="8" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/includes/_table_products.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/includes/_price_list_by_role.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wr_price_list.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="42" column="19" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/inc/Functions/PriceList.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="52" column="57" lean-forward="true" selection-start-line="52" selection-start-column="57" selection-end-line="52" selection-end-column="57" />
+        <state relative-caret-position="85">
+          <caret line="9" selection-start-line="9" selection-end-line="9" selection-end-column="39" />
+          <folding>
+            <element signature="e#61#100#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/products.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="22" selection-start-line="3" selection-end-line="3" selection-end-column="22" />
+          <folding>
+            <element signature="e#6#45#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/inc/Controller/PriceListController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="40" column="78" selection-start-line="40" selection-start-column="78" selection-end-line="40" selection-end-column="78" />
+        <state relative-caret-position="289">
+          <caret line="59" column="13" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/includes/requests/_price_list_request.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="50" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../woocommerce/includes/wc-product-functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="617" column="1" lean-forward="true" selection-start-line="617" selection-start-column="1" selection-end-line="617" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/includes/_import_export.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="39" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/includes/requests/_import_price_list_request.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="33" column="16" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="16" />
+          <folding>
+            <element signature="e#341#348#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/Controller/ProductController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="259" column="22" lean-forward="true" selection-start-line="259" selection-start-column="22" selection-end-line="259" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uploads/test.csv">
+      <provider editor-type-id="csv-text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="11" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="csv-table-editor">
+        <state showInfoPanel="false" fixedHeaders="false" autoColumnWidthOnOpen="false" rowLines="3">
+          <column index="0" width="100" />
+          <column index="1" width="100" />
+          <column index="2" width="100" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor" />
     </entry>
   </component>
 </project>

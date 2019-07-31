@@ -271,4 +271,38 @@
         });
     });
 
+    //fileupload validation
+    $('input[type=file]').change(function(){
+        var ext = $('#file_import').val().split('.').pop().toLowerCase();
+//Allowed file types
+        if($.inArray(ext, ['csv']) == -1) {
+            alert('The file type is invalid!');
+            $('#import_price_list').prop('disabled',true);
+            $('#file_import').val("");
+        }else{
+            if(this.files[0].size > 8388608){
+                alert('File greater than 8 mb');
+            }else{
+                $('#import_price_list').prop('disabled',false);
+            }
+
+        }
+    });
+
+    //import/ export feature
+    $('#check_price_list').click(function(){
+        if($(this).prop("checked") == true){
+            $('#import_new_price_list').prop('disabled',false);
+            $('#import_select_price_list').prop('disabled',true);
+            $('#import_new_price_list_label').removeClass('disabled');
+            $('#import_select_price_list_label').addClass('disabled');
+        }
+        else{
+            $('#import_new_price_list').prop('disabled',true);
+            $('#import_select_price_list').prop('disabled',false);
+            $('#import_new_price_list_label').addClass('disabled');
+            $('#import_select_price_list_label').removeClass('disabled');
+        }
+    });
+
 })(jQuery);

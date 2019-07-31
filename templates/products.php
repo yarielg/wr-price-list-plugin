@@ -1,6 +1,8 @@
 <?php
 use Inc\Controller\PriceListController;
+use Inc\Controller\ProductController;
 $price_list_controller =  new PriceListController(); //Init all the function about price list
+$product_controller =  new ProductController(); //Init all the function about price list
 $plists = $price_list_controller->wrpl_get_price_lists();
 $roles = stdToArray(wrpl_roles());
 $tab = $_GET['tab'];
@@ -36,6 +38,13 @@ $tab = $_GET['tab'];
                        href="<?php echo ADMIN_URL . 'admin.php?page=wrpl-products-menu&tab=create_prices_list_and_role'?>"
                        class="<?php echo $tab == 'create_prices_list_and_role'  ? 'active' : '' ?>">
                         Price Lists & Roles
+                    </a>
+                </li>
+                <li>
+                    <a id="import_export"
+                       href="<?php echo ADMIN_URL . 'admin.php?page=wrpl-products-menu&tab=import_export'?>"
+                       class="<?php echo $tab == 'import_export'  ? 'active' : '' ?>">
+                        Import/Export
                     </a>
                 </li>
             </ul>
@@ -82,6 +91,12 @@ $tab = $_GET['tab'];
                             <?php include 'includes/_create_price_list_and_role.php' ?>
                         </div>
                 <?php
+                    }else if($tab == 'import_export'){
+                        ?>
+                        <div class="tab-pane show active" id="import_export">
+                            <?php include 'includes/_import_export.php' ?>
+                        </div>
+                        <?php
                     }
                 ?>
             </div> <!-- END div.wrpl_container_tab -->
