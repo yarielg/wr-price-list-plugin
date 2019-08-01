@@ -40,7 +40,13 @@ class PriceList{
 
         add_filter( 'woocommerce_get_price_html', array($this,'wrpl_woocommerce_price_html'), 100, 2 );
 
-        $this->wp_cache_flush();
+        add_filter('woocommerce_get_variation_prices_hash',array($this,'testing'));
+
+        //$this->wp_cache_flush();
+    }
+
+    function testing(){
+        return 10;
     }
 
     function wp_cache_flush() {

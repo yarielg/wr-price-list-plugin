@@ -49,10 +49,16 @@ class ProductController{
             if(! $this->isProductHasVariations($product['ID'])){ //not including products with variations
                 $image_values = wp_get_attachment_image_src( get_post_thumbnail_id($product['ID']), 'single-post-thumbnail' );
                 $product['image'] = $image_values[0];
+                $product['attrs'] = '';
+                if($product['post_type'] == 'product_variation'){
+                    $product55 = wc_get_product( $product['ID'] );
+                    $product['attrs'] = $product55->get_attributes();
+                }
                 $product['price'] = $this->getRegularPrice($product['ID'],$price_list);
                 $product['sku'] = $product['meta_value'];
                 $product['sale_price'] = $this->getSalesPrice($product['ID'],$price_list);
                 array_push($products_data,$product);
+
             }
         }
 
@@ -184,12 +190,10 @@ class ProductController{
 
         }else{
             $this->updateOrInsertPrice($post_id,$price_list,$price,$sale_price);
-
             $result = array('success' => 'Regular Price Updated and Sale Price Deleted');
         }
-        wc_delete_product_transients( $post_id );
         wp_update_post(array('ID'=> $post_id,'post_modified' => date('Y-m-d H:i:s'), 'post_modified_gmt' => date('Y-m-d H:i:s')));
-        return json_encode($result);
+        echo json_encode($result);
         wp_reset_query();
         wp_die();
     }
@@ -266,7 +270,7 @@ class ProductController{
                 }
 
             } else{
-                array_push($results, array('type' => 'failure','msg' => 'The product with sku: ' . $sku . ' was not found' ));
+                array_push($results, array('type' => 'failure','msg' => 'The product with sku: <i>' . $sku . '</i> was not found' ));
             }
 
         }//endforeach

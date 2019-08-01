@@ -26,12 +26,14 @@ if(isset($_POST['import_price_list'])){
 
         }else{
             $price_list_id = $price_list_controller->wrpl_add_price_list($new_price_list_name);
-            $result = $product_controller->wrpl_import_products($products_imported,$price_list_id);
+            $imported_msgs = $product_controller->wrpl_import_products($products_imported,$price_list_id);
+
+
         }
-    }else{ //import base in existing price list
-        $result = $product_controller->wrpl_import_products($products_imported,$_POST['price_list_id']);
+    }else{ //import based in existing price list
+        $imported_msgs = $product_controller->wrpl_import_products($products_imported,$_POST['price_list_id']);
     }
-var_dump($result);
+//var_dump($result);
 
 }
 

@@ -36,6 +36,41 @@ include 'requests/_import_price_list_request.php';
             <input type="submit" class="btn btn-info btn-sm" name="import_price_list" id="import_price_list" value="Import" disabled>
         </div>
 
+        <div class="import_result">
+
+            <?php
+
+            if(isset($imported_msgs)){
+                echo '<h5 class="text-center">Import Results</h5>';
+
+                if(isset($_POST['import_new_price_list'])){
+                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Price List ' .$_POST['import_new_price_list'] . ' was created!</strong> The products price were inserted in this new list.
+                     </div>';
+                }
+                $count_success = 0;
+                $count_failure = 0;
+                $msgs = '';
+                foreach ($imported_msgs as $msg){
+                    if($msg['type']=='success'){
+                        $count_success++;
+                    }else{
+                        $count_failure++;
+                        $msgs .= $msg['msg'] . '</br>';
+                    }
+
+                }
+                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>It were inserted or updated ' . $count_success .' products successfully.
+                     </div>';
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>It were found ' . $count_failure .' errors, below a list with the details.
+                     </div>';
+                echo $msgs;
+            }
+            ?>
+        </div>
+
     </form>
 
 

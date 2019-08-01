@@ -47,6 +47,13 @@ $tab = $_GET['tab'];
                         Import/Export
                     </a>
                 </li>
+                <li>
+                    <a id="settings"
+                       href="<?php echo ADMIN_URL . 'admin.php?page=wrpl-products-menu&tab=settings'?>"
+                       class="<?php echo $tab == 'settings'  ? 'active' : '' ?>">
+                        Settings
+                    </a>
+                </li>
             </ul>
 
             <div id="wrpl_container_tab"  class="tab-content clearfix">
