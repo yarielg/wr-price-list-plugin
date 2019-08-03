@@ -15,12 +15,22 @@ class PriceListController
 
     }
 
-    function wrpl_get_price_lists(){
+    function wrpl_get_price_list_name_by_id($id){
         global $wpdb;
-        $plists = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "wr_price_lists" );
-
-        $plists = stdToArray($plists);
-
+        $plists = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "wr_price_lists WHERE id = '$id'",ARRAY_A );
+        if(count($plists)>0){
+            return $plists[0]['description'];
+        }else{
+            return false;
+        }
+    }
+    function wrpl_get_price_lists($all_pl = true){
+        global $wpdb;
+        if($all_pl){
+            $plists = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "wr_price_lists",ARRAY_A );
+        }else{
+            $plists = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "wr_price_lists WHERE id_parent =0",ARRAY_A );
+        }
         return $plists;
     }
 
@@ -56,16 +66,26 @@ class PriceListController
         }
     }
 
-    function wrpl_add_price_list($plist){
+    function wrpl_add_price_list($name,$plist,$factor){
         global  $wpdb;
-        $plist = preg_replace('/\s+/', ' ',$plist); //removing extra spacing
-        if(!$this->wrpl_exist_price_list_name($plist)){
-            $wpdb->query("INSERT INTO $wpdb->prefix" . "wr_price_lists (description) VALUES ('$plist')");
+        $name = preg_replace('/\s+/', ' ',$name); //removing extra spacing
+        if(!$this->wrpl_exist_price_list_name($name)){
+            $wpdb->query("INSERT INTO $wpdb->prefix" . "wr_price_lists (description,id_parent,factor) VALUES ('$name','$plist','$factor')");
 
             return $wpdb->insert_id;
         }else{
             return false;
         }
+    }
+
+    function wrpl_get_price_list_by_id($id){
+        global $wpdb;
+        $plists = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "wr_price_lists WHERE id = '$id'", ARRAY_A);
+        $plist = -1;
+        if(count($plists)>0){
+            $plist = $plists[0];
+        }
+        return $plist ;
     }
 
     function wrpl_remove_price_list($id){
@@ -76,10 +96,10 @@ class PriceListController
         return $result;
     }
 
-    function wrpl_edit_price_list($name,$id){
+    function wrpl_edit_price_list($name,$id,$factor){
         global $wpdb;
         if(!$this->wrpl_exist_price_list_name($name)){
-            $wpdb->query("UPDATE $wpdb->prefix" . "wr_price_lists SET description='$name' WHERE id='$id'");
+            $wpdb->query("UPDATE $wpdb->prefix" . "wr_price_lists SET description='$name',factor='$factor' WHERE id='$id'");
             return true;
         }
         return false;

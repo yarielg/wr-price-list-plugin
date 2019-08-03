@@ -168,3 +168,14 @@ ul.list-group li{
     vertical-align: middle;
 }
 
+/* price list with parent styles */
+.wrpl-nobase-pl .price,.wrpl-nobase-pl .sale_price{
+    background: lightgoldenrodyellow;
+}
+span.wrpl-increase{
+    color: green !important;
+}
+span.wrpl-decrease{
+    color: red !important;
+}
+

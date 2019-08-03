@@ -12,8 +12,6 @@ final class Init{
 
             Controller\ProductController::class,
             //Controller\PriceListController::class,
-			//Functions\User::class,
-			//Functions\CheckAvailability::class,
 			Functions\PriceList::class,
 
 		] ;
@@ -36,56 +34,3 @@ final class Init{
 		return $service;
 	}	
 }
-
-/*use Inc\Base\Activate;
-use Inc\Base\Deactivate;
-
-if( !class_exists( 'Yariko' )){ 
-
-		class Yariko {
-
-		public $plugin;
-
-		function __construct(){
-
-			$this->plugin = plugin_basename( __FILE__ );
-			add_action( 'init' , array( $this , 'custom_post_type' ) ) ; //action to  create CPT
-
-		}
-
-		function register(){
-			
-			
-
-			add_filter('plugin_action_links_' . $this->plugin , array( $this , 'settings_link'));//this filter is to add a link on list of pluging
-		}
-
-
-		
-
-		function settings_link( $links ){
-
-			$settings_link = '<a href="admin.php?page=yariko-main-menu">Settings</a>';
-			array_push( $links, $settings_link );
-			return $links;	
-		}
-
-		
-
-		function custom_post_type(){
-			register_post_type( 'book', [ 'public' => true , 'label' => 'Books' , 'show_ui' => true , 'menu_icon' => 'dashicons-book' ] ); 
-		}
-
-
-	}//End Class Plugin
-
-	$yariko = new Yariko();
-	$yariko->register(); 
-}
-
-// activation
-register_activation_hook( __FILE__, array('Activate','activate') ); 
-
-// deactivation
-register_activation_hook( __FILE__, array('Deactivate','deactivate') );
-*/
