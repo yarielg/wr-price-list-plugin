@@ -44,7 +44,7 @@ $tab = $_GET['tab'];
                     <a id="import_export"
                        href="<?php echo ADMIN_URL . 'admin.php?page=wrpl-products-menu&tab=import_export'?>"
                        class="<?php echo $tab == 'import_export'  ? 'active' : '' ?>">
-                        Import/Export
+                        Import
                     </a>
                 </li>
                 <li>
@@ -101,11 +101,18 @@ $tab = $_GET['tab'];
                     }else if($tab == 'import_export'){
                         ?>
                         <div class="tab-pane show active" id="import_export">
-                            <?php include 'includes/_import_export.php' ?>
+                            <?php include 'includes/_import_export.php'; ?>
+                        </div>
+                        <?php
+                    }else if($tab == 'settings'){
+                        ?>
+                        <div class="tab-pane show active" id="settings">
+                            <?php include 'includes/_settings.php'; ?>
                         </div>
                         <?php
                     }
                 ?>
+
             </div> <!-- END div.wrpl_container_tab -->
         </div> <!-- END div#wrpl_tabs -->
 

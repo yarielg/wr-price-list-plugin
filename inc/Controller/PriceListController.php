@@ -38,11 +38,10 @@ class PriceListController
         if (is_user_logged_in()) {
             $user = wp_get_current_user();
             $roles = ( array )$user->roles;
-            return get_option('wrpl-'.$roles[1]) ? get_option('wrpl-'.$roles[1]) : 'default';
+            return get_option('wrpl-'.$roles[0]) ? get_option('wrpl-'.$roles[0]) : 'default';
         }else{
-            return 'default';
+            return get_option('wrpl-default_list');
         }
-
     }
 
     function wrpl_exist_price_list_name($name){

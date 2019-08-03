@@ -52,6 +52,12 @@ class ProductController{
                 $product['price'] = $this->getRegularPrice($product['ID'],$price_list);
                 $product['sku'] = $product['meta_value'];
                 $product['sale_price'] = $this->getSalesPrice($product['ID'],$price_list);
+                if($product['post_type'] == 'product_variation'){
+                    $product['edit_url'] = ADMIN_URL . 'post.php?post=' . $product['post_parent'] . '&action=edit';
+                    $product['guid'] = get_permalink($product['post_parent']);
+                }else{
+                    $product['edit_url'] = ADMIN_URL . 'post.php?post=' . $product['ID'] . '&action=edit';
+                }
                 array_push($products_data,$product);
             }
         }

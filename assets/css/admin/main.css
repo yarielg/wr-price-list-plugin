@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap');
 
 
-.wrpl-page,input[type='file']{
+.wrpl-page,input[type='file'],textarea#custom_msg_not_login_user{
     font-size: 12px;
     font-weight: bold;
     font-family: 'Nunito', sans-serif;
@@ -155,6 +155,13 @@ ul.list-group li{
 }
 .wrpl-edit:before {
     content: "\f464";
+    -webkit-font-smoothing: antialiased;
+    font: normal 15px/1 'dashicons';
+    color: #fff;
+    vertical-align: middle;
+}
+.wrpl-view:before {
+    content: "\f177";
     -webkit-font-smoothing: antialiased;
     font: normal 15px/1 'dashicons';
     color: #fff;

@@ -40,19 +40,25 @@ class PriceList{
 
         add_filter( 'woocommerce_get_price_html', array($this,'wrpl_woocommerce_price_html'), 100, 2 );
 
-        add_filter('woocommerce_get_variation_prices_hash',array($this,'testing'));
-
-        //$this->wp_cache_flush();
+       //hide price not login user
+        if(get_option('wrpl-hide_price')  == 1 ){
+            add_action( 'init', array($this,'hide_price_not_login_user') );
+        }
     }
 
-    function testing(){
-        return 10;
+    function hide_price_not_login_user() {
+        if ( ! is_user_logged_in() ) {
+            remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
+            remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
+            remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
+            remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
+            add_action( 'woocommerce_single_product_summary', array($this,'wrpl_print_login_to_see'), 31 );
+            add_action( 'woocommerce_after_shop_loop_item', array($this,'wrpl_print_login_to_see'), 11 );
+        }
     }
 
-    function wp_cache_flush() {
-        global $wp_object_cache;
-
-        return $wp_object_cache->flush();
+    function wrpl_print_login_to_see() {
+        echo stripslashes( get_option('wrpl-custom_msg_no_login_user'));
     }
 
     function custom_price($price,$product){

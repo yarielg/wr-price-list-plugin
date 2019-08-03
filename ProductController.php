@@ -49,10 +49,9 @@ class ProductController{
             if(! $this->isProductHasVariations($product['ID'])){ //not including products with variations
                 $image_values = wp_get_attachment_image_src( get_post_thumbnail_id($product['ID']), 'single-post-thumbnail' );
                 $product['image'] = $image_values[0];
-                $product['attrs'] = '';
+                $product['edit_url'] = ADMIN_URL . '/post.php?post=' . $product['ID'] . '&action=edit';
                 if($product['post_type'] == 'product_variation'){
-                    $product55 = wc_get_product( $product['ID'] );
-                    $product['attrs'] = $product55->get_attributes();
+                    $product['edit_url'] = ADMIN_URL . '/post.php?post=' . $product['post_parent'] . '&action=edit';
                 }
                 $product['price'] = $this->getRegularPrice($product['ID'],$price_list);
                 $product['sku'] = $product['meta_value'];
@@ -233,6 +232,7 @@ class ProductController{
                     $min = $variation['meta_value'];
                 }
             }
+            $min = ($min == PHP_FLOAT_MAX) ? 0 : $min;
         }
 
 

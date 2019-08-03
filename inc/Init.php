@@ -14,7 +14,7 @@ final class Init{
             //Controller\PriceListController::class,
 			//Functions\User::class,
 			//Functions\CheckAvailability::class,
-			Functions\PriceList::class
+			Functions\PriceList::class,
 
 		] ;
 	}
