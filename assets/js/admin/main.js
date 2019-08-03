@@ -178,7 +178,7 @@
                         'id': id,
                         'action':'edit_price',
                         'price':parseFloat(content),
-                        'sale_price':sale_price,
+                        'sale_price':parseFloat(sale_price),
                         'price_list' : price_list
                     },
                     dataType: "json",

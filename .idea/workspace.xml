@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="35a345d5-9d05-4145-b7f2-358a23529e57" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/admin/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/admin/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/admin/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/admin/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/admin/wrtable.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/admin/wrtable.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inc/Controller/PriceListController.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/Controller/PriceListController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inc/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/Controller/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inc/Functions/PriceList.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/Functions/PriceList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inc/Init.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/Init.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/products.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/products.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,8 +24,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assets/js/admin/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="181" column="49" lean-forward="true" selection-start-line="181" selection-start-column="49" selection-end-line="181" selection-end-column="49" />
+            <state relative-caret-position="189">
+              <caret line="180" column="58" selection-start-line="180" selection-start-column="58" selection-end-line="180" selection-end-column="58" />
               <folding>
                 <element signature="n#style#0;n#input#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#input#0;n#!!top" expanded="true" />
@@ -332,12 +323,12 @@
       <updated>1564410012931</updated>
       <workItem from="1564410014917" duration="23453000" />
       <workItem from="1564514741277" duration="7353000" />
-      <workItem from="1564578393796" duration="63623000" />
+      <workItem from="1564578393796" duration="63853000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94429000" />
+    <option name="totallyTimeSpent" value="94659000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -665,8 +656,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/admin/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="181" column="49" lean-forward="true" selection-start-line="181" selection-start-column="49" selection-end-line="181" selection-end-column="49" />
+        <state relative-caret-position="189">
+          <caret line="180" column="58" selection-start-line="180" selection-start-column="58" selection-end-line="180" selection-end-column="58" />
           <folding>
             <element signature="n#style#0;n#input#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#0;n#!!top" expanded="true" />
