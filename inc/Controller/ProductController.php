@@ -104,7 +104,7 @@ class ProductController{
             }else{
 
                 if($pl_object['id_parent'] == '1234567890'){
-                    return $pl_object['factor'] >= 1 ? 0 : $this->getPriceDefault($id,'_sale_price')*$pl_object['factor'];;
+                    return $pl_object['factor'] >= 1 ? 0 : $this->getPriceDefault($id,'_regular_price') * $pl_object['factor'];;
                 }else{
                     return $pl_object['factor'] >= 1 ? 0 : $this->getPriceNotDefault($id,$price_list,'price')*$pl_object['factor'];
                 }

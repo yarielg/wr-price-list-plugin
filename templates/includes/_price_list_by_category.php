@@ -1,16 +1,16 @@
 <?php
-
+$rules = $price_list_controller->wrpl_get_rules();
+var_dump($rules);
 if(isset($_POST['assign_price_list_category'])){
-    $assign = $price_list_controller->wrpl_assign_pl_to_category($_POST['wrpl_cat_id'],$_POST['price_list_categories']);
-    if($assign){
-        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Category Assigned! </strong> The category was successfully assigned.
+    $result = $price_list_controller->wrpl_assign_pl_to_category($_POST['wrpl_cat_id'],$_POST['price_list_categories']);
+        echo '<div class="alert alert-'.$result['type'].' alert-dismissible fade show" role="alert">
+                    '. $result['msg'] .'
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                </div>';
+    $rules = $price_list_controller->wrpl_get_rules();
 
-    }
 }
 ?>
 
@@ -43,7 +43,7 @@ if(isset($_POST['assign_price_list_category'])){
 
                 <input type="text" name="wrpl_cat_id" id="wrpl_cat_id" hidden>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-info btn-sm float-right mr-3" name="assign_price_list_category" id="btn_price_list_cat" value="Save" disabled>
+                    <input type="submit" class="btn btn-info btn-sm float-right mr-3" name="assign_price_list_category" id="btn_price_list_cat" value="Create Rule" disabled>
                 </div>
 
 
@@ -56,26 +56,20 @@ if(isset($_POST['assign_price_list_category'])){
 
         <br>
         <br>
-        <div class="col-6">
+        <div class="col-2"></div>
+        <div class="col-8">
             <ul id="wrpl_rules_categories" class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center p-1">
-                    wrpl-1
-                    <span class="wrpl-sortable"></span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center p-1">
-                    wrpl-2
-                    <span class="wrpl-sortable"></span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center p-1">
-                    wrpl-3
-                    <span class="wrpl-sortable"></span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center p-1">
-                    wrpl-4
-                    <span class="wrpl-sortable"></span>
-                </li>
+                <?php
+                foreach ($rules as $rule){
+                    echo '<li class="list-group-item d-flex justify-content-between align-items-center p-2">
+                            ' . get_term( $rule['id_category'], 'product_cat')->name . ' => ' . $rule['description']  . '
+                            <span class="wrpl-sortable"></span>
+                        </li>';
+                }
+                ?>
             </ul>
         </div>
+        <div class="col-2"></div>
     </div>
 </div>
 

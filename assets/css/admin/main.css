@@ -214,4 +214,7 @@ span.wrpl-increase{
 span.wrpl-decrease{
     color: red !important;
 }
-
+/*style for sortable category list*/
+.wrpl-sortable{
+    cursor: pointer;
+}

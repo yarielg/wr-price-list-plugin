@@ -168,11 +168,43 @@ class PriceListController
 
     }
 
-    function wrpl_assign_pl_to_category($cat_id,$price_list_id){
-        update_option('wrpl_cat_' . $cat_id,$price_list_id);
-        if(get_option('wrpl_cat_' . $cat_id,$price_list_id) == $price_list_id){
+    function wrpl_exist_rule($cat_id,$price_list_id){
+        global $wpdb;
+
+
+        $rules = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "wr_rules WHERE id_price_list='$price_list_id' AND id_category=$cat_id");
+        if(count($rules)>0){
             return true;
+        }else{
+            return false;
+
         }
-        return false;
+    }
+
+    function wrpl_assign_pl_to_category($cat_id,$price_list_id){
+        global $wpdb;
+
+        if($this->wrpl_exist_rule($cat_id,$price_list_id)){
+            return array( 'type'=>'danger', 'msg' => 'It already exists a rule with the same parameters');
+        }else{
+            update_option('wrpl_cat_' . $cat_id,$price_list_id);
+            $wpdb->query("INSERT INTO $wpdb->prefix" . "wr_rules (id_price_list,id_category,rule_type) VALUES ('$price_list_id','$cat_id','category')");
+            if($wpdb->last_error !== '') {
+
+                $result = array( 'type'=>'danger', 'msg' => 'Something was wrong, we could not create the rule');
+                return $result;
+
+            }else{
+                return array('type' => 'success', 'msg' => 'The rule was successfully created');
+            }
+        }
+
+    }
+
+    function wrpl_get_rules(){
+        global $wpdb;
+        $rules = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "wr_rules INNER JOIN $wpdb->prefix" . "wr_price_lists ON $wpdb->prefix"."wr_rules.id_price_list=$wpdb->prefix" ."wr_price_lists.id  ORDER BY priority", ARRAY_A);
+
+        return $rules;
     }
 }
