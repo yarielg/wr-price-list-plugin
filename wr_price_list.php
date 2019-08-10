@@ -49,8 +49,10 @@ include 'inc/Util/helper.php';
 
 if( class_exists( 'Wrpl\\Inc\\Init' ) ){
     register_activation_hook( __FILE__ , array('Wrpl\\Inc\\Base\\Activate','activate') );
-    register_deactivation_hook( __FILE__, array('Wrpl\\Inc\\Base\\Deactivate','deactivate'));
+    //register_deactivation_hook( __FILE__ , array('Wrpl\\Inc\\Base\\Deactivate','deactivate') );
     Wrpl\Inc\Init::register_services();
 
 }
+
+
 

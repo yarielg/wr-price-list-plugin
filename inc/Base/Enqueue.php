@@ -13,7 +13,7 @@ class Enqueue{
     public function register(){
 
         add_action( 'admin_enqueue_scripts', array( $this , 'enqueue_admin' ) ); //action to include script to the backend, in order to include in the frontend is just wp_enqueue_scripts instead admin_enqueue_scripts
-        add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend'));
+       // add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend'));
 
     }
 
@@ -30,9 +30,4 @@ class Enqueue{
         wp_enqueue_script('mediaelement');
     }
 
-    function enqueue_frontend(){
-        //enqueue all our scripts frontend
-
-        //wp_enqueue_script('my_frontend_scripts', WRPL_PLUGIN_URL . '/assets/js/front/main.js' ,array ('jquery'), '1.0', true );
-    }
 }

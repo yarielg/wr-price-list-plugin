@@ -168,6 +168,34 @@ ul.list-group li{
     vertical-align: middle;
 }
 
+.wrpl-expand:before {
+    content: "\f132";
+    -webkit-font-smoothing: antialiased;
+    font: normal 15px/1 'dashicons';
+    color: #000;
+    vertical-align: middle;
+}
+.wrpl-collapse:before {
+    content: "\f460";
+    -webkit-font-smoothing: antialiased;
+    font: normal 15px/1 'dashicons';
+    color: #000;
+    vertical-align: middle;
+}
+.wrpl-cat:before {
+    content: "\f323";
+    -webkit-font-smoothing: antialiased;
+    font: normal 15px/1 'dashicons';
+    color: #000;
+    vertical-align: middle;
+}
+
+
+
+#price_list_by_role .active{
+    color: #000 !important;
+}
+
 
 .wrpl-sortable:before {
     content: "\f545";

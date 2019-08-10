@@ -50,7 +50,7 @@
 
                });
 
-               $('#default-tree').treeview('expandAll', { silent: true });
+               //$('#default-tree').treeview('expandAll', { silent: true });
            //    $('#default-tree').treeview('selectNode', [ 0, { silent: true } ]);
 
 

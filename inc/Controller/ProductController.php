@@ -364,6 +364,7 @@ class ProductController{
         $categories = array();
         foreach ($product_categories as $category){
             $category['text'] = $category['name'];
+            $category['plist'] = get_option('wrpl_cat_' . $category['term_id']) ?: 'default';
             if($this->hasChildren($category['term_id'])){
                 $category['nodes'] = $this->getProductChildCategories($category['term_id']);
             }
@@ -389,6 +390,7 @@ class ProductController{
         $categories = array();
         foreach ($product_categories as $category){
             $category['text'] = $category['name'];
+            $category['plist'] = get_option('wrpl_cat_' . $category['term_id']) ?: 'default';
             if($this->hasChildren($category['term_id'])){
                 $category['nodes'] = $this->getProductChildCategories($category['term_id']);
             }

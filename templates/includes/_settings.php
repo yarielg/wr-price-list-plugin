@@ -30,6 +30,21 @@
                 <textarea name="custom_message" class="form-control" id="custom_msg_not_login_user" rows="3"  placeholder="<strong>Please</strong>, <a href='url-to-login'>login</a> to see price"  <?php echo get_option('wrpl-hide_price') == 0 ? 'disabled' : '' ?>><?php echo stripslashes(get_option('wrpl-custom_msg_no_login_user')) ?></textarea>
             </div>
         </div>
+
+        <hr>
+        <p>Chosse which assignation method you want</p>
+        <div class="form-row">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input ml-1" type="radio" name="by_rbtn" id="rbtn_by_role" value="1" <?php echo get_option('wrpl-assign-method') == 1 ? 'checked' : '' ?>>
+                <label class="form-check-label" for="rbtn_by_role">By Role</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="by_rbtn" id="rbtn_by_category" value="2" <?php echo get_option('wrpl-assign-method') == 2 ? 'checked' : '' ?>>
+                <label class="form-check-label" for="rbtn_by_category">By Category</label>
+            </div>
+        </div>
+
+        <br><br>
         <div class="form-group">
             <input type="submit" class="btn btn-info btn-sm" name="save_settings" id="import_price_list" value="Save settings">
         </div>

@@ -167,4 +167,12 @@ class PriceListController
         return false;
 
     }
+
+    function wrpl_assign_pl_to_category($cat_id,$price_list_id){
+        update_option('wrpl_cat_' . $cat_id,$price_list_id);
+        if(get_option('wrpl_cat_' . $cat_id,$price_list_id) == $price_list_id){
+            return true;
+        }
+        return false;
+    }
 }

@@ -7,8 +7,12 @@ $plists = $price_list_controller->wrpl_get_price_lists();
 $roles = stdToArray(wrpl_roles());
 //$categories = $product_controller->getProductParentCategories();
 $tab = 'products';
+$section = '';
 if(isset($_GET['tab'])){
     $tab = $_GET['tab'];
+    if(isset($_GET['section'])){
+        $section = 'category';
+    }
 }
 ?>
 
@@ -93,12 +97,12 @@ if(isset($_GET['tab'])){
                     <div class="tab-pane show active" id="price_list_by_role">
                         <a id="price_list_by_roles"
                            href="<?php echo WRPL_ADMIN_URL . 'admin.php?page=wrpl-products-menu&tab=price_list_by_roles'?>"
-                           class="<?php echo $tab == 'price_list_by_roles'  ? 'active' : '' ?>">
+                           class="<?php echo $section == ''  ? 'active' : '' ?>">
                             By Role
                         </a> |
                         <a id="price_list_by_roles"
                            href="<?php echo WRPL_ADMIN_URL . 'admin.php?page=wrpl-products-menu&tab=price_list_by_roles&section=category'?>"
-                           class="<?php echo $tab == 'price_list_by_roles'  ? 'active' : '' ?>">
+                           class="<?php echo $section == 'category'  ? 'active' : '' ?>">
                             By Category
                         </a>
                         <?php

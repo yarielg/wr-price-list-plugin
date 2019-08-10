@@ -11,7 +11,7 @@ final class Init{
             Base\Enqueue::class,
 
             Controller\ProductController::class,
-            //Controller\PriceListController::class,
+            Controller\PriceListController::class,
 
             Functions\PriceList::class,
 
@@ -36,3 +36,4 @@ final class Init{
     }
 
 }
+?>

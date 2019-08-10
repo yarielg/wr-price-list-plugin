@@ -2,7 +2,7 @@
 if(isset($_POST['wrpl_new_price_list'])){
     $name = $_POST['wrpl_pl_name'];
     $price_list = $_POST['price_list'];
-    $factor = $_POST['wrpl_pl_factor'];
+    $factor = isset($_POST['wrpl_pl_factor']) ? $_POST['wrpl_pl_factor'] : '';
     $was_inserted = $price_list_controller->wrpl_add_price_list($name,$price_list,$factor);
     if($was_inserted){
         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
