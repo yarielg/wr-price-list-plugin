@@ -18,6 +18,7 @@ class Activate{
 
         $table_name1 = $wpdb->prefix . 'wr_price_lists';
         $table_name2 = $wpdb->prefix . 'wr_price_lists_price';
+        $table_name3 = $wpdb->prefix . 'wr_rules';
 
 
         $sql1 = "CREATE TABLE $table_name1 (
@@ -37,10 +38,20 @@ class Activate{
           PRIMARY KEY  (id)
         )  $charset_collate;";
 
+        $sql3 = "CREATE TABLE $table_name3 (
+          id mediumint(9) NOT NULL AUTO_INCREMENT,
+          id_price_list INT NOT NULL,
+          id_category INT NOT NULL,
+          order INT NOT NULL,
+          type varchar(11) NOT NULL,
+          PRIMARY KEY  (id)
+        )  $charset_collate;";
+
 
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
         dbDelta( $sql1 );
         dbDelta( $sql2 );
+        dbDelta( $sql3 );
     }
 
 
