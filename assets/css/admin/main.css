@@ -168,3 +168,11 @@ ul.list-group li{
     vertical-align: middle;
 }
 
+.wrpl-sortable:before {
+    content: "\f545";
+    display: block;
+    font: normal 15px/1 'dashicons';
+    width: 15px;
+    height: 15px;
+}
+

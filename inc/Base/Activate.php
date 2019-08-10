@@ -1,15 +1,15 @@
-<?php 	
+<?php
 
 /*
 *
 * @package yariko		
 *
 */
-namespace Inc\Base;
+namespace Wrpl\Inc\Base;
 
 class Activate{
 
-	public static function activate(){
+    public static function activate(){
 
         global $wpdb;
 
@@ -23,6 +23,8 @@ class Activate{
         $sql1 = "CREATE TABLE $table_name1 (
           id mediumint(9) NOT NULL AUTO_INCREMENT,
           description varchar(100) NOT NULL,
+          id_parent varchar(11) NOT NULL,
+          factor varchar(11) NOT NULL,
           PRIMARY KEY  (id)
         ) $charset_collate;";
 
@@ -39,8 +41,8 @@ class Activate{
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
         dbDelta( $sql1 );
         dbDelta( $sql2 );
-	}
+    }
 
-		
+
 
 }

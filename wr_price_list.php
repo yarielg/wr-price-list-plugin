@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
 *
 * @package yariko
@@ -37,20 +37,20 @@ Copyright 2005-2015 Automattic, Inc.
 defined('ABSPATH') or die('You do not have access, sally human!!!'); //for security
 
 if( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php') ){
-	require_once  dirname( __FILE__ ) . '/vendor/autoload.php';
+    require_once  dirname( __FILE__ ) . '/vendor/autoload.php';
 }
 
-define('PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
-define('PLUGIN_URL' , plugin_dir_url(  __FILE__  ) );
-define('ADMIN_URL' , get_admin_url() );
+define('WRPL_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+define('WRPL_PLUGIN_URL' , plugin_dir_url(  __FILE__  ) );
+define('WRPL_ADMIN_URL' , get_admin_url() );
 
 //include the helpers
- include 'inc/Util/helper.php';
+include 'inc/Util/helper.php';
 
-if( class_exists( 'Inc\\Init' ) ){
-    register_activation_hook( __FILE__ , array('Inc\\Base\\Activate','activate') );
-    register_deactivation_hook( __FILE__, array('Inc\\Base\\Activate','deactivate'));
-    Inc\Init::register_services();
+if( class_exists( 'Wrpl\\Inc\\Init' ) ){
+    register_activation_hook( __FILE__ , array('Wrpl\\Inc\\Base\\Activate','activate') );
+    register_deactivation_hook( __FILE__, array('Wrpl\\Inc\\Base\\Deactivate','deactivate'));
+    Wrpl\Inc\Init::register_services();
 
 }
 

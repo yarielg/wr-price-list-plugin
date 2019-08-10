@@ -6,9 +6,9 @@
 *
 */
 
-namespace Inc\Functions;
-use Inc\Controller\PriceListController;
-use Inc\Controller\ProductController;
+namespace Wrpl\Inc\Functions;
+use Wrpl\Inc\Controller\PriceListController;
+use Wrpl\Inc\Controller\ProductController;
 
 class PriceList{
 
@@ -40,20 +40,27 @@ class PriceList{
 
         add_filter( 'woocommerce_get_price_html', array($this,'wrpl_woocommerce_price_html'), 100, 2 );
 
-       //hide price not login user
+        //hide price not login user
         if(get_option('wrpl-hide_price')  == 1 ){
             add_action( 'init', array($this,'hide_price_not_login_user') );
+
         }
     }
-
+    //
     function hide_price_not_login_user() {
         if ( ! is_user_logged_in() ) {
-            remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
-            remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
+            remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart',99	);
+            remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart',99);
             remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
             remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
             add_action( 'woocommerce_single_product_summary', array($this,'wrpl_print_login_to_see'), 31 );
             add_action( 'woocommerce_after_shop_loop_item', array($this,'wrpl_print_login_to_see'), 11 );
+            add_filter( 'woocommerce_is_sold_individually','custom_remove_all_quantity_fields', 10, 2 );
+            echo "<style type='text/css'>
+            		.single_add_to_cart_button, form.cart .quantity{
+						display: none !important;width:0;height:0; visibility: hidden;
+            		}
+            </style>";
         }
     }
 
@@ -89,44 +96,59 @@ class PriceList{
 
     function wrpl_variation_price_range( $price, $product ) {
 
-        //  $prefix = sprintf('%s: ', __('From', 'webready'));
+        if (  is_user_logged_in() && get_option('wrpl-hide_price')  != 1) {
 
-        // $min_price_regular = 7;//$product->get_variation_regular_price( 'min', true );
-        // $min_price_sale    = 5;//$product->get_variation_sale_price( 'min', true );
-        // $max_price = 4;//$product->get_variation_price( 'max', true );
-        // $min_price = 4;//$product->get_variation_price( 'min', true );
-        $price_list = $this->price_list_controller->wrpl_get_user_price_list();
-        $product_parent_id = $product->get_id();
-        /*$price = ( $min_price_sale == $min_price_regular ) ?
-            wc_price( $min_price_regular ) :
-            '<del>' . wc_price( $min_price_regular ) . '</del>' . '<ins>' . wc_price( $min_price_sale ) . '</ins>';*/
+            //  $prefix = sprintf('%s: ', __('From', 'webready'));
 
-        $min_max = $this->product_controller->getMinMaxPriceVariation($product_parent_id,$price_list,'_regular_price');
-        if($min_max['min'] != $min_max['max']){
+            // $min_price_regular = 7;//$product->get_variation_regular_price( 'min', true );
+            // $min_price_sale    = 5;//$product->get_variation_sale_price( 'min', true );
+            // $max_price = 4;//$product->get_variation_price( 'max', true );
+            // $min_price = 4;//$product->get_variation_price( 'min', true );
+            $price_list = $this->price_list_controller->wrpl_get_user_price_list();
+            $product_parent_id = $product->get_id();
+            /*$price = ( $min_price_sale == $min_price_regular ) ?
+                wc_price( $min_price_regular ) :
+                '<del>' . wc_price( $min_price_regular ) . '</del>' . '<ins>' . wc_price( $min_price_sale ) . '</ins>';*/
 
-            return wc_price($min_max['min']) . " - " .  wc_price($min_max['max']);
+            $min_max = $this->product_controller->getMinMaxPriceVariation($product_parent_id,$price_list,'_regular_price');
+            if($min_max['min'] != $min_max['max']){
+
+                return wc_price($min_max['min']) . " - " .  wc_price($min_max['max']);
+
+            }
 
         }
 
     }
 
     function wrpl_woocommerce_price_html( $price, $product ){
-        $price_list = $this->price_list_controller->wrpl_get_user_price_list();
-        $min_max = $this->product_controller->getMinMaxPriceVariation($product->get_id(),$price_list,'_regular_price');
-        $min_max_sale = $this->product_controller->getMinMaxPriceVariation($product->get_id(),$price_list,'_sale_price');
-        if(!$product->has_child()){
-            if($this->custom_sale_price($price,$product) != $this->custom_regular_price($price,$product)){
-                $html_price = '<del>' . wc_price($this->custom_regular_price($price,$product)) . '</del>  ' . wc_price($this->custom_sale_price($price,$product)) ;
-            }else{
-                $html_price =  wc_price($this->custom_regular_price($price,$product));
-            }
-            return $html_price;
-        }else{
 
-            if(  $min_max_sale['min']>0 && $min_max_sale['min']<$min_max['min']){
-                return 'Start in: ' . wc_price($min_max_sale['min']);
+        if (  is_user_logged_in() && get_option('wrpl-hide_price')  != 1) {
+
+            $price_list = $this->price_list_controller->wrpl_get_user_price_list();
+            $min_max = $this->product_controller->getMinMaxPriceVariation($product->get_id(),$price_list,'_regular_price');
+            $min_max_sale = $this->product_controller->getMinMaxPriceVariation($product->get_id(),$price_list,'_sale_price');
+            $pl_objec =$this->price_list_controller->wrpl_get_price_list_by_id($price_list);
+
+            /*if($pl_objec['id_parent'] > 0  ){
+                $
+            }*/
+            //var_dump($min_max);
+            if(!$product->has_child()){
+                if($this->custom_sale_price($price,$product) != $this->custom_regular_price($price,$product)){
+                    $html_price = '<del>' . wc_price($this->custom_regular_price($price,$product)) . '</del>  ' . wc_price($this->custom_sale_price($price,$product)) ;
+                }else{
+                    $html_price =  wc_price($this->custom_regular_price($price,$product));
+                }
+                return $html_price;
             }else{
-                return 'Start in: ' . wc_price($min_max['min']);
+
+                if(  $min_max_sale['max'] > 0 && $min_max_sale['min']<$min_max['min']){
+                    return 'Start in: ' . wc_price($min_max_sale['min']);
+                }else{
+                    return 'Start in: ' . wc_price($min_max['min']);
+                }
+
             }
 
         }

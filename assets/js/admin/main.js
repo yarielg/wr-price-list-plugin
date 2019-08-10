@@ -40,7 +40,7 @@
                   "url": parameters.ajax_url,
                   "type": "POST",
                   "data":{
-                      "action" : 'get_products',
+                      "action" : 'wrpl_get_products',
                       'price_list': price_list
                   },
                   "dataSrc": function(data){
@@ -82,7 +82,7 @@
                   url:  parameters.ajax_url,
                   data:{
                       'id': id,
-                      'action':'edit_price',
+                      'action':'wrpl_edit_price',
                       'price':regular_price,
                       'sale_price':parseFloat(content),
                       'price_list' : price_list
@@ -168,6 +168,8 @@
             return this;
         }
 
+        //This is duplicated, so I have to refactor it
+
         $.fn.makeEditable1 = function(id,sale_price) {
             var price_list = $('#price_list').val();
             function editPriceAjaxRequest(sale_price,id,content,cell){
@@ -176,7 +178,7 @@
                     url:  parameters.ajax_url,
                     data:{
                         'id': id,
-                        'action':'edit_price',
+                        'action':'wrpl_edit_price',
                         'price':parseFloat(content),
                         'sale_price':parseFloat(sale_price),
                         'price_list' : price_list
