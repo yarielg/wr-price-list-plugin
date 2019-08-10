@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="35a345d5-9d05-4145-b7f2-358a23529e57" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/wr_price_list.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/wr_price_list.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProductController.php" beforeDir="false" />
@@ -11,16 +12,37 @@
       <change beforePath="$PROJECT_DIR$/inc/Base/Activate.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/Base/Activate.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/inc/Base/Deactivate.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/Base/Deactivate.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/inc/Base/Enqueue.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/Base/Enqueue.php" afterDir="false" />
+=======
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/assets/js/admin/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/admin/main.js" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/admin/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/admin/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/admin/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/admin/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inc/Base/Activate.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/Base/Activate.php" afterDir="false" />
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
       <change beforePath="$PROJECT_DIR$/inc/Controller/PriceListController.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/Controller/PriceListController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/inc/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/Controller/ProductController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/inc/Functions/CheckAvailability.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/inc/Functions/PriceList.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/Functions/PriceList.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/inc/Functions/User.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/inc/Init.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/Init.php" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/inc/Pages/Pages.php" beforeDir="false" afterPath="$PROJECT_DIR$/inc/Pages/Pages.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/includes/requests/_import_price_list_request.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/includes/requests/_import_price_list_request.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/products.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/products.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wr_price_list.php" beforeDir="false" afterPath="$PROJECT_DIR$/wr_price_list.php" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/templates/includes/_create_price_list_and_role.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/includes/_create_price_list_and_role.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/includes/_import_export.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/includes/_import_export.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/includes/_price_list_by_role.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/includes/_price_list_by_role.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/includes/_select_price_list.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/includes/_select_price_list.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/includes/modals/__edit_price_list_modal.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/includes/modals/__edit_price_list_modal.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/includes/requests/_import_price_list_request.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/includes/requests/_import_price_list_request.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/includes/requests/_price_list_request.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/includes/requests/_price_list_request.php" afterDir="false" />
+>>>>>>> Adding Price List Base on other Price List.
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -58,6 +80,7 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/inc/Base/Enqueue.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="427">
@@ -65,11 +88,18 @@
               <folding>
                 <element signature="e#7#34#0#PHP" expanded="true" />
               </folding>
+=======
+        <entry file="file://$PROJECT_DIR$/templates/includes/_import_export.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="297">
+              <caret line="19" column="55" lean-forward="true" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/inc/Pages/Pages.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="461">
@@ -86,6 +116,103 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="840">
               <caret line="90" column="43" lean-forward="true" selection-start-line="90" selection-start-column="43" selection-end-line="90" selection-end-column="43" />
+=======
+        <entry file="file://$PROJECT_DIR$/templates/includes/modals/__add_price_list_modal.php">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="189">
+              <caret line="180" column="58" selection-start-line="180" selection-start-column="58" selection-end-line="180" selection-end-column="58" />
+=======
+            <state relative-caret-position="323">
+              <caret line="25" column="28" lean-forward="true" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="90" />
+>>>>>>> Adding Price List Base on other Price List.
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
+              <folding>
+                <element signature="e#487#494#1#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
+        <entry file="file://$PROJECT_DIR$/inc/Functions/PriceList.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2091">
+              <caret line="136" column="39" lean-forward="true" selection-start-line="136" selection-start-column="39" selection-end-line="136" selection-end-column="39" />
+              <folding>
+                <element signature="e#66#110#0#PHP" expanded="true" />
+              </folding>
+=======
+        <entry file="file://$PROJECT_DIR$/assets/css/admin/main.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="478">
+              <caret line="175" column="28" selection-start-line="175" selection-start-column="28" selection-end-line="175" selection-end-column="28" />
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
+        <entry file="file://$PROJECT_DIR$/templates/products.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="702">
+              <caret line="124" column="26" lean-forward="true" selection-start-line="124" selection-start-column="26" selection-end-line="124" selection-end-column="26" />
+              <folding>
+                <element signature="e#6#50#0#PHP" expanded="true" />
+              </folding>
+=======
+        <entry file="file://$PROJECT_DIR$/templates/includes/_create_price_list_and_role.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="311">
+              <caret line="56" column="33" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
+        <entry file="file://$PROJECT_DIR$/assets/js/admin/category.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="308">
+              <caret line="98" column="30" selection-start-line="98" selection-start-column="9" selection-end-line="98" selection-end-column="30" />
+=======
+        <entry file="file://$PROJECT_DIR$/inc/Controller/PriceListController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="331">
+              <caret line="106" lean-forward="true" selection-start-line="106" selection-end-line="106" />
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
+        <entry file="file://$PROJECT_DIR$/templates/includes/_price_list_by_category.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/includes/_price_list_by_role.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="20" column="12" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="115" />
+=======
+        <entry file="file://$PROJECT_DIR$/templates/includes/modals/__edit_price_list_modal.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="376">
+              <caret line="35" column="65" selection-start-line="35" selection-start-column="51" selection-end-line="35" selection-end-column="65" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/js/admin/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="393" column="41" lean-forward="true" selection-start-line="393" selection-start-column="41" selection-end-line="393" selection-end-column="41" />
               <folding>
                 <element signature="n#style#0;n#input#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#input#0;n#!!top" expanded="true" />
@@ -97,46 +224,27 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inc/Functions/PriceList.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2091">
-              <caret line="136" column="39" lean-forward="true" selection-start-line="136" selection-start-column="39" selection-end-line="136" selection-end-column="39" />
+            <state relative-caret-position="102">
+              <caret line="115" column="59" selection-start-line="115" selection-start-column="59" selection-end-line="115" selection-end-column="59" />
               <folding>
-                <element signature="e#66#110#0#PHP" expanded="true" />
+                <element signature="e#61#100#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/products.php">
+        <entry file="file://$PROJECT_DIR$/templates/includes/requests/_price_list_request.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="702">
-              <caret line="124" column="26" lean-forward="true" selection-start-line="124" selection-start-column="26" selection-end-line="124" selection-end-column="26" />
+            <state relative-caret-position="204">
+              <caret line="33" column="53" lean-forward="true" selection-start-line="33" selection-start-column="53" selection-end-line="33" selection-end-column="53" />
               <folding>
-                <element signature="e#6#50#0#PHP" expanded="true" />
+                <element signature="e#322#329#1" expanded="true" />
+                <element signature="e#341#348#1" expanded="true" />
+                <element signature="e#321#328#1" expanded="true" />
+                <element signature="e#341#348#1" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/js/admin/category.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="98" column="30" selection-start-line="98" selection-start-column="9" selection-end-line="98" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/includes/_price_list_by_category.php">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/includes/_price_list_by_role.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="20" column="12" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="115" />
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
             </state>
           </provider>
         </entry>
@@ -169,9 +277,16 @@
       <find>expiredWarning</find>
       <find>impo</find>
       <find>edit</find>
+<<<<<<< HEAD
       <find>wrpl_</find>
       <find>edit_price</find>
       <find>getPro</find>
+=======
+      <find>create</find>
+      <find>cons</find>
+      <find>1.20</find>
+      <find>fixe</find>
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -184,18 +299,25 @@
         <option value="$PROJECT_DIR$/templates/includes/requests/_role_request.php" />
         <option value="$PROJECT_DIR$/templates/includes/requests/_import_export.php" />
         <option value="$PROJECT_DIR$/assets/js/front/main.js" />
-        <option value="$PROJECT_DIR$/templates/includes/_create_price_list_and_role.php" />
         <option value="$PROJECT_DIR$/.gitignore" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/templates/includes/_import_export.php" />
+=======
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
         <option value="$PROJECT_DIR$/../price-by-user-role-for-woocommerce/includes/settings/class-alg-wc-price-by-user-role-settings-per-product.php" />
         <option value="$PROJECT_DIR$/inc/Functions/PriceListWoo.php" />
         <option value="$PROJECT_DIR$/templates/includes/requests/_settings_request.php" />
         <option value="$PROJECT_DIR$/templates/includes/_settings.php" />
+<<<<<<< HEAD
+=======
+        <option value="$PROJECT_DIR$/templates/products.php" />
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
         <option value="$PROJECT_DIR$/ProductController.php" />
         <option value="$PROJECT_DIR$/assets/js/admin/test.js" />
         <option value="$PROJECT_DIR$/assets/js/admin/wrtable.min.js" />
         <option value="$PROJECT_DIR$/templates/includes/requests/_import_price_list_request.php" />
         <option value="$PROJECT_DIR$/uploads/test.csv" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/wr_price_list.php" />
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/inc/Base/Activate.php" />
@@ -209,6 +331,23 @@
         <option value="$PROJECT_DIR$/inc/Controller/ProductController.php" />
         <option value="$PROJECT_DIR$/inc/Init.php" />
         <option value="$PROJECT_DIR$/inc/Base/Enqueue.php" />
+=======
+        <option value="$PROJECT_DIR$/inc/Init.php" />
+        <option value="$PROJECT_DIR$/templates/includes/modals/__add_price_list.php" />
+        <option value="$PROJECT_DIR$/inc/Base/Activate.php" />
+        <option value="$PROJECT_DIR$/templates/includes/modals/__add_price_list_modal.php" />
+        <option value="$PROJECT_DIR$/assets/css/admin/main.css" />
+        <option value="$PROJECT_DIR$/inc/Functions/PriceList.php" />
+        <option value="$PROJECT_DIR$/inc/Controller/ProductController.php" />
+        <option value="$PROJECT_DIR$/templates/includes/_price_list_by_role.php" />
+        <option value="$PROJECT_DIR$/templates/includes/_select_price_list.php" />
+        <option value="$PROJECT_DIR$/templates/includes/_create_price_list_and_role.php" />
+        <option value="$PROJECT_DIR$/assets/js/admin/main.js" />
+        <option value="$PROJECT_DIR$/templates/includes/modals/__edit_price_list_modal.php" />
+        <option value="$PROJECT_DIR$/templates/includes/requests/_price_list_request.php" />
+        <option value="$PROJECT_DIR$/inc/Controller/PriceListController.php" />
+        <option value="$PROJECT_DIR$/templates/includes/_import_export.php" />
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
       </list>
     </option>
   </component>
@@ -317,6 +456,27 @@
               <item name="wr_price_list" type="462c0819:PsiDirectoryNode" />
               <item name="inc" type="462c0819:PsiDirectoryNode" />
               <item name="Base" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
+            </path>
+            <path>
+              <item name="wr_price_list" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test-integration" type="462c0819:PsiDirectoryNode" />
+              <item name="wp-content" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="wr_price_list" type="462c0819:PsiDirectoryNode" />
+              <item name="inc" type="462c0819:PsiDirectoryNode" />
+              <item name="Controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wr_price_list" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test-integration" type="462c0819:PsiDirectoryNode" />
+              <item name="wp-content" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="wr_price_list" type="462c0819:PsiDirectoryNode" />
+              <item name="inc" type="462c0819:PsiDirectoryNode" />
+              <item name="Functions" type="462c0819:PsiDirectoryNode" />
+=======
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
             </path>
             <path>
               <item name="wr_price_list" type="b2602c69:ProjectViewProjectNode" />
@@ -342,15 +502,6 @@
               <item name="wp-content" type="462c0819:PsiDirectoryNode" />
               <item name="plugins" type="462c0819:PsiDirectoryNode" />
               <item name="wr_price_list" type="462c0819:PsiDirectoryNode" />
-              <item name="inc" type="462c0819:PsiDirectoryNode" />
-              <item name="Pages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="wr_price_list" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test-integration" type="462c0819:PsiDirectoryNode" />
-              <item name="wp-content" type="462c0819:PsiDirectoryNode" />
-              <item name="plugins" type="462c0819:PsiDirectoryNode" />
-              <item name="wr_price_list" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -367,7 +518,24 @@
               <item name="test-integration" type="462c0819:PsiDirectoryNode" />
               <item name="wp-content" type="462c0819:PsiDirectoryNode" />
               <item name="plugins" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
               <item name=".idea" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="wr_price_list" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="includes" type="462c0819:PsiDirectoryNode" />
+              <item name="modals" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wr_price_list" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test-integration" type="462c0819:PsiDirectoryNode" />
+              <item name="wp-content" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="wr_price_list" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="includes" type="462c0819:PsiDirectoryNode" />
+              <item name="requests" type="462c0819:PsiDirectoryNode" />
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
             </path>
           </expand>
           <select />
@@ -412,12 +580,28 @@
       <updated>1564410012931</updated>
       <workItem from="1564410014917" duration="23453000" />
       <workItem from="1564514741277" duration="7353000" />
+<<<<<<< HEAD
       <workItem from="1564578393796" duration="72537000" />
+=======
+<<<<<<< HEAD
+      <workItem from="1564578393796" duration="63853000" />
+=======
+      <workItem from="1564578393796" duration="120240000" />
+>>>>>>> Adding Price List Base on other Price List.
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="105631000" />
+=======
+<<<<<<< HEAD
+    <option name="totallyTimeSpent" value="94659000" />
+=======
+    <option name="totallyTimeSpent" value="151046000" />
+>>>>>>> Adding Price List Base on other Price List.
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -490,13 +674,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/inc/Util/helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/includes/requests/_role_request.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="87">
@@ -522,13 +699,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/includes/_create_price_list_and_role.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="6" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -543,6 +713,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/templates/includes/_table_products.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -553,6 +724,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
     <entry file="file://$PROJECT_DIR$/../price-by-user-role-for-woocommerce/price-by-user-role-for-woocommerce.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-646">
@@ -574,6 +747,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/templates/includes/_import_export.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="93">
@@ -589,6 +763,18 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/inc/Functions/PriceListWoo.php" />
+=======
+    <entry file="file://$PROJECT_DIR$/inc/Functions/PriceListWoo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+          <folding>
+            <element signature="e#61#100#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
     <entry file="file://$PROJECT_DIR$/../price-by-user-role-for-woocommerce/includes/settings/class-alg-wc-price-by-user-role-settings-per-product.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="483">
@@ -617,6 +803,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/assets/js/admin/test.js" />
     <entry file="file://$USER_HOME$/Desktop/datatable.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -632,12 +819,26 @@
     <entry file="file://$PROJECT_DIR$/assets/js/admin/wrtable.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
+=======
+    <entry file="file://$PROJECT_DIR$/assets/js/admin/test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="9583" column="16" selection-start-line="9583" selection-start-column="16" selection-end-line="9583" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/datatable.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3111">
+          <caret line="13" column="271" lean-forward="true" selection-end-line="327" />
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/ProductController.php" />
     <entry file="file://$USER_HOME$/AppData/Local/Temp/fz3temp-2/main.js" />
     <entry file="file://$PROJECT_DIR$/assets/css/admin/wrtable.min.css">
@@ -667,6 +868,43 @@
           <folding>
             <element signature="e#7#525#0#PHP" expanded="true" />
           </folding>
+=======
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/Rar$DIa11940.7851/datatables.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="634">
+          <caret line="179" lean-forward="true" selection-start-line="179" selection-end-line="179" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/Pages/Pages.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-131">
+          <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ProductController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3060">
+          <caret line="15" column="64" lean-forward="true" selection-start-line="15" selection-start-column="64" selection-end-line="15" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/fz3temp-2/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="139" column="16" lean-forward="true" selection-start-line="139" selection-start-column="16" selection-end-line="139" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wr_price_list.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="44" column="17" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="17" />
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
         </state>
       </provider>
     </entry>
@@ -677,13 +915,29 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/inc/Base/Deactivate.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+=======
+    <entry file="file://$PROJECT_DIR$/uploads/test.csv">
+      <provider editor-type-id="csv-text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="11" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
         </state>
       </provider>
+      <provider selected="true" editor-type-id="csv-table-editor">
+        <state showInfoPanel="false" fixedHeaders="false" autoColumnWidthOnOpen="false" rowLines="3">
+          <column index="0" width="100" />
+          <column index="1" width="100" />
+          <column index="2" width="100" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor" />
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/inc/Controller/PriceListController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="529">
@@ -714,14 +968,63 @@
           <caret line="124" column="26" lean-forward="true" selection-start-line="124" selection-start-column="26" selection-end-line="124" selection-end-column="26" />
           <folding>
             <element signature="e#6#50#0#PHP" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/inc/Functions/CheckAvailability.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/inc/Functions/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/Init.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="48" lean-forward="true" selection-start-line="12" selection-start-column="48" selection-end-line="12" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/includes/requests/_import_price_list_request.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="48" selection-start-line="12" selection-start-column="48" selection-end-line="12" selection-end-column="48" />
+          <folding>
+            <element signature="e#341#348#1" expanded="true" />
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/assets/css/admin/main.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="410">
           <caret line="171" column="19" selection-start-line="171" selection-start-column="19" selection-end-line="171" selection-end-column="19" />
+=======
+    <entry file="file://$PROJECT_DIR$/templates/includes/_table_products.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/Base/Activate.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="28" column="29" lean-forward="true" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/Util/helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="9" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
         </state>
       </provider>
     </entry>
@@ -735,6 +1038,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/inc/Functions/PriceList.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2091">
@@ -742,13 +1046,70 @@
           <folding>
             <element signature="e#66#110#0#PHP" expanded="true" />
           </folding>
+=======
+    <entry file="file://$PROJECT_DIR$/templates/products.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-374">
+          <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+          <folding>
+            <element signature="e#6#45#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/Functions/PriceList.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="115" column="59" selection-start-line="115" selection-start-column="59" selection-end-line="115" selection-end-column="59" />
+          <folding>
+            <element signature="e#61#100#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/includes/_price_list_by_role.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="5" lean-forward="true" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc/Controller/ProductController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="255" column="46" selection-start-line="255" selection-start-column="46" selection-end-line="255" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/css/admin/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="175" column="28" selection-start-line="175" selection-start-column="28" selection-end-line="175" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/includes/_create_price_list_and_role.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="56" column="33" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/admin/main.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="840">
           <caret line="90" column="43" lean-forward="true" selection-start-line="90" selection-start-column="43" selection-end-line="90" selection-end-column="43" />
+=======
+<<<<<<< HEAD
+        <state relative-caret-position="189">
+          <caret line="180" column="58" selection-start-line="180" selection-start-column="58" selection-end-line="180" selection-end-column="58" />
+=======
+        <state relative-caret-position="408">
+          <caret line="393" column="41" lean-forward="true" selection-start-line="393" selection-start-column="41" selection-end-line="393" selection-end-column="41" />
+>>>>>>> Adding Price List Base on other Price List.
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
           <folding>
             <element signature="n#style#0;n#input#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#0;n#!!top" expanded="true" />
@@ -756,6 +1117,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/inc/Controller/ProductController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
@@ -776,9 +1138,61 @@
           <caret line="35" column="10" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
           <folding>
             <element signature="e#7#34#0#PHP" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/templates/includes/modals/__edit_price_list_modal.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="376">
+          <caret line="35" column="65" selection-start-line="35" selection-start-column="51" selection-end-line="35" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/includes/requests/_price_list_request.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="33" column="53" lean-forward="true" selection-start-line="33" selection-start-column="53" selection-end-line="33" selection-end-column="53" />
+          <folding>
+            <element signature="e#322#329#1" expanded="true" />
+            <element signature="e#341#348#1" expanded="true" />
+            <element signature="e#321#328#1" expanded="true" />
+            <element signature="e#341#348#1" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/inc/Controller/PriceListController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="106" lean-forward="true" selection-start-line="106" selection-end-line="106" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/includes/_select_price_list.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="212" selection-start-line="7" selection-start-column="212" selection-end-line="7" selection-end-column="212" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/includes/modals/__add_price_list_modal.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="25" column="28" lean-forward="true" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="90" />
+          <folding>
+            <element signature="e#487#494#1#HTML" expanded="true" />
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/templates/includes/_import_export.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="19" column="55" lean-forward="true" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> 2545067cc2378ba9d3ab2985f292a60c654209eb
   </component>
 </project>

@@ -98,8 +98,7 @@ class PriceListController
 
     function wrpl_edit_price_list($name,$id,$factor){
         global $wpdb;
-        $name_in_database = $this->wrpl_get_price_list_by_id($id)['description'];
-        if(!$this->wrpl_exist_price_list_name($name) || $name == $name_in_database){
+        if(!$this->wrpl_exist_price_list_name($name)){
             $wpdb->query("UPDATE $wpdb->prefix" . "wr_price_lists SET description='$name',factor='$factor' WHERE id='$id'");
             return true;
         }

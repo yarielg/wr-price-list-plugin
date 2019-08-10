@@ -19,6 +19,7 @@ include 'requests/_import_price_list_request.php';
             <select name="price_list_id" class="form-control form-control-sm col-sm-9" id="import_select_price_list">
                 <option value="default" selected>Default Woocommerce</option>
                 <?php
+                $plists = $price_list_controller->wrpl_get_price_lists(false);
                 foreach ($plists as $plist) {
                     echo "<option value='{$plist['id']}'>{$plist['description']}</option>";
                 }

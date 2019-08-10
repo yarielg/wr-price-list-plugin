@@ -168,11 +168,22 @@ ul.list-group li{
     vertical-align: middle;
 }
 
+
 .wrpl-sortable:before {
     content: "\f545";
     display: block;
     font: normal 15px/1 'dashicons';
     width: 15px;
     height: 15px;
+}
+/* price list with parent styles */
+.wrpl-nobase-pl .price,.wrpl-nobase-pl .sale_price{
+    background: lightgoldenrodyellow;
+}
+span.wrpl-increase{
+    color: green !important;
+}
+span.wrpl-decrease{
+    color: red !important;
 }
 

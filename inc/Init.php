@@ -12,6 +12,7 @@ final class Init{
 
             Controller\ProductController::class,
             //Controller\PriceListController::class,
+
             Functions\PriceList::class,
 
         ] ;
@@ -33,4 +34,5 @@ final class Init{
         $service = new $class();
         return $service;
     }
+
 }

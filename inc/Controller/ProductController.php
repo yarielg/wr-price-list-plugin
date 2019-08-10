@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Wrpl\Inc\Controller;
 use Wrpl\Inc\Controller\PriceListController;
 
@@ -105,7 +106,6 @@ class ProductController{
                 if($pl_object['id_parent'] == '1234567890'){
                     return $pl_object['factor'] >= 1 ? 0 : $this->getPriceDefault($id,'_sale_price')*$pl_object['factor'];;
                 }else{
-                    // var_dump($this->getPriceNotDefault($id,$price_list,'price'));
                     return $pl_object['factor'] >= 1 ? 0 : $this->getPriceNotDefault($id,$price_list,'price')*$pl_object['factor'];
                 }
             }
@@ -115,7 +115,6 @@ class ProductController{
     function getRegularPrice($id,$price_list){
 
         if($price_list == 'default'){
-
             return $this->getPriceDefault($id,'_regular_price');
         }else {
             $pricelist_controller = new PriceListController();
@@ -263,13 +262,13 @@ class ProductController{
         return array('min' => $min*$factor, 'max' => $max*$factor);
     }
 
+
     //return max and min price variation for a specific product
     function getMinMaxPriceVariation($id,$price_list,$price_type){
         $key = $price_type == '_regular_price' ? 'price' : 'sale_price';
 
         if($price_list == 'default'){
             $max_min = $this->getMinMaxPriceVariationDefault($id,$price_type);
-
         }else{
             $pricelist_controller = new PriceListController();
             $pl_object = $pricelist_controller->wrpl_get_price_list_by_id($price_list);
@@ -291,8 +290,9 @@ class ProductController{
 
     function wrpl_remove_product_price_caching($post_id){
         global $wpdb;
-        $wpdb->query("DELETE FROM " .$wpdb->prefix . "options WHERE option_name='_transient_timeout_wc_var_prices_" . $post_id . "'");
-        $wpdb->query("DELETE FROM " .$wpdb->prefix . "options WHERE option_name='_transient_wc_var_prices_" . $post_id . "'");
+
+        $wpdb->query('DELETE FROM ' .$wpdb->prefix . 'wp_options WHERE option_name LIKE _transient_timeout_wc_var_prices_' . $post_id);
+        $wpdb->query('DELETE FROM ' .$wpdb->prefix . 'wp_options WHERE option_name LIKE _transient_wc_var_prices_' . $post_id);
 
     }
     function wrpl_import_products($products,$price_list){

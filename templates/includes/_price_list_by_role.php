@@ -6,8 +6,8 @@ if(isset($_POST['wrpl_save_roles'])){
 ?>
 
 <div class="row p-3">
-    <p>Asigne a cada rol una lista de precio, así todo el usuario que corresponde con el role verá solo el precio de que corresponda a la lista de precio asignada.</p>
-    <p><strong>Nota:</strong>  Tenga en cuenta que si para cierto role no elige una lista, todos los usuarios pertenecientes a este role veran los precios de la lista que esté por defecto</p>
+    <p>Assign a price list to each role, so that all users who correspond to the role will see only the price that corresponds to the assigned price list.</p>
+    <p><strong>Note:</strong>  Please note that if for a certain role you do not choose a list, all users belonging to this role will see the prices of the list that is by default.</p>
 </div>
 
 
