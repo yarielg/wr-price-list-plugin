@@ -122,7 +122,8 @@
                   url:  parameters.ajax_url,
                   data:{
                       'id': id,
-
+                      'action':'wrpl_edit_price',
+                      'price': parseFloat(regular_price),
                       'sale_price':parseFloat(content),
                       'price_list' : price_list
                   },

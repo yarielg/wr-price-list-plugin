@@ -291,8 +291,8 @@ class ProductController{
     function wrpl_remove_product_price_caching($post_id){
         global $wpdb;
 
-        $wpdb->query('DELETE FROM ' .$wpdb->prefix . 'wp_options WHERE option_name LIKE _transient_timeout_wc_var_prices_' . $post_id);
-        $wpdb->query('DELETE FROM ' .$wpdb->prefix . 'wp_options WHERE option_name LIKE _transient_wc_var_prices_' . $post_id);
+        $wpdb->query('DELETE FROM ' .$wpdb->prefix . 'options WHERE option_name LIKE "%_transient_timeout_wc_var_prices_' . $post_id . '%"');
+        $wpdb->query('DELETE FROM ' .$wpdb->prefix . 'options WHERE option_name LIKE "%_transient_wc_var_prices_' . $post_id . '%"');
 
     }
     function wrpl_import_products($products,$price_list){
