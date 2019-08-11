@@ -4,10 +4,10 @@ if(isset($_POST['import_price_list'])){
 
     $file_name = $_FILES['file_import']['name'];
     $file_tmp = $_FILES['file_import']['tmp_name'];
-    move_uploaded_file($file_tmp, PLUGIN_PATH . 'uploads/' . $file_name );
+    move_uploaded_file($file_tmp, WRPL_PLUGIN_PATH . 'uploads/' . $file_name );
 
     $products_imported =  array();
-    if (($handle = fopen(PLUGIN_PATH . 'uploads/' . $file_name, "r")) !== FALSE) {
+    if (($handle = fopen(WRPL_PLUGIN_PATH . 'uploads/' . $file_name, "r")) !== FALSE) {
         while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
             if('' != trim($data[0]) || '' != trim($data[1])){
                 if( trim($data[2]) == '' ){ //si sale price esta vacio

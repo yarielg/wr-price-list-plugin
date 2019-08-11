@@ -27,9 +27,9 @@ class PriceListController
     function wrpl_get_price_lists($all_pl = true){
         global $wpdb;
         if($all_pl){
-            $plists = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "wr_price_lists",ARRAY_A );
+            $plists = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "wr_price_lists ORDER BY id",ARRAY_A );
         }else{
-            $plists = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "wr_price_lists WHERE id_parent =0",ARRAY_A );
+            $plists = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "wr_price_lists WHERE id_parent =0 ORDER BY id",ARRAY_A );
         }
         return $plists;
     }
@@ -48,7 +48,8 @@ class PriceListController
         if (is_user_logged_in()) {
             $user = wp_get_current_user();
             $roles = ( array )$user->roles;
-            return get_option('wrpl-'.$roles[0]) ? get_option('wrpl-'.$roles[0]) : 'default';
+
+            return get_option('wrpl-'.$roles[0]) ? get_option('wrpl-'.$roles[0]) : 1; //si no se encuentra una lista asociada se devuelve Default Woocommerce
         }else{
             return get_option('wrpl-default_list');
         }
@@ -66,7 +67,7 @@ class PriceListController
         }
     }
 
-    function wrpl_add_price_list($name,$plist,$factor){
+    function wrpl_add_price_list($name,$plist = 0, $factor = ''){
         global  $wpdb;
         $name = preg_replace('/\s+/', ' ',$name); //removing extra spacing
         if(!$this->wrpl_exist_price_list_name($name)){

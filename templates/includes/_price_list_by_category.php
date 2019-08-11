@@ -31,7 +31,6 @@ if(isset($_POST['assign_price_list_category'])){
                 <div class="form-group row">
                     <label for="price_list_categories" id="price_list_categories_label" class=" form-control-sm col-sm-3 disabled">Choose Price List:</label>
                     <select name="price_list_categories" class="form-control form-control-sm col-sm-8 ml-3" id="price_list_categories" disabled>
-                        <option value="default" selected>Default Woocommerce</option>
                         <?php
                         $plists = $price_list_controller->wrpl_get_price_lists();
                         foreach ($plists as $plist) {
@@ -60,11 +59,15 @@ if(isset($_POST['assign_price_list_category'])){
         <div class="col-8">
             <ul id="wrpl_rules_categories" class="list-group">
                 <?php
-                foreach ($rules as $rule){
-                    echo '<li class="list-group-item d-flex justify-content-between align-items-center p-2">
+                if(count($rules) > 0){
+                    foreach ($rules as $rule){
+                        echo '<li class="list-group-item d-flex justify-content-between align-items-center p-2">
                             ' . get_term( $rule['id_category'], 'product_cat')->name . ' => ' . $rule['description']  . '
                             <span class="wrpl-sortable"></span>
                         </li>';
+                    }
+                }else{
+                    echo '<p>No rules at this moment.</p>';
                 }
                 ?>
             </ul>

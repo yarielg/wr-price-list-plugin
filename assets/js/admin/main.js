@@ -13,21 +13,14 @@
             var factor = $('#wrpl-option-' + select_list.val()).attr('pl-factor');
             var price_list = select_list.val();
             table.DataTable().destroy();
-            if(!isNaN(price_list)){
-
                 createDatatable(price_list,id_parent,factor);
-            }else{
-
-                createDatatable('default',0,0);
-
-            }
         });
 
         //creando la tabla por defecto
-        createDatatable('default',0,0);
+        createDatatable(1,0,0);
         // crea una tabla y carga los valores en dependencia de la lista de precio
       function createDatatable(price_list,id_parent,factor){
-          price_list = id_parent == 0 ? price_list : (id_parent === '1234567890' ? 'default' : id_parent); //if la lista no tiene padre devuelve el id de la lista, sino si la lista si tiene padre devuelve el id del padre(caso específico para default woocommerce que su id es 0123456789)
+          price_list = id_parent == 0 ? price_list : id_parent; //if la lista no tiene padre devuelve el id de la lista, sino si la lista si tiene padre devuelve el id del padre
           //Datatable
           var datatable = table.DataTable( {
               "stateSave": true,

@@ -92,7 +92,7 @@ class ProductController{
     }
     function getSalesPrice($id,$price_list){
 
-        if($price_list == 'default'){
+        if($price_list == 1){
             return $this->getPriceDefault($id,'_sale_price');
         }else{
             $pricelist_controller =  new PriceListController();
@@ -103,7 +103,7 @@ class ProductController{
                 return $this->getPriceNotDefault($id,$price_list,'sale_price');
             }else{
 
-                if($pl_object['id_parent'] == '1234567890'){
+                if($pl_object['id_parent'] == 1){
                     return $pl_object['factor'] >= 1 ? 0 : $this->getPriceDefault($id,'_regular_price') * $pl_object['factor'];;
                 }else{
                     return $pl_object['factor'] >= 1 ? 0 : $this->getPriceNotDefault($id,$price_list,'price')*$pl_object['factor'];
@@ -114,7 +114,7 @@ class ProductController{
 
     function getRegularPrice($id,$price_list){
 
-        if($price_list == 'default'){
+        if($price_list == 1){
             return $this->getPriceDefault($id,'_regular_price');
         }else {
             $pricelist_controller = new PriceListController();
@@ -125,7 +125,7 @@ class ProductController{
                 return $this->getPriceNotDefault($id, $price_list, 'price');
             } else {
 
-                if ($pl_object['id_parent'] == '1234567890') {
+                if ($pl_object['id_parent'] == 1) {
                     return $pl_object['factor'] >= 1 ? $this->getPriceDefault($id, '_regular_price') * $pl_object['factor'] : $this->getPriceDefault($id, '_regular_price') ;
                 } else {
                     // var_dump($this->getPriceNotDefault($id,$price_list,'price'));
@@ -194,7 +194,7 @@ class ProductController{
 
 
 
-        if($price_list == 'default'){
+        if($price_list == 1){
 
             if($sale_price < $price && $sale_price > 0 ){ //S<R and S>0
                 update_post_meta($post_id, '_regular_price', $price);
@@ -267,7 +267,7 @@ class ProductController{
     function getMinMaxPriceVariation($id,$price_list,$price_type){
         $key = $price_type == '_regular_price' ? 'price' : 'sale_price';
 
-        if($price_list == 'default'){
+        if($price_list == 1){
             $max_min = $this->getMinMaxPriceVariationDefault($id,$price_type);
         }else{
             $pricelist_controller = new PriceListController();
@@ -277,7 +277,7 @@ class ProductController{
                 $max_min = $this->getMinMaxPriceVariationNoDefault($id,$price_list,$key);
             } else {
 
-                if ($pl_object['id_parent'] == '1234567890') {
+                if ($pl_object['id_parent'] == 1) {
                     $max_min = $this->getMinMaxPriceVariationDefault($id,'_regular_price',$pl_object['factor']);
                 } else {
                     // var_dump($this->getPriceNotDefault($id,$price_list,'price'));
@@ -305,7 +305,7 @@ class ProductController{
                 $regular_price = floatval($product[1]);
                 $sale_price = floatval($product[2]);
 
-                if($price_list == 'default'){
+                if($price_list == 1){
 
                     if($sale_price < $regular_price && $regular_price > 0 ){
                         array_push($results, array('type' => 'success','msg' => 'The product with sku: ' . $sku . ' was updated' ));
@@ -364,7 +364,7 @@ class ProductController{
         $categories = array();
         foreach ($product_categories as $category){
             $category['text'] = $category['name'];
-            $category['plist'] = get_option('wrpl_cat_' . $category['term_id']) ?: 'default';
+            $category['plist'] = get_option('wrpl_cat_' . $category['term_id']) ?: 1;
             if($this->hasChildren($category['term_id'])){
                 $category['nodes'] = $this->getProductChildCategories($category['term_id']);
             }
@@ -390,7 +390,7 @@ class ProductController{
         $categories = array();
         foreach ($product_categories as $category){
             $category['text'] = $category['name'];
-            $category['plist'] = get_option('wrpl_cat_' . $category['term_id']) ?: 'default';
+            $category['plist'] = get_option('wrpl_cat_' . $category['term_id']) ?: 1;
             if($this->hasChildren($category['term_id'])){
                 $category['nodes'] = $this->getProductChildCategories($category['term_id']);
             }

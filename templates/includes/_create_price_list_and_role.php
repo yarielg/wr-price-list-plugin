@@ -46,7 +46,10 @@ include 'requests/_price_list_request.php';
             <ul class="list-group">
                 <?php
                 foreach ($plists as $plist){
-                    $name_parent = $plist['id_parent'] > 0 ? ($plist['id_parent'] == 1234567890 ? ' ( based on Default Woocommerce )' : ' ( based on ' . $price_list_controller->wrpl_get_price_list_name_by_id($plist['id_parent']) . ')' )  : '';
+                    if($plist['id'] == 1){
+                        continue;
+                    }
+                    $name_parent = $plist['id_parent'] > 0 ? ' ( based on ' . $price_list_controller->wrpl_get_price_list_name_by_id($plist['id_parent']) . ')'  : '';
                     echo '
                             <li class="list-group-item p-1 d-flex justify-content-between align-items-center">'.
                             $plist['description'] . $name_parent .

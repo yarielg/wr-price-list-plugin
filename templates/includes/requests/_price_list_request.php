@@ -30,7 +30,7 @@ if(isset($_POST['wrpl_remove_pl_action'])){
 if(isset($_POST['wrpl_edit_pl_action'])){
     $name = $_POST['wrpl_pl_name'];
     $id = $_POST['wrpl_pl_id'];
-    $factor = $_POST['wrpl_pl_factor'];
+    $factor = isset($_POST['wrpl_pl_factor']) ? $_POST['wrpl_pl_factor'] : '';
     $was_inserted  = $price_list_controller->wrpl_edit_price_list($name,$id,$factor);
     if($was_inserted){
         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">

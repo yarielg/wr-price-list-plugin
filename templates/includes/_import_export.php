@@ -17,7 +17,6 @@ include 'requests/_import_price_list_request.php';
         <div class="form-group row">
             <label id="import_select_price_list_label" for="import_new_price_list" class="form-control-sm col-sm-2 disabled">Choose a price list:</label>
             <select name="price_list_id" class="form-control form-control-sm col-sm-9" id="import_select_price_list">
-                <option value="default" selected>Default Woocommerce</option>
                 <?php
                 $plists = $price_list_controller->wrpl_get_price_lists(false);
                 foreach ($plists as $plist) {

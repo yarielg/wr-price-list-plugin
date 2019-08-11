@@ -21,7 +21,6 @@
                         <label for="wrpl-add_pl_base" class="col-sm-2 form-control-sm" >Based:</label>
                         <select class="custom-select form-control form-control-sm col-sm-9" name="price_list" id="price_list">
                             <option value="0" selected>-- No Price List --</option>
-                            <option value="1234567890" >Default Woocommerce</option>
                             <?php
                             $plists = $price_list_controller->wrpl_get_price_lists(false);
                             foreach ($plists as $plist) {

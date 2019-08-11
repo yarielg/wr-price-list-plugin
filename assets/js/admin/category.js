@@ -63,6 +63,7 @@
                    save_btn.prop('disabled',false);
                    text_cat_id.val(data.term_id);
                    select_pl_categories.val(data.plist);
+                   console.log(data.plist);
                });
 
                $('#default-tree').on('nodeUnselected', function(event, data) {

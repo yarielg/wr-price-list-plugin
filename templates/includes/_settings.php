@@ -6,7 +6,6 @@
         <div class="form-group row ml-1">
             <label id="default_price_list" for="default_price_list" class="form-control-sm col-sm-2">Price list:</label>
             <select name="default_price_list" class="form-control form-control-sm col-sm-9" id="default_price_list">
-                <option value="default">Default Woocommerce</option>
                 <?php
                 foreach ($plists as $plist) {
                     $selected = get_option('wrpl-default_list') == $plist['id'] ? 'selected' : '';

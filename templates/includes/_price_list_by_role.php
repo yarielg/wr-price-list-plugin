@@ -28,7 +28,6 @@ if(isset($_POST['wrpl_save_roles'])){
                         </div>
                         <div class="col-9">
                             <select name="' . wrpl_valid_name($role['name'])  .'" class="form-control form-control-sm">
-                                <option value="default">Default Woocommerce</option>
                                 ' . $options_price_lists . '
                             </select>               
                         </div>
