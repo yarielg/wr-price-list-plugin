@@ -63,7 +63,6 @@
                    save_btn.prop('disabled',false);
                    text_cat_id.val(data.term_id);
                    select_pl_categories.val(data.plist);
-                   console.log(data.plist);
                });
 
                $('#default-tree').on('nodeUnselected', function(event, data) {
@@ -98,12 +97,68 @@
 
        //sortable rule list
     $( "#wrpl_rules_categories" ).sortable({
+        connectWith: '#deleteAreaRule',
         update: function( event, ui ) {
-            console.log(event);
-        }
+            var order = $(this).sortable('serialize');
+            $(this).children().each(function(index){
+                if($(this).attr('data-order') != (index+1) ){
+                    $(this).attr('data-order',index + 1 ).addClass('updated-position');
+                }
+            });
+            saveNewPositions();
+        },
+        helper: 'clone'
     });
 
+    function saveNewPositions(){
+        var positions= [];
+        $('.updated-position').each(function(){
+            positions.push([$(this).attr('data-index'),$(this).attr('data-order')]);
+            $(this).removeClass('updated-position');
+        });
+        console.log(positions);
+        $.ajax({
+            url: parameters.ajax_url,
+            method: 'POST',
+            dataType: 'json',
+            data: {
+               // update: 1,
+                positions: positions,
+                action: 'wrpl_updated_rule_order'
+            },
+            success: function(response){
+                //console.log(response);
+            },
+            error(){
+                alert('Ooops something weird happened, try again please.')
+            }
+        });
+    }
 
+    $("#deleteAreaRule").droppable({
+        accept: '#wrpl_rules_categories > li',
+        activeClass: 'dropArea',
+        hoverClass: 'dropAreaHover',
+        drop: function(event, ui) {
+            ui.draggable.remove();
+            console.log();
+            $.ajax({
+                url: parameters.ajax_url,
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    id: ui.draggable.attr('data-index'),
+                    action: 'wrpl_delete_rule'
+                },
+                success: function(response){
+                    console.log(response);
+                },
+                error(){
+                    alert('Ooops something weird happened, try again please.')
+                }
+            });
+        }
+    });
 
 
 })(jQuery);

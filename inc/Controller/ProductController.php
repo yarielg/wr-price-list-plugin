@@ -6,7 +6,13 @@ use Wrpl\Inc\Controller\PriceListController;
 
 class ProductController{
 
-#
+    public $price_list_controller;
+
+    function __construct()
+    {
+        $this->price_list_controller =  new PriceListController();
+    }
+
     public function register(){
 
         //get all products
@@ -405,5 +411,52 @@ class ProductController{
             echo json_encode(array('error' => 'There are not categories'));
         }
         wp_die();
+    }
+
+    function wrpl_get_rules_with_most_priority($rules){
+        $priority_rule = null;
+        if(count($rules)>0){
+            $priority_rule = $rules[0];
+            for ($i = 0; $i < count($rules); $i++){
+                if($priority_rule >  $rules[$i+1]['priority']){
+                    $priority_rule = $rules[$i+1];
+                }
+            }
+        }
+        return $priority_rule;
+    }
+
+    function wrpl_get_rules_by_category_id($id_cat,$rules){
+        $matched_rules = array();
+        foreach ($rules as $rule){
+            if($rule['id_category'] == $id_cat){
+                array_push($matched_rules,$rule);
+            }
+        }
+        return $matched_rules;
+    }
+
+    function wrpl_get_price_list_by_category($id){
+        $rules = $this->price_list_controller->wrpl_get_rules();
+        $categories = array();
+        if(get_the_terms( $id, 'product_cat' )){
+            $categories = stdToArray(get_the_terms( $id, 'product_cat' ));
+        }
+        $mached_rules =  array();
+        foreach ($rules as $rule){
+            foreach ($categories as $category){
+                if($rule['id_category'] == $category['term_id']){
+
+                    array_push($mached_rules,$rule);
+
+                }
+            }
+        }
+        if(count($mached_rules)>0){
+            return $mached_rules[0]['id_price_list'];
+        }else{
+            return 1;
+        }
+
     }
 }

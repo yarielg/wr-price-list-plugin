@@ -40,6 +40,8 @@ class Pages{
                     wp_enqueue_script( 'main_js');
                     wp_localize_script( 'main_js', 'parameters',['ajax_url'=> admin_url('admin-ajax.php')]);
 
+                    wp_enqueue_script('jquery-ui-draggable');
+                    wp_enqueue_script('jquery-ui-droppable');
                     wp_enqueue_script('by_categories_js', WRPL_PLUGIN_URL . '/assets/js/admin/category.js',array('jquery-ui-sortable'), null, true );
                     wp_enqueue_script( 'by_categories_js');
                     wp_localize_script( 'by_categories_js', 'parameters',['ajax_url'=> admin_url('admin-ajax.php'),'source' => 'category']);

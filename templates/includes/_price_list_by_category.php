@@ -1,6 +1,5 @@
 <?php
 $rules = $price_list_controller->wrpl_get_rules();
-var_dump($rules);
 if(isset($_POST['assign_price_list_category'])){
     $result = $price_list_controller->wrpl_assign_pl_to_category($_POST['wrpl_cat_id'],$_POST['price_list_categories']);
         echo '<div class="alert alert-'.$result['type'].' alert-dismissible fade show" role="alert">
@@ -32,9 +31,13 @@ if(isset($_POST['assign_price_list_category'])){
                     <label for="price_list_categories" id="price_list_categories_label" class=" form-control-sm col-sm-3 disabled">Choose Price List:</label>
                     <select name="price_list_categories" class="form-control form-control-sm col-sm-8 ml-3" id="price_list_categories" disabled>
                         <?php
+                        $selected = '';
                         $plists = $price_list_controller->wrpl_get_price_lists();
                         foreach ($plists as $plist) {
-                            echo "<option value='{$plist['id']}' >{$plist['description']}</option>";
+                            if($plist['id'] == 1){
+                                $selected = 'selected';
+                            }
+                            echo "<option value='{$plist['id']}' {$selected}>{$plist['description']}</option>";
                         }
                         ?>
                     </select>
@@ -57,11 +60,12 @@ if(isset($_POST['assign_price_list_category'])){
         <br>
         <div class="col-2"></div>
         <div class="col-8">
+
             <ul id="wrpl_rules_categories" class="list-group">
                 <?php
                 if(count($rules) > 0){
                     foreach ($rules as $rule){
-                        echo '<li class="list-group-item d-flex justify-content-between align-items-center p-2">
+                        echo '<li data-index="'.$rule['id_rule'].'" data-order="'.$rule['priority'].'" class="list-group-item d-flex justify-content-between align-items-center p-2">
                             ' . get_term( $rule['id_category'], 'product_cat')->name . ' => ' . $rule['description']  . '
                             <span class="wrpl-sortable"></span>
                         </li>';
@@ -71,6 +75,11 @@ if(isset($_POST['assign_price_list_category'])){
                 }
                 ?>
             </ul>
+
+            <br>
+            <div class="text-center" id="deleteAreaRule">
+                <p><span class="wrpl-trash-rule" ></span>Drag here to delete rule.</p>
+            </div>
         </div>
         <div class="col-2"></div>
     </div>

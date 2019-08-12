@@ -8,9 +8,12 @@ class PriceListController
 {
     public function register(){
 
-        //get all price lists
+        //change rule order
         //add_action( 'wp_ajax_nopriv_get_price_lists', array($this,'getPriceList' ));
-        //add_action( 'wp_ajax_get_price_lists', array($this,'getPriceList' ));
+        add_action( 'wp_ajax_wrpl_updated_rule_order', array($this,'wrpl_change_rules_order' ));
+        add_action( 'wp_ajax_wrpl_delete_rule', array($this,'wrpl_delete_rule' ));
+
+
 
 
     }
@@ -92,7 +95,7 @@ class PriceListController
     function wrpl_remove_price_list($id){
         global $wpdb;
         $wpdb->get_results("DELETE FROM $wpdb->prefix" . "wr_price_lists WHERE id = '$id' OR id_parent='$id'");
-        $wpdb->get_results("UPDATE $wpdb->prefix" . "options SET option_value = 'default' WHERE option_value = '$id'");
+       // $wpdb->get_results("UPDATE $wpdb->prefix" . "options SET option_value = 'default' WHERE option_value = '$id'");
         $result = $wpdb->get_results("DELETE FROM $wpdb->prefix" . "wr_price_lists_price WHERE id_price_list = '$id'");
         return $result;
     }
@@ -188,7 +191,6 @@ class PriceListController
         if($this->wrpl_exist_rule($cat_id,$price_list_id)){
             return array( 'type'=>'danger', 'msg' => 'It already exists a rule with the same parameters');
         }else{
-            update_option('wrpl_cat_' . $cat_id,$price_list_id);
             $wpdb->query("INSERT INTO $wpdb->prefix" . "wr_rules (id_price_list,id_category,rule_type) VALUES ('$price_list_id','$cat_id','category')");
             if($wpdb->last_error !== '') {
 
@@ -204,8 +206,27 @@ class PriceListController
 
     function wrpl_get_rules(){
         global $wpdb;
-        $rules = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "wr_rules INNER JOIN $wpdb->prefix" . "wr_price_lists ON $wpdb->prefix"."wr_rules.id_price_list=$wpdb->prefix" ."wr_price_lists.id  ORDER BY priority", ARRAY_A);
+        $rules = $wpdb->get_results("SELECT T1.id as 'id_rule',T1.id_price_list,T1.id_category,T1.priority,T2.id_parent,T2.description FROM $wpdb->prefix" . "wr_rules T1 INNER JOIN $wpdb->prefix" . "wr_price_lists T2 ON T1.id_price_list=T2.id  ORDER BY priority", ARRAY_A);
 
         return $rules;
     }
+
+    function wrpl_change_rules_order(){
+        global $wpdb;
+
+        $positions =  $_POST['positions'];
+        foreach($positions as $position){
+            $id = $position[0];
+            $priority = $position[1];
+            $wpdb->query("UPDATE $wpdb->prefix" . "wr_rules SET priority='$priority' WHERE id='$id'");
+        }
+    }
+
+    function wrpl_delete_rule(){
+        global $wpdb;
+        $id_rule = $_POST['id'];
+        $result = $wpdb->get_results("DELETE FROM $wpdb->prefix" . "wr_rules WHERE id_price_list = '$id_rule'");
+        return $result;
+    }
+
 }

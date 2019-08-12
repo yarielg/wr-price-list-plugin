@@ -69,7 +69,7 @@ class PriceList{
     }
 
     function custom_price($price,$product){
-        $price_list = $this->price_list_controller->wrpl_get_user_price_list(); //get price list of the logging user
+        $price_list = get_option('wrpl-assign-method') == 1 ? $this->price_list_controller->wrpl_get_user_price_list() : $this->product_controller->wrpl_get_price_list_by_category($product->get_id());
         $rp = $this->product_controller->getRegularPrice($product->get_id(),$price_list);
         $sp = $this->product_controller->getSalesPrice($product->get_id(),$price_list);
         return $sp == 0 ? $rp : $sp;
@@ -78,13 +78,13 @@ class PriceList{
     }
 
     function custom_regular_price($price,$product){
-        $price_list = $this->price_list_controller->wrpl_get_user_price_list();
+        $price_list = get_option('wrpl-assign-method') == 1 ? $this->price_list_controller->wrpl_get_user_price_list() : $this->product_controller->wrpl_get_price_list_by_category($product->get_id());
         $p = $this->product_controller->getRegularPrice($product->get_id(),$price_list);
         return $p;
     }
 
     function custom_sale_price($price,$product){
-        $price_list = $this->price_list_controller->wrpl_get_user_price_list();
+        $price_list = get_option('wrpl-assign-method') == 1 ? $this->price_list_controller->wrpl_get_user_price_list() : $this->product_controller->wrpl_get_price_list_by_category($product->get_id());
         $sp = $this->product_controller->getSalesPrice($product->get_id(),$price_list);
         $rp = $this->product_controller->getRegularPrice($product->get_id(),$price_list);
         if($sp>0){
@@ -122,7 +122,7 @@ class PriceList{
     }
 
     function wrpl_woocommerce_price_html( $price, $product ){
-        $price_list = $this->price_list_controller->wrpl_get_user_price_list();
+        $price_list = get_option('wrpl-assign-method') == 1 ? $this->price_list_controller->wrpl_get_user_price_list() : $this->product_controller->wrpl_get_price_list_by_category($product->get_id());
         $min_max = $this->product_controller->getMinMaxPriceVariation($product->get_id(),$price_list,'_regular_price');
         $min_max_sale = $this->product_controller->getMinMaxPriceVariation($product->get_id(),$price_list,'_sale_price');
         $pl_objec =$this->price_list_controller->wrpl_get_price_list_by_id($price_list);

@@ -153,6 +153,15 @@ ul.list-group li{
     color: #fff;
     vertical-align: middle;
 }
+
+.wrpl-trash-rule:before {
+    content: "\f182";
+    -webkit-font-smoothing: antialiased;
+    font: normal 15px/1 'dashicons';
+    color: #000;
+    vertical-align: middle;
+}
+
 .wrpl-edit:before {
     content: "\f464";
     -webkit-font-smoothing: antialiased;
@@ -217,4 +226,21 @@ span.wrpl-decrease{
 /*style for sortable category list*/
 .wrpl-sortable{
     cursor: pointer;
+}
+
+#deleteAreaRule{
+    height: 50px;
+    border-radius: 5px;
+    vertical-align: middle;
+    padding: 15px;
+}
+
+
+#wrpl_rules_categories li { cursor: move; }
+.dropArea {
+    background-color: #fee
+}
+.dropAreaHover {
+    background-color: #f00;
+    color: white !important;
 }
