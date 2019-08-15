@@ -107,7 +107,6 @@
             });
             saveNewPositions();
         },
-        helper: 'clone'
     });
 
     function saveNewPositions(){
@@ -116,7 +115,7 @@
             positions.push([$(this).attr('data-index'),$(this).attr('data-order')]);
             $(this).removeClass('updated-position');
         });
-        console.log(positions);
+
         $.ajax({
             url: parameters.ajax_url,
             method: 'POST',
@@ -125,6 +124,14 @@
                // update: 1,
                 positions: positions,
                 action: 'wrpl_updated_rule_order'
+            },
+            beforeSend: function () {
+                $(".wrpl_loader").css("display", "block");
+                $("#modal-overlay").show();
+            },
+            complete: function () {
+                $(".wrpl_loader").css("display", "none");
+                $("#modal-overlay").hide();
             },
             success: function(response){
                 //console.log(response);
@@ -141,7 +148,6 @@
         hoverClass: 'dropAreaHover',
         drop: function(event, ui) {
             ui.draggable.remove();
-            console.log();
             $.ajax({
                 url: parameters.ajax_url,
                 method: 'POST',
@@ -149,9 +155,17 @@
                 data: {
                     id: ui.draggable.attr('data-index'),
                     action: 'wrpl_delete_rule'
+                },beforeSend: function () {
+                    $(".wrpl_loader").css("display", "block");
+                    $("#modal-overlay").show();
+                },
+                complete: function () {
+                    $(".wrpl_loader").css("display", "none");
+                    $("#modal-overlay").hide();
                 },
                 success: function(response){
                     console.log(response);
+
                 },
                 error(){
                     alert('Ooops something weird happened, try again please.')

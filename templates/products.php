@@ -71,12 +71,17 @@ if(isset($_GET['tab'])){
                     ?>
                     <div class="tab-pane show active" id="tab_products">
                         <div class="row">
-                            <div class="col-7">
+
+                            <div class="col-3">
                                 <p>Choose a Price list to start change price quickly: </p>
                             </div>
-                            <div class="col-5">
+                            <div class="col-6">
                                 <?php include 'includes/_select_price_list.php' ?>
                             </div>
+                            <div class="col-3"></div>
+                        </div>
+                        <div class="row">
+                               <?php include "includes/_filters_products.php"; ?>
                         </div>
                         <div class="row mt-3">
                             <div class="container-fluid">
@@ -95,18 +100,18 @@ if(isset($_GET['tab'])){
                     ?>
 
                     <div class="tab-pane show active" id="price_list_by_role">
-                        <a id="price_list_by_roles"
-                           href="<?php echo WRPL_ADMIN_URL . 'admin.php?page=wrpl-products-menu&tab=price_list_by_roles'?>"
-                           class="<?php echo $section == ''  ? 'active' : '' ?>">
+                        <!--<a id="price_list_by_roles"
+                           href="<?php /*echo WRPL_ADMIN_URL . 'admin.php?page=wrpl-products-menu&tab=price_list_by_roles'*/?>"
+                           class="<?php /*echo $section == ''  ? 'active' : '' */?>">
                             By Role
                         </a> |
                         <a id="price_list_by_roles"
-                           href="<?php echo WRPL_ADMIN_URL . 'admin.php?page=wrpl-products-menu&tab=price_list_by_roles&section=category'?>"
-                           class="<?php echo $section == 'category'  ? 'active' : '' ?>">
+                           href="<?php /*echo WRPL_ADMIN_URL . 'admin.php?page=wrpl-products-menu&tab=price_list_by_roles&section=category'*/?>"
+                           class="<?php /*echo $section == 'category'  ? 'active' : '' */?>">
                             By Category
-                        </a>
+                        </a>-->
                         <?php
-                        if(isset($_GET['section'])){
+                        if( get_option('wrpl-assign-method') == 2){
                             include 'includes/_price_list_by_category.php';
                         }else{
                             include 'includes/_price_list_by_role.php';

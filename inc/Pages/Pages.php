@@ -19,11 +19,11 @@ class Pages{
         });
 
         add_action('admin_menu', function(){
-            add_submenu_page( 'wrpl-main-menu', 'Dashboard', 'Dashboard','manage_options', 'wrpl-main-menu', array($this,'admin_index'));
+            add_submenu_page( 'wrpl-main-menu', __('Dashboard','wr_price_list'), __('Dashboard','wr_price_list'),'manage_options', 'wrpl-main-menu', array($this,'admin_index'));
         });
 
         add_action('admin_menu',function(){
-            $page_product =  add_submenu_page( 'wrpl-main-menu', 'Products', 'Products','manage_options', 'wrpl-products-menu', array($this,'products'));
+            $page_product =  add_submenu_page( 'wrpl-main-menu', __('Products','wr_price_list'), __('Products','wr_price_list'),'manage_options', 'wrpl-products-menu', array($this,'products'));
             add_action( 'load-' . $page_product, function(){
                 add_action( 'admin_enqueue_scripts',function (){
 

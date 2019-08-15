@@ -1,1 +1,1 @@
-<h1>Dashboard</h1>
+<h1><?php  _e('Dashboard','wr_price_list'); ?></h1>
