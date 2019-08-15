@@ -23,6 +23,10 @@ class ProductController{
 
         //get categories
         add_action( 'wp_ajax_wrpl_get_categories', array($this,'getProductParentCategories' ));
+
+        //when a category is removed
+        add_action('delete_product_cat', array($this,'wrpl_delete_cat'), 10,4);
+
     }
 
     function getAllProducts(){
@@ -39,39 +43,60 @@ class ProductController{
         $start = $_POST['start'];
         $length = $_POST['length'];
         $search = trim($_POST['search']['value']);
+        $category_id = $_POST['category_id'];
 
         $all_products = $this->getAllProducts();
-        $count_products = count($all_products);
+        $count_products =  count($all_products);
 
-        $products_with_search  = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "posts  LEFT JOIN $wpdb->prefix" . "postmeta ON ID=post_id WHERE post_type IN ('product_variation','product') AND post_status NOT IN ('auto-draft','trash') AND meta_key = '_sku' AND ( post_title LIKE '%$search%' OR meta_value LIKE '%$search%') ORDER BY post_id LIMIT $start,$length");
+        $products_with_search  = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "posts  LEFT JOIN $wpdb->prefix" . "postmeta ON ID=post_id WHERE post_type IN ('product_variation','product') AND post_status NOT IN ('auto-draft','trash') AND meta_key = '_sku' AND ( post_title LIKE '%$search%' OR meta_value LIKE '%$search%') ORDER BY post_id LIMIT $start,$length" ,ARRAY_A);
 
         if($search == ""){
-            $count_products_with_search = $count_products;
+            $count_products_with_search = count($all_products);
         }else{
+            //$products_with_search = $this->wrpl_filter_category_product($products_with_search,$search);
             $count_products_with_search = count($products_with_search);
         }
-        $products = stdToArray($products_with_search);
+        $products = $products_with_search;
         $products_data = array();
         foreach ($products as $product){
             if(! $this->isProductHasVariations($product['ID'])){ //not including products with variations
+                $product['categories'] = get_the_terms( $product['ID'], 'product_cat' ) ?  wrpl_convert_to_separate_value(get_the_terms( $product['ID'], 'product_cat' ),'name') : '';
                 $image_values = wp_get_attachment_image_src( get_post_thumbnail_id($product['ID']), 'single-post-thumbnail' );
                 $product['image'] = $image_values[0];
                 $product['price'] = $this->getRegularPrice($product['ID'],$price_list);
                 $product['sku'] = $product['meta_value'];
                 $product['sale_price'] = $this->getSalesPrice($product['ID'],$price_list);
+
                 if($product['post_type'] == 'product_variation'){
                     $product['edit_url'] = WRPL_ADMIN_URL . 'post.php?post=' . $product['post_parent'] . '&action=edit';
                     $product['guid'] = get_permalink($product['post_parent']);
                 }else{
                     $product['edit_url'] = WRPL_ADMIN_URL . 'post.php?post=' . $product['ID'] . '&action=edit';
                 }
-                array_push($products_data,$product);
+                if($category_id !== 'all'){
+                    if( has_term( $category_id , 'product_cat', $product['ID']))
+                        array_push($products_data,$product);
+                }else{
+                    array_push($products_data,$product);
+                }
+
             }
         }
 
 
         echo json_encode(array('data'=>$products_data,'recordsTotal'=>$count_products,'recordsFiltered'=>$count_products_with_search));
         wp_die();
+    }
+
+    function wrpl_filter_category_product($products,$search){
+        $final_products = array();
+        foreach ($products as $product){
+            $categories = wrpl_convert_to_separate_value(get_the_terms( $product['ID'], 'product_cat' ),'name');
+                if( strpos($categories,$search)  !== false ){
+                array_push($final_products,$product);
+            }
+        }
+        return $final_products;
     }
 
     function getPriceDefault($id,$price_type){
@@ -459,4 +484,33 @@ class ProductController{
         }
 
     }
+
+    function wrpl_delete_cat($term, $tt_id, $deleted_term, $object_ids){
+        $this->price_list_controller->wrpl_delete_rule($term);
+      //  wp_die();
+    }
+
+    function wrpl_get_all_product_cat(){
+
+        $orderby = 'name';
+        $order = 'asc';
+        $hide_empty = false ;
+        $cat_args = array(
+            'orderby'    => $orderby,
+            'order'      => $order,
+            'hide_empty' => $hide_empty,
+        );
+
+        $product_categories = get_terms( 'product_cat', $cat_args );
+
+        if( !empty($product_categories) ){
+
+            return stdToArray($product_categories);
+        }else{
+            return [];
+        }
+    }
+
+
+
 }

@@ -244,3 +244,7 @@ span.wrpl-decrease{
     background-color: #f00;
     color: white !important;
 }
+
+ul.wrpl_list_categories li{
+    font-size: 10px !important;
+}

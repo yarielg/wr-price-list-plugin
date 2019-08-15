@@ -222,11 +222,17 @@ class PriceListController
         }
     }
 
-    function wrpl_delete_rule(){
+    function wrpl_delete_rule($id = -1){
         global $wpdb;
-        $id_rule = $_POST['id'];
-        $result = $wpdb->get_results("DELETE FROM $wpdb->prefix" . "wr_rules WHERE id_price_list = '$id_rule'");
-        return $result;
+
+        if(isset($_POST['id'])){
+            $id = $_POST['id'];
+            $result = $wpdb->get_results("DELETE FROM $wpdb->prefix" . "wr_rules WHERE id='$id'");
+        }else{
+            $result = $wpdb->get_results("DELETE FROM $wpdb->prefix" . "wr_rules WHERE id_category='$id'");
+        }
+
+       // echo json_encode($result);
     }
 
 }

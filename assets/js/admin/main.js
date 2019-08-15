@@ -7,24 +7,37 @@
         var datatable_container = $('#datatable_container');
         //populating price list select
         var select_list = $('#price_list');
+        var select_category = $('#categories_select_search');
         var price_list = select_list.val();
+        var category_id = select_category.val();
+        datatable = null;
         select_list.change(function(){
             var id_parent = $('#wrpl-option-' + select_list.val()).attr('pl-parent');
             var factor = $('#wrpl-option-' + select_list.val()).attr('pl-factor');
-            var price_list = select_list.val();
+            var category_id = select_category.val();
             table.DataTable().destroy();
-                createDatatable(price_list,id_parent,factor);
+            datatable = createDatatable(price_list,id_parent,factor,category_id);
+        });
+
+        select_category.change(function(){
+            var id_parent = $('#wrpl-option-' + select_list.val()).attr('pl-parent');
+            var factor = $('#wrpl-option-' + select_list.val()).attr('pl-factor');
+            var price_list = select_list.val();
+            category_id = $(this).val();
+            table.DataTable().destroy();
+            datatable = createDatatable(price_list,id_parent,factor,category_id);
         });
 
         //creando la tabla por defecto
-        createDatatable(1,0,0);
+        datatable = createDatatable(1,0,0,'all');
         // crea una tabla y carga los valores en dependencia de la lista de precio
-      function createDatatable(price_list,id_parent,factor){
+      function createDatatable(price_list,id_parent,factor,category_id){
           price_list = id_parent == 0 ? price_list : id_parent; //if la lista no tiene padre devuelve el id de la lista, sino si la lista si tiene padre devuelve el id del padre
           //Datatable
           var datatable = table.DataTable( {
               "stateSave": true,
               "deferRender": true,
+              "fixedHeader": true,
               "rowId": 'ID',
               "serverSide": true,
               "bServerSide":true,
@@ -38,13 +51,14 @@
                   "type": "POST",
                   "data":{
                       "action" : 'wrpl_get_products',
-                      'price_list': price_list
+                      'price_list': price_list,
+                      'category_id': category_id
                   },
                   "dataSrc": function(data){
                       data = data.data;
                       for(var i = 0; i < data.length; i++ ){
-
-                          data[i]['guid'] = "<a class='btn btn-info btn-sm py-0 wrpl-view' href='" + data[i]['guid'] + "'></a>" + "<a class='btn btn-info btn-sm py-0 wrpl-edit ml-1' href='" + data[i]['edit_url'] + "'></a>";
+                          data[i]['post_title'] = data[i]['post_title'].substring(0, 30) + (data[i]['post_title'].length>30 ? '...' : '');
+                          data[i]['guid'] = "<a class='btn btn-info btn-sm py-0 wrpl-view mr-1 mt-1' href='" + data[i]['guid'] + "'></a>" + "<a class='btn btn-info btn-sm py-0 wrpl-edit mt-1' href='" + data[i]['edit_url'] + "'></a>";
                           data[i]['image'] = data[i]['image'] ? "<img src='"+ data[i]['image'] +"' width='25' height='25'>" : "<img src='https://imgplaceholder.com/120x120?text=Not+Found&font-size=25' width='25' height='25'>";
                           data[i]['post_type'] = data[i]['post_type'] == 'product_variation' ? 'variation' : 'product';
                           if(id_parent != 0 ){
@@ -56,6 +70,12 @@
                               }
 
                           }
+                          /*var categories =  data[i]['categories'] ;
+                          var categories_html = '<ul class="wrpl_list_categories">';
+                          for(var j = 0; j < categories.length; j++ ){
+                              categories_html+='<li>'+categories[j]['name'] +'</li>';
+                          }
+                          data[i]['categories'] = categories_html + '</ul>';*/
 
                       }
                       return data;
@@ -67,6 +87,7 @@
                   { "data" : "image", "name": 'image' },
                   { "data" : "post_title", "name": 'post_title' },
                   { "data" : "sku", "name": 'sku' },
+                  { "data" : "categories", "name": 'categories' },
                   { "data" : "post_type", "name": 'post_type' },
                   { "data" : "price", "name": 'price' ,
                       "render": function ( data, type, row ) {
@@ -103,6 +124,8 @@
                   }
               }
           });
+
+          return datatable;
       }
 
         //editing sale price
@@ -310,8 +333,8 @@
                 var id_parent = $('#wrpl-option-' + $('#price_list').val()).attr('pl-parent') || $('#wrpl-option-0').attr('pl-parent');
                 if(id_parent == 0) {
                     var row = $(this).closest('tr');
-                    var td_sale_price = row.find('td:eq(6)');
-                    var regular_price = row.find('td:eq(5)').text();
+                    var td_sale_price = row.find('td:eq(7)');
+                    var regular_price = row.find('td:eq(6)').text();
                     var id = row.find('td:eq(0)').text();
 
                     td_sale_price.makeEditable(id, regular_price);
@@ -322,8 +345,8 @@
                 var id_parent = $('#wrpl-option-' + $('#price_list').val()).attr('pl-parent') || $('#wrpl-option-0').attr('pl-parent');
                 if(id_parent == 0) {
                     var row = $(this).closest('tr');
-                    var td_regular_price = row.find('td:eq(5)');
-                    var sale_price = row.find('td:eq(6)').text();
+                    var td_regular_price = row.find('td:eq(6)');
+                    var sale_price = row.find('td:eq(7)').text();
                     var id = row.find('td:eq(0)').text();
 
                     td_regular_price.makeEditable1(id, sale_price);
@@ -470,6 +493,11 @@
             $('#wrpl-add_pl_factor').prop('disabled',false);
             $('#wrpl-add_pl_factor_label').removeClass('disabled');
         }
+    });
+
+    /*Searching*/
+    $('#pepe_pepe').on('click', function(){
+       // datatable.search( 'Ab' ).draw();
     });
 
 })(jQuery);

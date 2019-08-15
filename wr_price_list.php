@@ -43,6 +43,8 @@ if( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php') ){
 define('WRPL_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define('WRPL_PLUGIN_URL' , plugin_dir_url(  __FILE__  ) );
 define('WRPL_ADMIN_URL' , get_admin_url() );
+define('WRPL_PLUGIN_DIR_BASENAME' , dirname(plugin_basename(__FILE__)) );
+
 
 //include the helpers
 include 'inc/Util/helper.php';
