@@ -36,7 +36,6 @@ class ProductController{
         );
         return $products;
     }
-
     function getProducts(){
         global $wpdb;
         $price_list = $_POST['price_list'];
@@ -44,13 +43,10 @@ class ProductController{
         $length = $_POST['length'];
         $search = trim($_POST['search']['value']);
         $category_id = $_POST['category_id'];
-
         $all_products = $this->getAllProducts();
         $count_products =  count($all_products);
-
-        $products_with_search  = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "posts  LEFT JOIN $wpdb->prefix" . "postmeta ON ID=post_id WHERE post_type IN ('product_variation','product') AND post_status NOT IN ('auto-draft','trash') AND meta_key = '_sku' AND ( post_title LIKE '%$search%' OR meta_value LIKE '%$search%') ORDER BY post_id LIMIT $start,$length" ,ARRAY_A);
-
-        if($search == ""){
+        $products_with_search  = $this->getProductByCategory($category_id,$search,$length,$start);
+        if($search == "" && $category_id == 0){
             $count_products_with_search = count($all_products);
         }else{
             //$products_with_search = $this->wrpl_filter_category_product($products_with_search,$search);
@@ -60,32 +56,56 @@ class ProductController{
         $products_data = array();
         foreach ($products as $product){
             if(! $this->isProductHasVariations($product['ID'])){ //not including products with variations
-                $product['categories'] = get_the_terms( $product['ID'], 'product_cat' ) ?  wrpl_convert_to_separate_value(get_the_terms( $product['ID'], 'product_cat' ),'name') : '';
                 $image_values = wp_get_attachment_image_src( get_post_thumbnail_id($product['ID']), 'single-post-thumbnail' );
                 $product['image'] = $image_values[0];
                 $product['price'] = $this->getRegularPrice($product['ID'],$price_list);
                 $product['sku'] = $product['meta_value'];
                 $product['sale_price'] = $this->getSalesPrice($product['ID'],$price_list);
-
                 if($product['post_type'] == 'product_variation'){
                     $product['edit_url'] = WRPL_ADMIN_URL . 'post.php?post=' . $product['post_parent'] . '&action=edit';
                     $product['guid'] = get_permalink($product['post_parent']);
+                    $product['categories'] = get_the_terms( $product['post_parent'], 'product_cat' ) ?  wrpl_convert_to_separate_value(get_the_terms( $product['post_parent'], 'product_cat' ),'name') : '';
                 }else{
                     $product['edit_url'] = WRPL_ADMIN_URL . 'post.php?post=' . $product['ID'] . '&action=edit';
+                    $product['categories'] = get_the_terms( $product['ID'], 'product_cat' ) ?  wrpl_convert_to_separate_value(get_the_terms( $product['ID'], 'product_cat' ),'name') : '';
                 }
-                if($category_id !== 'all'){
-                    if( has_term( $category_id , 'product_cat', $product['ID']))
-                        array_push($products_data,$product);
-                }else{
-                    array_push($products_data,$product);
-                }
-
+                array_push($products_data,$product);
             }
         }
-
-
         echo json_encode(array('data'=>$products_data,'recordsTotal'=>$count_products,'recordsFiltered'=>$count_products_with_search));
         wp_die();
+    }
+
+    function getProductByCategory($cat_id,$search,$limit,$offset){
+        global $wpdb;
+
+        $products =  $products_with_search  = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "posts  LEFT JOIN $wpdb->prefix" . "postmeta ON ID=post_id WHERE post_type IN ('product_variation','product') AND post_status NOT IN ('auto-draft','trash') AND meta_key = '_sku' AND ( post_title LIKE '%$search%' OR meta_value LIKE '%$search%') ORDER BY post_id",ARRAY_A);
+        $final_products = array();
+        foreach ($products as $product){
+            if($cat_id > 0){
+                if($product['post_type'] == 'product_variation'){
+                    if( $this->wrpl_product_has_category($cat_id,$product['post_parent'])){
+                        array_push($final_products,$product);
+                    }
+                }else{
+                    if( $this->wrpl_product_has_category($cat_id,$product['ID'])){
+                        array_push($final_products,$product);
+                    }
+                }
+            }else{
+                array_push($final_products,$product);
+            }
+        }
+        return array_splice($final_products,$offset,$limit);
+    }
+
+    function wrpl_product_has_category($cat_id,$product_id){
+        global $wpdb;
+        $results = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "term_relationships WHERE term_taxonomy_id='$cat_id' AND object_id='$product_id'", ARRAY_A);
+        if(count($results) > 0){
+            return true;
+        }
+        return false;
     }
 
     function wrpl_filter_category_product($products,$search){

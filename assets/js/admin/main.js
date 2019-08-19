@@ -29,7 +29,7 @@
         });
 
         //creando la tabla por defecto
-        datatable = createDatatable(1,0,0,'all');
+        datatable = createDatatable(1,0,0,0);
         // crea una tabla y carga los valores en dependencia de la lista de precio
       function createDatatable(price_list,id_parent,factor,category_id){
           price_list = id_parent == 0 ? price_list : id_parent; //if la lista no tiene padre devuelve el id de la lista, sino si la lista si tiene padre devuelve el id del padre

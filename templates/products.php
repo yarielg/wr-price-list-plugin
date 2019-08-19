@@ -4,7 +4,7 @@ use Wrpl\Inc\Controller\ProductController;
 $price_list_controller =  new PriceListController(); //Init all the function about price list
 $product_controller =  new ProductController(); //Init all the function about price list
 $plists = $price_list_controller->wrpl_get_price_lists();
-$roles = stdToArray(wrpl_roles());
+$roles = wrpl_roles();
 //$categories = $product_controller->getProductParentCategories();
 $tab = 'products';
 $section = '';
@@ -72,13 +72,12 @@ if(isset($_GET['tab'])){
                     <div class="tab-pane show active" id="tab_products">
                         <div class="row">
 
-                            <div class="col-3">
+                            <div class=" col-4">
                                 <p>Choose a Price list to start change price quickly: </p>
                             </div>
-                            <div class="col-6">
+                            <div class="col-8">
                                 <?php include 'includes/_select_price_list.php' ?>
                             </div>
-                            <div class="col-3"></div>
                         </div>
                         <div class="row">
                                <?php include "includes/_filters_products.php"; ?>
