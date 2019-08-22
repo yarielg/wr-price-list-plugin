@@ -15,6 +15,35 @@ class Activate{
         update_option('wrpl-hide_price',0);
         update_option('wrpl-default_list',1);
 
+        define('YOUR_LICENSE_SERVER_URL','https://webreadynow.com');
+
+        $prox_anio = mktime(0, 0, 0, date("m"), date("d"), date("Y") + 1);
+
+        $api_params = array(
+            'slm_action' => 'slm_create_new',
+            'secret_key' => '5d5df9b0ad55e8.43571874',
+            'first_name' => 'elvis',
+            'last_name' => 'presley',
+            'email' => 'elvis@king.com',
+            'company_name' => 'WEB READY',
+            'txn_id' => 'ABC0987654321',
+            'max_allowed_domains' => '2',
+            'date_created' =>date('Y-m-d'),
+            'date_expiry' =>date('Y-m-d', $prox_anio),
+);
+
+// Send query to the license manager server
+$response = wp_remote_get(add_query_arg($api_params,YOUR_LICENSE_SERVER_URL ), array('timeout' => 20, 'sslverify' => false));
+
+// Check for error in the response
+if (is_wp_error($response)){
+    echo "Unexpected Error! The query returned with an error.";
+    }
+
+// License data.
+$license_data = json_decode(wp_remote_retrieve_body($response));
+
+
         global $wpdb;
 
         $charset_collate = $wpdb->get_charset_collate();

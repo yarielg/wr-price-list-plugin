@@ -15,11 +15,7 @@ class Pages{
 
 
         add_action('admin_menu', function(){
-            add_menu_page('WR Price List', 'WR Price List', 'manage_options', 'wrpl-main-menu', array($this,'admin_index'),'dashicons-image-rotate-right',110);
-        });
-
-        add_action('admin_menu', function(){
-            add_submenu_page( 'wrpl-main-menu', __('Dashboard','wr_price_list'), __('Dashboard','wr_price_list'),'manage_options', 'wrpl-main-menu', array($this,'admin_index'));
+            add_menu_page('WR Price Manager', 'WR Price Manager', 'manage_options', 'wrpl-products-menu', array($this,'wrpl-products-menu') , WRPL_PLUGIN_URL. 'assets/img/price-tag.png',110);
         });
 
         add_action('admin_menu',function(){

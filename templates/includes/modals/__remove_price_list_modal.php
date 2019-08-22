@@ -13,12 +13,13 @@
                 <div class="alert alert-warning fade show" role="alert">
 
                     <ul>
-                        <li>Alert! The price list could have some data integrated, if you continue the following information will be removed:</li>
-                        <li>- All the price related with this list</li>
-                        <li>- All relations between this list and roles, categories, etc</li>
+                        <li><?php _e('Alert! The price list could have some data integrated, if you continue the following information will be removed:','wr_price_list') ?></li>
+                        <li>- <?php _e('All the price related with this list','wr_price_list') ?> </li>
+                        <li>- <?php _e('All relations between this list and roles, categories, etc','wr_price_list') ?></li>
                         <br>
-                        <li>Do you want to continue?</li>
+                        <li><?php _e('Do you want to continue?','wr_price_list') ?></li>
                     </ul>
+
                 </div>
                 <br>
 
