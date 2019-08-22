@@ -359,25 +359,25 @@ class ProductController{
                 if($price_list == 1){
 
                     if($sale_price < $regular_price && $regular_price > 0 ){
-                        array_push($results, array('type' => 'success','msg' => 'The product with sku: ' . $sku . ' was updated' ));
+                        array_push($results, array('type' => 'success','msg' => __('The product with sku: ','wr_price_list') . $sku . __(' was updated','wr_price_list') ));
                         update_post_meta($product_id, '_regular_price', $regular_price);
                         update_post_meta($product_id, '_price', $sale_price);
                         update_post_meta($product_id, '_sale_price', $sale_price);
                     }else{
-                        array_push($results, array('type' => 'failure','msg' => 'The product with sku: ' . $sku . ' was no inserted, you must follow this rule: regular > sale and regular > 0'));
+                        array_push($results, array('type' => 'failure','msg' => __('The product with sku: ','wr_price_list') . $sku . __(' was no inserted, you must follow this rule: regular > sale and regular > 0','wr_price_list')));
                     }
 
                 }else{
                     if($sale_price < $regular_price && $regular_price > 0 ){
                         $this->updateOrInsertPrice($product_id,$price_list,$regular_price,$sale_price);
-                        array_push($results, array('type' => 'success','msg' => 'The product with sku: ' . $sku . ' was updated' ));
+                        array_push($results, array('type' => 'success','msg' => __('The product with sku: ','wr_price_list') . $sku . __(' was updated','wr_price_list') ));
                     }else {
-                        array_push($results, array('type' => 'failure','msg' => 'The product with sku: ' . $sku . ' was no inserted, you must follow this rule: regular > sale and regular > 0'));
+                        array_push($results, array('type' => 'failure','msg' => __('The product with sku: ','wr_price_list') . $sku . __(' was no inserted, you must follow this rule: regular > sale and regular > 0','wr_price_list')));
                     }
                 }
 
             } else{
-                array_push($results, array('type' => 'failure','msg' => 'The product with sku: ' . $sku . ' was not found' ));
+                array_push($results, array('type' => 'failure','msg' => __('The product with sku: ','wr_price_list') . $sku . __(' was not found','wr_price_list') ));
             }
 
         }//endforeach

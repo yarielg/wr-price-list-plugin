@@ -6,7 +6,7 @@ if(isset($_POST['wrpl_new_price_list'])){
     $was_inserted = $price_list_controller->wrpl_add_price_list($name,$price_list,$factor);
     if($was_inserted){
         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Price list inserted! </strong> The price list was successfully inserted.
+                    <strong>'.__('Price list inserted! ','wr_price_list').'</strong> '.__('The price list was successfully inserted.','wr_price_list').'
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -14,7 +14,7 @@ if(isset($_POST['wrpl_new_price_list'])){
         $plists = $price_list_controller->wrpl_get_price_lists();
     }else{
         echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Price list name duplicated! </strong>The price list already exist, please choose other name.
+                    <strong>'.__('Price list name duplicated! ','wr_price_list').'</strong> '.__('The price list already exist, please choose other name.','wr_price_list').'
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -34,7 +34,7 @@ if(isset($_POST['wrpl_edit_pl_action'])){
     $was_inserted  = $price_list_controller->wrpl_edit_price_list($name,$id,$factor);
     if($was_inserted){
         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Price list inserted! </strong> The price list was successfully updated.
+                     <strong>'.__('Price list updated! ','wr_price_list').'</strong> '.__('The price list was successfully updated.','wr_price_list').'
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -42,7 +42,7 @@ if(isset($_POST['wrpl_edit_pl_action'])){
         $plists = $price_list_controller->wrpl_get_price_lists();
     }else{
         echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Price list name duplicated! </strong>The price list already exist, please choose other name.
+                   <strong>'.__('Price list name duplicated! ','wr_price_list').'</strong> '.__('The price list already exist, please choose other name.','wr_price_list').'
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

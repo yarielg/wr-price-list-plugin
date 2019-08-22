@@ -23,7 +23,7 @@ if(isset($_POST['import_price_list'])){
         $new_price_list_name = $_POST['import_new_price_list'];
         if($price_list_controller->wrpl_exist_price_list_name($new_price_list_name)){
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Price list name duplicated! </strong>The price list already exist, please choose other name.
+                    <strong>'.__('Price list name duplicated! ','wr_price_list').'</strong> '.__('The price list already exist, please choose other name.','wr_price_list').'
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

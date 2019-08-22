@@ -12,9 +12,10 @@ include 'requests/_price_list_request.php';
 
     <div class="row">
         <div class="col-md-6">
-            <h5>Roles</h5>
+            <h5><?php _e('Roles:','wr_price_list') ?></h5>
             <ul class="list-group">
                 <?php
+                     $roles = wrpl_roles();
                     foreach ($roles as $role){
                         $btns = get_option('wrpl_role-'. wrpl_valid_name($role['name'])) == $role['name'] ?
                                 '<button class="btn btn-info btn-sm wrpl_edit_role wrpl-edit" name="wrpl_edit_role" data-toggle="modal" data-target="#wrpl_edit_role_modal"  data-role-name="' .$role['name']. ' " ></button>
@@ -44,7 +45,7 @@ include 'requests/_price_list_request.php';
 
         <!-- PRICE LISTS -->
         <div class="col-md-6">
-            <h5>Price Lists</h5>
+            <h5><?php _e('Price Lists:','wr_price_list') ?></h5>
             <ul class="list-group">
                 <?php
                 foreach ($plists as $plist){
@@ -67,7 +68,7 @@ include 'requests/_price_list_request.php';
             <br>
 
             <!-- Adding price Lists -->
-            <button data-toggle="modal" data-target="#wrpl_add_pl_modal" class="btn btn-info btn-sm float-right">Add New Price List</button>
+            <button data-toggle="modal" data-target="#wrpl_add_pl_modal" class="btn btn-info btn-sm float-right"><?php _e('Add new price list:','wr_price_list') ?></button>
         </div>
     </div>
 </div>

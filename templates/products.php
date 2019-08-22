@@ -73,7 +73,7 @@ if(isset($_GET['tab'])){
                         <div class="row">
 
                             <div class=" col-4">
-                                <p>Choose a Price list to start change price quickly: </p>
+                                <p><?php _e('Choose a Price list to start change price quickly: ','wr_price_list') ?></p>
                             </div>
                             <div class="col-8">
                                 <?php include 'includes/_select_price_list.php' ?>

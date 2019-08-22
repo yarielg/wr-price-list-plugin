@@ -6,8 +6,8 @@ if(isset($_POST['wrpl_save_roles'])){
 ?>
 
 <div class="row p-3">
-    <p>Assign a price list to each role, so that all users who correspond to the role will see only the price that corresponds to the assigned price list.</p>
-    <p><strong>Note:</strong>  Please note that if for a certain role you do not choose a list, all users belonging to this role will see the prices of the list that is by default.</p>
+    <p><?php _e('Assign a price list to each role, so that all users who correspond to the role will see only the price that corresponds to the assigned price list.','wr_price_list') ?></p>
+    <p><?php _e('Note: Please note that if for a certain role you do not choose a list, all users belonging to this role will see the prices of the list that is by default.','wr_price_list') ?></p>
 </div>
 
 
@@ -34,7 +34,7 @@ if(isset($_POST['wrpl_save_roles'])){
                         
                     </div>';
     }
-    $rows .= '<input type="submit" name="wrpl_save_roles" class="btn btn-info btn-sm ml-3 my-3 float-right" value="Save">
+    $rows .= '<input type="submit" name="wrpl_save_roles" class="btn btn-info btn-sm ml-3 my-3 float-right" value="'.__('Save','wr_price_list').'">
              </form>';
     echo $rows;
 ?>
