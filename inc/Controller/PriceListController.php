@@ -46,22 +46,37 @@ class PriceListController
         }
     }
 
-    function wrpl_get_user_price_list() //relation between price list and role are in options table of wp (wrpl-nameofpricelist,price_list_value)
+
+
+    function wrpl_get_user_price_list() //relation between price list and role are in options table of wp (wrpl-name-of-role,price_list_value)
     {
         if (is_user_logged_in()) {
             $user = wp_get_current_user();
             $roles = ( array )$user->roles;
 
-            return get_option('wrpl-'.$roles[0]) ? get_option('wrpl-'.$roles[0]) : 1; //si no se encuentra una lista asociada se devuelve Default Woocommerce
+            return ( $this->wrpl_exist_price_list_id(get_option('wrpl-'.$roles[0]))) ? get_option('wrpl-'.$roles[0]) : 1; //si no se encuentra una lista asociada se devuelve Default Woocommerce
         }else{
             return get_option('wrpl-default_list');
         }
     }
 
-    function wrpl_exist_price_list_name($name){
+    function wrpl_exist_price_list_name($name,$id=0){
         global $wpdb;
+
         $name = strtolower($name);
-        $plists = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "wr_price_lists WHERE LOWER(description) = '$name'");
+        $plists = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "wr_price_lists WHERE LOWER(description) = '$name' AND id!='$id'");
+        if(count($plists)>0){
+            return true;
+        }else{
+            return false;
+
+        }
+    }
+
+    function wrpl_exist_price_list_id($id){
+        global $wpdb;
+
+        $plists = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "wr_price_lists WHERE id='$id'");
         if(count($plists)>0){
             return true;
         }else{
@@ -95,14 +110,14 @@ class PriceListController
     function wrpl_remove_price_list($id){
         global $wpdb;
         $wpdb->get_results("DELETE FROM $wpdb->prefix" . "wr_price_lists WHERE id = '$id' OR id_parent='$id'");
-       // $wpdb->get_results("UPDATE $wpdb->prefix" . "options SET option_value = 'default' WHERE option_value = '$id'");
+        $wpdb->get_results("UPDATE $wpdb->prefix" . "options SET option_value = 1 WHERE option_value = '$id'");
         $result = $wpdb->get_results("DELETE FROM $wpdb->prefix" . "wr_price_lists_price WHERE id_price_list = '$id'");
         return $result;
     }
 
     function wrpl_edit_price_list($name,$id,$factor){
         global $wpdb;
-        if(!$this->wrpl_exist_price_list_name($name)){
+        if(!$this->wrpl_exist_price_list_name($name,$id)){
             $wpdb->query("UPDATE $wpdb->prefix" . "wr_price_lists SET description='$name',factor='$factor' WHERE id='$id'");
             return true;
         }

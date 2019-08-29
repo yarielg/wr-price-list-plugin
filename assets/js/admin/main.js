@@ -16,167 +16,162 @@
             var factor = $('#wrpl-option-' + select_list.val()).attr('pl-factor');
             var category_id = select_category.val();
             table.DataTable().destroy();
+            price_list = $(this).val();
             datatable = createDatatable(price_list,id_parent,factor,category_id);
         });
 
         select_category.change(function(){
             var id_parent = $('#wrpl-option-' + select_list.val()).attr('pl-parent');
             var factor = $('#wrpl-option-' + select_list.val()).attr('pl-factor');
-            var price_list = select_list.val();
             category_id = $(this).val();
             table.DataTable().destroy();
             datatable = createDatatable(price_list,id_parent,factor,category_id);
+            datatable.page( 'first' ).draw( 'page' );
         });
 
         //creando la tabla por defecto
         datatable = createDatatable(1,0,0,0);
         // crea una tabla y carga los valores en dependencia de la lista de precio
-      function createDatatable(price_list,id_parent,factor,category_id){
-          price_list = id_parent == 0 ? price_list : id_parent; //if la lista no tiene padre devuelve el id de la lista, sino si la lista si tiene padre devuelve el id del padre
-          //Datatable
-          var datatable = table.DataTable( {
-              "stateSave": true,
-              "deferRender": true,
-              "fixedHeader": true,
-              "rowId": 'ID',
-              "serverSide": true,
-              "bServerSide":true,
-              "bPaginate":'paging',
-              "processing": true,
-              "language":{
-                  "processing": 'loading...'
-              },
-              "ajax": {
-                  "url": parameters.ajax_url,
-                  "type": "POST",
-                  "data":{
-                      "action" : 'wrpl_get_products',
-                      'price_list': price_list,
-                      'category_id': category_id
-                  },
-                  "dataSrc": function(data){
-                      data = data.data;
-                      for(var i = 0; i < data.length; i++ ){
-                          data[i]['post_title'] = data[i]['post_title'].substring(0, 30) + (data[i]['post_title'].length>30 ? '...' : '');
-                          data[i]['guid'] = "<a class='btn btn-info btn-sm py-0 wrpl-view mr-1 mt-1' href='" + data[i]['guid'] + "'></a>" + "<a class='btn btn-info btn-sm py-0 wrpl-edit mt-1' href='" + data[i]['edit_url'] + "'></a>";
-                          data[i]['image'] = data[i]['image'] ? "<img src='"+ data[i]['image'] +"' width='25' height='25'>" : "<img src='https://imgplaceholder.com/120x120?text=Not+Found&font-size=25' width='25' height='25'>";
-                          data[i]['post_type'] = data[i]['post_type'] == 'product_variation' ? 'variation' : 'product';
-                          if(id_parent != 0 ){
-                              if(factor < 1 ){
-                                  data[i]['sale_price'] =  (data[i]['price'] * parseFloat(factor)).toFixed(2);// + '  ' + toFixed(parseFloat(factor*100));
-                              }else{
-                                  data[i]['price'] = (data[i]['price']  *  parseFloat(factor)).toFixed(2);//+ '  ' + toFixed(parseFloat(factor*100));
-                                  data[i]['sale_price'] = 0;
-                              }
-
-                          }
-                          /*var categories =  data[i]['categories'] ;
-                          var categories_html = '<ul class="wrpl_list_categories">';
-                          for(var j = 0; j < categories.length; j++ ){
-                              categories_html+='<li>'+categories[j]['name'] +'</li>';
-                          }
-                          data[i]['categories'] = categories_html + '</ul>';*/
-
-                      }
-                      return data;
-                  },
-              },
-              "columns": [
-
-                  { "data" : "ID", "name": 'ID' },
-                  { "data" : "image", "name": 'image' },
-                  { "data" : "post_title", "name": 'post_title' },
-                  { "data" : "sku", "name": 'sku' },
-                  { "data" : "categories", "name": 'categories' },
-                  { "data" : "post_type", "name": 'post_type' },
-                  { "data" : "price", "name": 'price' ,
-                      "render": function ( data, type, row ) {
-                                  if(id_parent > 0){
-                                      if(factor>=1){
-                                          return  '$'+data + '<span class="wrpl-increase"> (↑' + (factor*100-100).toFixed() + '%)</span>' ;
-                                      }else{
-                                          return '$' + data;
-                                      }
-                                  }else
-                                      return '$' + data;
+        function createDatatable(price_list,id_parent,factor,category_id){
+            price_list = id_parent == 0 ? price_list : id_parent; //if la lista no tiene padre devuelve el id de la lista, sino si la lista si tiene padre devuelve el id del padre
+            //Datatable
+            var datatable = table.DataTable( {
+                "stateSave": true,
+                "deferRender": true,
+                "fixedHeader": true,
+                "rowId": 'ID',
+                "serverSide": true,
+                "bServerSide":true,
+                "bPaginate":'paging',
+                "processing": true,
+                "language":{
+                    "processing": 'loading...'
+                },
+                "ajax": {
+                    "url": parameters.ajax_url,
+                    "type": "POST",
+                    "data":{
+                        "action" : 'wrpl_get_products',
+                        'price_list': price_list,
+                        'category_id': category_id
                     },
-                      "class" : 'price'},
-                  { "data" : "sale_price", "name": 'sale_price' ,
-                      "render": function ( data, type, row ) {
-                          if(id_parent > 0 ){
-                              if(factor<1){
-                                  return  '$'+data + '<span class="wrpl-decrease"> (↓' + ((1-factor)*100).toFixed() + '%)</span>' ;
-                              }else{
-                                  return 'N/A';
-                              }
-                          }else
-                              return '$' + data;
-                      },
-                      "class" : 'sale_price'},
-                  { "data" : "guid", "name": 'guid'}
-              ],
-              "createdRow": function( row, data, dataIndex ) {
-                  if(data['post_type'] == 'variation'){
-                      $(row).addClass('wrpl-variation-row');
-                  }
-                  if(id_parent != 0){
-                      $(row).addClass('wrpl-nobase-pl');
-                  }
-              }
-          });
+                    "dataSrc": function(data){
+                        data = data.data;
+                        for(var i = 0; i < data.length; i++ ){
+                            data[i]['post_title'] = data[i]['post_title'].substring(0, 30) + (data[i]['post_title'].length>30 ? '...' : '');
+                            data[i]['guid'] = "<a class='btn btn-info btn-sm py-0 wrpl-view mr-1 mt-1' href='" + data[i]['guid'] + "'></a>" + "<a class='btn btn-info btn-sm py-0 wrpl-edit mt-1' href='" + data[i]['edit_url'] + "'></a>";
+                            data[i]['image'] = data[i]['image'] ? "<img src='"+ data[i]['image'] +"' width='25' height='25'>" : "<img src='https://imgplaceholder.com/120x120?text=Not+Found&font-size=25' width='25' height='25'>";
+                            data[i]['post_type'] = data[i]['post_type'] == 'product_variation' ? 'variation' : 'product';
+                            if(id_parent != 0 ){
+                                if(factor < 1 ){
+                                    data[i]['sale_price'] =  (data[i]['price'] * parseFloat(factor)).toFixed(2);// + '  ' + toFixed(parseFloat(factor*100));
+                                }else{
+                                    data[i]['price'] = (data[i]['price']  *  parseFloat(factor)).toFixed(2);//+ '  ' + toFixed(parseFloat(factor*100));
+                                    data[i]['sale_price'] = 0;
+                                }
 
-          return datatable;
-      }
+                            }
+
+                        }
+                        return data;
+                    },
+                },
+                "columns": [
+
+                    { "data" : "ID", "name": 'ID' },
+                    { "data" : "image", "name": 'image' },
+                    { "data" : "post_title", "name": 'post_title' },
+                    { "data" : "sku", "name": 'sku' },
+                    { "data" : "categories", "name": 'categories' },
+                    { "data" : "post_type", "name": 'post_type' },
+                    { "data" : "price", "name": 'price' ,
+                        "render": function ( data, type, row ) {
+                            if(id_parent > 0){
+                                if(factor>=1){
+                                    return  '$'+data + '<span class="wrpl-increase"> (↑' + (factor*100-100).toFixed() + '%)</span>' ;
+                                }else{
+                                    return '$' + data;
+                                }
+                            }else
+                                return '$' + data;
+                        },
+                        "class" : 'price'},
+                    { "data" : "sale_price", "name": 'sale_price' ,
+                        "render": function ( data, type, row ) {
+                            if(id_parent > 0 ){
+                                if(factor<1){
+                                    return  '$'+data + '<span class="wrpl-decrease"> (↓' + ((1-factor)*100).toFixed() + '%)</span>' ;
+                                }else{
+                                    return 'N/A';
+                                }
+                            }else
+                                return '$' + data;
+                        },
+                        "class" : 'sale_price'},
+                    { "data" : "guid", "name": 'guid'}
+                ],
+                "createdRow": function( row, data, dataIndex ) {
+                    if(data['post_type'] == 'variation'){
+                        $(row).addClass('wrpl-variation-row');
+                    }
+                    if(id_parent != 0){
+                        $(row).addClass('wrpl-nobase-pl');
+                    }
+                }
+            });
+
+            return datatable;
+        }
 
         //editing sale price
-        $.fn.makeEditable = function(id,regular_price) {
+        $.fn.makeEditable = function(id) {
             var price_list = $('#price_list').val();
-          function editPriceAjaxRequest(regular_price,id,content,cell){
+            function editPriceAjaxRequest(regular_price,id,content,cell){
 
-              $.ajax( {
-                  type: 'POST',
-                  url:  parameters.ajax_url,
-                  data:{
-                      'id': id,
-                      'action':'wrpl_edit_price',
-                      'price': parseFloat(regular_price),
-                      'sale_price':parseFloat(content),
-                      'price_list' : price_list
-                  },
-                  dataType: "json",
-                  beforeSend: function () {
-                      $(".wrpl_loader").css("display", "block");
-                      $("#modal-overlay").show();
-                  },
-                  complete: function () {
-                      $(".wrpl_loader").css("display", "none");
-                      $("#modal-overlay").hide();
-                  },
-                  success: function (json) {
-                      cell.html( '$' + parseFloat(content));
-                  },
-                  error : function(jqXHR, exception){
-                      var msg = '';
-                      if (jqXHR.status === 0) {
-                          msg = 'Not connect.\n Verify Network.';
-                      } else if (jqXHR.status == 404) {
-                          msg = 'Requested page not found. [404]';
-                      } else if (jqXHR.status == 500) {
-                          msg = 'Internal Server Error [500].';
-                      } else if (exception === 'parsererror') {
-                          msg = 'Requested JSON parse failed.';
-                      } else if (exception === 'timeout') {
-                          msg = 'Time out error.';
-                      } else if (exception === 'abort') {
-                          msg = 'Ajax request aborted.';
-                      } else {
-                          msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                      }
-                      alert(msg);
-                  }
+                $.ajax( {
+                    type: 'POST',
+                    url:  parameters.ajax_url,
+                    data:{
+                        'id': id,
+                        'action':'wrpl_edit_price',
+                        'price': parseFloat(regular_price),
+                        'sale_price':parseFloat(content),
+                        'price_list' : price_list
+                    },
+                    dataType: "json",
+                    beforeSend: function () {
+                        $(".wrpl_loader").css("display", "block");
+                        $("#modal-overlay").show();
+                    },
+                    complete: function () {
+                        $(".wrpl_loader").css("display", "none");
+                        $("#modal-overlay").hide();
+                    },
+                    success: function (json) {
+                        cell.html( '$' + parseFloat(content));
+                    },
+                    error : function(jqXHR, exception){
+                        var msg = '';
+                        if (jqXHR.status === 0) {
+                            msg = 'Not connect.\n Verify Network.';
+                        } else if (jqXHR.status == 404) {
+                            msg = 'Requested page not found. [404]';
+                        } else if (jqXHR.status == 500) {
+                            msg = 'Internal Server Error [500].';
+                        } else if (exception === 'parsererror') {
+                            msg = 'Requested JSON parse failed.';
+                        } else if (exception === 'timeout') {
+                            msg = 'Time out error.';
+                        } else if (exception === 'abort') {
+                            msg = 'Ajax request aborted.';
+                        } else {
+                            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                        }
+                        alert(msg);
+                    }
 
-              } );
-          }
+                } );
+            }
 
             $(this).on('click',function(){
                 if($(this).find('input').is(':focus')) return this;
@@ -199,17 +194,23 @@
                             }
                         },
                         'closeEditable':function(e){
-                            console.log(regular_price);
-                            regular_price = regular_price + '';
+                            var regular_price = $('#'+id).find('td:eq(6)').text();
+                            regular_price += '';
                             regular_price = parseFloat(regular_price.replace('$',''));
+                            if(isNaN(regular_price)){
+                                regular_price = 0;
+                            }
+
                             content = parseFloat(content.replace('$',''));
-                            if(!isNaN(regular_price) && !isNaN(content) && regular_price > 0 && content >= 0 && regular_price !== '' && content !== ''){
-                                if(regular_price > content){
+
+                            console.log(regular_price,content,'sale',old_content);
+                            if(!isNaN(content)  && content >= 0 && content !== ''){
+                                if(regular_price > content && regular_price > 0){
+                                    console.log('adasdasdasd');
                                     editPriceAjaxRequest(regular_price,id,content,cell);
                                 }else{
                                     alert('Sales price have to be lower than regular price');
                                     cell.html(old_content);
-
                                 }
                             }else{
                                 alert('You must have to enter a valid number except 0');
@@ -230,7 +231,7 @@
         //This is duplicated, so I have to refactor it
         //editing regular price
 
-        $.fn.makeEditable1 = function(id,sale_price) {
+        $.fn.makeEditable1 = function(id) {
             var price_list = $('#price_list').val();
             function editPriceAjaxRequest(sale_price,id,content,cell){
                 $.ajax( {
@@ -299,9 +300,14 @@
                             }
                         },
                         'closeEditable':function(e){
+                            sale_price = $('#'+id).find('td:eq(7)').text();
                             sale_price += ''; //la primera vez lo edita pero despues da error c0on la funcion replace porque ya no es un string
                             sale_price = parseFloat(sale_price.replace('$',''));
                             content = parseFloat(content.replace('$',''));
+                            if(isNaN(sale_price)){
+                                sale_price = 0;
+                            }
+
                             if(!isNaN(sale_price) && !isNaN(content) && content > 0 && sale_price >= 0 && sale_price !== '' && content !== ''){
                                 if(content > sale_price){
                                     editPriceAjaxRequest(sale_price,id,content,cell);
@@ -329,34 +335,32 @@
 
 
         //edito siempre y cuando sea una lista sin padre
-            tbody.on('click','.sale_price',function(e){
-                var id_parent = $('#wrpl-option-' + $('#price_list').val()).attr('pl-parent') || $('#wrpl-option-0').attr('pl-parent');
-                if(id_parent == 0) {
-                    var row = $(this).closest('tr');
-                    var td_sale_price = row.find('td:eq(7)');
-                    var regular_price = row.find('td:eq(6)').text();
-                    var id = row.find('td:eq(0)').text();
+        tbody.on('click','.sale_price',function(e){
+            var id_parent = $('#wrpl-option-' + $('#price_list').val()).attr('pl-parent') || $('#wrpl-option-0').attr('pl-parent');
+            if(id_parent == 0) {
+                var row = $(this).closest('tr');
+                var td_sale_price = row.find('td:eq(7)');
+                var id = row.find('td:eq(0)').text();
 
-                    td_sale_price.makeEditable(id, regular_price);
-                }
-            });
+                td_sale_price.makeEditable(id);
+            }
+        });
 
-            tbody.on('click','.price',function(e){
-                var id_parent = $('#wrpl-option-' + $('#price_list').val()).attr('pl-parent') || $('#wrpl-option-0').attr('pl-parent');
-                if(id_parent == 0) {
-                    var row = $(this).closest('tr');
-                    var td_regular_price = row.find('td:eq(6)');
-                    var sale_price = row.find('td:eq(7)').text();
-                    var id = row.find('td:eq(0)').text();
+        tbody.on('click','.price',function(e){
+            var id_parent = $('#wrpl-option-' + $('#price_list').val()).attr('pl-parent') || $('#wrpl-option-0').attr('pl-parent');
+            if(id_parent == 0) {
+                var row = $(this).closest('tr');
+                var td_regular_price = row.find('td:eq(6)');
+                var id = row.find('td:eq(0)').text();
 
-                    td_regular_price.makeEditable1(id, sale_price);
-                }
-            });
+                td_regular_price.makeEditable1(id);
+            }
+        });
 
 
 
 
-      //helper for get the parameters from current url
+        //helper for get the parameters from current url
         function getUrlParam(key) {
             var vars = {};
             var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
@@ -376,10 +380,10 @@
             var $target = $(e.target);
             // modal targeted by the button
             var modalSelector = $target.data('target');
-                var $modalAttribute = $(modalSelector + ' #wrpl-pl');
-                var dataValue = $target.data('pl-id');
+            var $modalAttribute = $(modalSelector + ' #wrpl-pl');
+            var dataValue = $target.data('pl-id');
 
-                $modalAttribute.val(dataValue || '');
+            $modalAttribute.val(dataValue || '');
         });
         //edit price list
         $('[data-toggle="modal"].wrpl_edit_price_list').on('click', function (e) {
@@ -495,9 +499,5 @@
         }
     });
 
-    /*Searching*/
-    $('#pepe_pepe').on('click', function(){
-       // datatable.search( 'Ab' ).draw();
-    });
 
 })(jQuery);

@@ -117,12 +117,25 @@ input[type=number]::-webkit-outer-spin-button {
     margin-right: 8px;
     margin-bottom: 10px;
 }
+
 #wrpl_tabs ul li  a.active{
     background:#f2f2f2 ;
     border-radius: 8px 8px 0 0;
     -webkit-box-shadow: 8px -1px 9px -7px rgba(0,0,0,0.48);
     box-shadow: 8px -1px 9px -7px rgba(0,0,0,0.48);
 }
+
+@media only screen and (max-width: 767px) {
+    #wrpl_tabs ul li  a.active{
+        color:#000 ;
+        background:none ;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        text-align: center;
+    }
+}
+
+
 
 
 #wrpl_tabs *{
@@ -132,11 +145,6 @@ ul.nav-pills{
     margin-bottom: 17px;
 }
 
-/* remove border radius for the tab */
-
-#wrpl_tabs .nav-pills > li > a {
-
-}
 .tab-pane{
     padding-top: 10px;
 }
