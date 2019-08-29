@@ -26,7 +26,7 @@ if(isset($_GET['tab'])){
     <div class="container-fluid">
 
         <div id="wrpl_tabs" class="container">
-            <ul  class="nav nav-pills">
+            <ul  class="nav nav-pills  flex-column flex-md-row">
                 <li>
                     <a id="products"
                        href="<?php echo WRPL_ADMIN_URL . 'admin.php?page=wrpl-products-menu&tab=products'?>"

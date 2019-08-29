@@ -1,5 +1,5 @@
 <table class="table" id="products_dt">
-    <thead class="table list-table">
+    <thead class="table nowrap dt-responsive" style="width:100%">
 
     <tr>
        <!-- <th></th> Required for row details-->

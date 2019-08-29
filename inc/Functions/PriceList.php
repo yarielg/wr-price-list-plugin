@@ -33,7 +33,7 @@ class PriceList{
         add_filter('woocommerce_product_variation_get_regular_price', array( $this, 'custom_regular_price' ), 99, 2 );
         add_filter('woocommerce_product_variation_get_price', array( $this, 'custom_price' ), 99, 2 );
 
-        // add_filter( 'woocommerce_format_sale_price', array( $this, 'custom_price_template') , 20, 3 );
+        //add_filter( 'woocommerce_format_sale_price', array( $this, 'custom_price_template') , 20, 3 );
 
         add_filter( 'woocommerce_variable_sale_price_html', array($this,'wrpl_variation_price_range'), 10, 2 );
         add_filter( 'woocommerce_variable_price_html', array($this,'wrpl_variation_price_range'), 10, 2 );
@@ -53,11 +53,11 @@ class PriceList{
             remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart');
             remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
             remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
-           // add_action( 'woocommerce_single_product_summary', array($this,'wrpl_print_login_to_see'), 31 );
+            add_action( 'woocommerce_single_product_summary', array($this,'wrpl_print_login_to_see'), 31 );
             add_action( 'woocommerce_after_shop_loop_item', array($this,'wrpl_print_login_to_see'), 11 );
             add_filter( 'woocommerce_is_sold_individually','custom_remove_all_quantity_fields', 10, 2 );
             echo "<style type='text/css'>
-            		.single_add_to_cart_button, form.cart .quantity{
+            		.single_add_to_cart_button, form.cart .quantity,.product_type_simple.add_to_cart_button{
 						display: none !important;width:0;height:0; visibility: hidden;
             		}
             </style>";
@@ -124,7 +124,7 @@ class PriceList{
     function wrpl_woocommerce_price_html( $price, $product ){
 
         if ( ! is_user_logged_in() && get_option('wrpl-hide_price')  == 1 ) {
-            return stripslashes( get_option('wrpl-custom_msg_no_login_user'));
+            return '';
         }else{
             $price_list = get_option('wrpl-assign-method') == 1 ? $this->price_list_controller->wrpl_get_user_price_list() : $this->product_controller->wrpl_get_price_list_by_category($product->get_id());
             $min_max = $this->product_controller->getMinMaxPriceVariation($product->get_id(),$price_list,'_regular_price');
@@ -145,13 +145,13 @@ class PriceList{
             }else{
 
                 if(  $min_max_sale['max'] > 0 && $min_max_sale['min']<$min_max['min']){
-                    return 'Start in: ' . wc_price($min_max_sale['min']);
+                    return __('Starting at ','wr_price_list') . wc_price($min_max_sale['min']);
                 }else{
 
                     if(  $min_max_sale['max'] > 0 && $min_max_sale['min']<$min_max['min']){
-                        return 'Start in: ' . wc_price($min_max_sale['min']);
+                        return __('Starting at ','wr_price_list') . wc_price($min_max_sale['min']);
                     }else{
-                        return 'Start in: ' . wc_price($min_max['min']);
+                        return __('Starting at ','wr_price_list') . wc_price($min_max['min']);
                     }
 
                 }
