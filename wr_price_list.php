@@ -17,6 +17,8 @@ Domain Path:  /languages
 
 defined('ABSPATH') or die('You do not have access, sally human!!!'); //for security
 
+define ( 'WRPL_PLUGIN_VERSION', '1.0.0');
+
 if( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php') ){
     require_once  dirname( __FILE__ ) . '/vendor/autoload.php';
 }
@@ -36,6 +38,14 @@ if( class_exists( 'Wrpl\\Inc\\Init' ) ){
     Wrpl\Inc\Init::register_services();
 
 }
+
+//update
+require 'vendor/plugin-update-checker/plugin-update-checker.php';
+$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+    'https://webreadynow.com/plugin.json',
+    __FILE__, //Full path to the main plugin file or functions.php.
+    'wr_price_list'
+);
 
 
 

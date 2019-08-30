@@ -4,7 +4,7 @@
 
         var table = $('#products_dt');
         var tbody = $('#products_dt tbody');
-        var datatable_container = $('#datatable_container');
+
         //populating price list select
         var select_list = $('#price_list');
         var select_category = $('#categories_select_search');
@@ -60,7 +60,7 @@
                         for(var i = 0; i < data.length; i++ ){
                             data[i]['post_title'] = data[i]['post_title'].substring(0, 30) + (data[i]['post_title'].length>30 ? '...' : '');
                             data[i]['guid'] = "<a class='btn btn-info btn-sm py-0 wrpl-view mr-1 mt-1' href='" + data[i]['guid'] + "'></a>" + "<a class='btn btn-info btn-sm py-0 wrpl-edit mt-1' href='" + data[i]['edit_url'] + "'></a>";
-                            data[i]['image'] = data[i]['image'] ? "<img src='"+ data[i]['image'] +"' width='25' height='25'>" : "<img src='https://imgplaceholder.com/120x120?text=Not+Found&font-size=25' width='25' height='25'>";
+                            data[i]['image'] = data[i]['image'] ? "<img src='"+ data[i]['image'] +"' width='25' height='25'>" : "<img src='https://www.webreadynow.com/wp-content/uploads/2019/08/120x120.png' width='25' height='25'>";
                             data[i]['post_type'] = data[i]['post_type'] == 'product_variation' ? 'variation' : 'product';
                             if(id_parent != 0 ){
                                 if(factor < 1 ){
@@ -124,9 +124,9 @@
         }
 
         //editing sale price
-        $.fn.makeEditable = function(id) {
+        $.fn.makeEditable = function(id,type) { //type 1 for regular 2 for sa;e
             var price_list = $('#price_list').val();
-            function editPriceAjaxRequest(regular_price,id,content,cell){
+            function editPriceAjaxRequest(price,id,content,cell){
 
                 $.ajax( {
                     type: 'POST',
@@ -134,8 +134,8 @@
                     data:{
                         'id': id,
                         'action':'wrpl_edit_price',
-                        'price': parseFloat(regular_price),
-                        'sale_price':parseFloat(content),
+                        'price': (type === 1) ? parseFloat(content) : parseFloat(price),
+                        'sale_price': (type === 1) ? parseFloat(price) : parseFloat(content),
                         'price_list' : price_list
                     },
                     dataType: "json",
@@ -194,29 +194,46 @@
                             }
                         },
                         'closeEditable':function(e){
-                            var regular_price = $('#'+id).find('td:eq(6)').text();
-                            regular_price += '';
-                            regular_price = parseFloat(regular_price.replace('$',''));
-                            if(isNaN(regular_price)){
-                                regular_price = 0;
+
+                            var price = (type === 1) ? $('#'+id).find('td:eq(7)').text() : $('#'+id).find('td:eq(6)').text();
+                            price = parseFloat(price.replace('$',''));
+                            if(isNaN(price)){
+                                price = 0;
+                            }
+                            content += '';
+                            content = parseFloat(content.replace('$',''));
+                            if(isNaN(content)){
+                                content = 0;
                             }
 
-                            content = parseFloat(content.replace('$',''));
+                            if(type == 2){
+                                if(!isNaN(content)  && content >= 0 && content !== '' ){
+                                    if(price > content && price > 0){
 
-                            console.log(regular_price,content,'sale',old_content);
-                            if(!isNaN(content)  && content >= 0 && content !== ''){
-                                if(regular_price > content && regular_price > 0){
-                                    console.log('adasdasdasd');
-                                    editPriceAjaxRequest(regular_price,id,content,cell);
+                                        editPriceAjaxRequest(price,id,content,cell);
+                                    }else{
+                                        alert('Sales price have to be lower than regular price');
+                                        cell.html(old_content);
+                                    }
                                 }else{
-                                    alert('Sales price have to be lower than regular price');
+                                    alert('You must have to enter a valid number except 0');
                                     cell.html(old_content);
                                 }
-                            }else{
-                                alert('You must have to enter a valid number except 0');
-                                cell.html(old_content);
-                            }
 
+                            }else{
+                                if(!isNaN(price) && !isNaN(content) && content > 0 && price >= 0 && price !== '' && content !== ''){
+                                    if(content > price){
+                                        editPriceAjaxRequest(price,id,content,cell);
+                                    }else{
+                                        alert('Sales price have to be lower than regular price');
+                                        cell.html(old_content);
+
+                                    }
+                                }else{
+                                    alert('You must have to enter a valid number except 0');
+                                    cell.html(old_content);
+                                }
+                            }
                         },
                         'saveEditable':function(){
 
@@ -228,112 +245,6 @@
             return this;
         };
 
-        //This is duplicated, so I have to refactor it
-        //editing regular price
-
-        $.fn.makeEditable1 = function(id) {
-            var price_list = $('#price_list').val();
-            function editPriceAjaxRequest(sale_price,id,content,cell){
-                $.ajax( {
-                    type: 'POST',
-                    url:  parameters.ajax_url,
-                    data:{
-                        'id': id,
-                        'action':'wrpl_edit_price',
-                        'price':parseFloat(content),
-                        'sale_price':parseFloat(sale_price),
-                        'price_list' : price_list
-                    },
-                    dataType: "json",
-                    beforeSend: function () {
-                        $(".wrpl_loader").css("display", "block");
-                        $("#modal-overlay").show();
-                    },
-                    complete: function () {
-                        $(".wrpl_loader").css("display", "none");
-                        $("#modal-overlay").hide();
-                    },
-                    success: function (json) {
-                        cell.html( '$' + parseFloat(content));
-                    },
-                    error : function(jqXHR, exception){
-                        var msg = '';
-                        if (jqXHR.status === 0) {
-                            msg = 'Not connect.\n Verify Network.';
-                        } else if (jqXHR.status == 404) {
-                            msg = 'Requested page not found. [404]';
-                        } else if (jqXHR.status == 500) {
-                            msg = 'Internal Server Error [500].';
-                        } else if (exception === 'parsererror') {
-                            msg = 'Requested JSON parse failed.';
-                        } else if (exception === 'timeout') {
-                            msg = 'Time out error.';
-                        } else if (exception === 'abort') {
-                            msg = 'Ajax request aborted.';
-                        } else {
-                            msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                        }
-                        alert(msg);
-                    }
-
-                } );
-            }
-
-            $(this).on('click',function(){
-                if($(this).find('input').is(':focus')) return this;
-                var cell = $(this);
-                var content = $(this).html();
-                var old_content = $(this).html();
-                $(this).html('<input id="wrpl_price_editing" style="width: 100%;height: 22px;" step="0.01"  required  min=0 type="number" value="' + $(this).html().replace('$','') + '" />')
-                    .find('input')
-                    .trigger('focus')
-                    .on({
-                        'blur': function(){
-                            $('#wrpl_price_editing').remove();
-                            cell.html(old_content);
-                        },
-                        'keyup':function(e){
-                            if(e.which == '13'){ // enter
-                                $(this).trigger('saveEditable');
-                            } else if(e.which == '27'){ // escape
-                                $(this).trigger('closeEditable');
-                            }
-                        },
-                        'closeEditable':function(e){
-                            sale_price = $('#'+id).find('td:eq(7)').text();
-                            sale_price += ''; //la primera vez lo edita pero despues da error c0on la funcion replace porque ya no es un string
-                            sale_price = parseFloat(sale_price.replace('$',''));
-                            content = parseFloat(content.replace('$',''));
-                            if(isNaN(sale_price)){
-                                sale_price = 0;
-                            }
-
-                            if(!isNaN(sale_price) && !isNaN(content) && content > 0 && sale_price >= 0 && sale_price !== '' && content !== ''){
-                                if(content > sale_price){
-                                    editPriceAjaxRequest(sale_price,id,content,cell);
-                                }else{
-                                    alert('Sales price have to be lower than regular price');
-                                    cell.html(old_content);
-
-                                }
-                            }else{
-                                alert('You must have to enter a valid number except 0');
-                                cell.html(old_content);
-                            }
-
-                        },
-                        'saveEditable':function(){
-
-                            content = $(this).val();
-                            $(this).trigger('closeEditable');
-                        }
-                    });
-            });
-            return this;
-        }
-
-
-
         //edito siempre y cuando sea una lista sin padre
         tbody.on('click','.sale_price',function(e){
             var id_parent = $('#wrpl-option-' + $('#price_list').val()).attr('pl-parent') || $('#wrpl-option-0').attr('pl-parent');
@@ -342,7 +253,7 @@
                 var td_sale_price = row.find('td:eq(7)');
                 var id = row.find('td:eq(0)').text();
 
-                td_sale_price.makeEditable(id);
+                td_sale_price.makeEditable(id,2);
             }
         });
 
@@ -353,12 +264,9 @@
                 var td_regular_price = row.find('td:eq(6)');
                 var id = row.find('td:eq(0)').text();
 
-                td_regular_price.makeEditable1(id);
+                td_regular_price.makeEditable(id,1);
             }
         });
-
-
-
 
         //helper for get the parameters from current url
         function getUrlParam(key) {
@@ -371,7 +279,6 @@
             }
             return -1;
         }
-
 
         //modal remove price list
         //data-* attributes to scan when populating modal values
@@ -498,6 +405,5 @@
             $('#wrpl-add_pl_factor_label').removeClass('disabled');
         }
     });
-
 
 })(jQuery);
