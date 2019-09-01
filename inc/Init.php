@@ -9,6 +9,7 @@ final class Init{
         return [
             Pages\Pages::class,
             Base\Enqueue::class,
+            Base\WRPL_Signature::class,
 
             Controller\ProductController::class,
             Controller\PriceListController::class,

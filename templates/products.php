@@ -14,6 +14,7 @@ if(isset($_GET['tab'])){
         $section = 'category';
     }
 }
+
 ?>
 
 <br>
@@ -60,6 +61,12 @@ if(isset($_GET['tab'])){
                        href="<?php echo WRPL_ADMIN_URL . 'admin.php?page=wrpl-products-menu&tab=settings'?>"
                        class="<?php echo $tab == 'settings'  ? 'active' : '' ?>">
                         Settings
+                    </a>
+                </li><li>
+                    <a id="license"
+                       href="<?php echo WRPL_ADMIN_URL . 'admin.php?page=wrpl-products-menu&tab=license'?>"
+                       class="<?php echo $tab == 'license'  ? 'active' : '' ?>">
+                        License
                     </a>
                 </li>
             </ul>
@@ -136,6 +143,12 @@ if(isset($_GET['tab'])){
                     ?>
                     <div class="tab-pane show active" id="settings">
                         <?php include 'includes/_settings.php'; ?>
+                    </div>
+                    <?php
+                }else if($tab == 'license'){
+                    ?>
+                    <div class="tab-pane show active" id="license">
+                        <?php include 'includes/_license.php'; ?>
                     </div>
                     <?php
                 }
