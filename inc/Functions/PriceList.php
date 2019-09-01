@@ -56,11 +56,11 @@ class PriceList{
             add_action( 'woocommerce_single_product_summary', array($this,'wrpl_print_login_to_see'), 31 );
             add_action( 'woocommerce_after_shop_loop_item', array($this,'wrpl_print_login_to_see'), 11 );
             add_filter( 'woocommerce_is_sold_individually','custom_remove_all_quantity_fields', 10, 2 );
-            echo "<style type='text/css'>
-            		.single_add_to_cart_button, form.cart .quantity,.product_type_simple.add_to_cart_button{
-						display: none !important;width:0;height:0; visibility: hidden;
-            		}
-            </style>";
+
+            //add this inline css style to assets/css/front/main.css when we want hide add to cart button and other stuff
+            add_action( 'wp_enqueue_scripts', function(){
+                wp_add_inline_style( 'wr_frontend_main', ".single_add_to_cart_button, form.cart .quantity,.product_type_simple.add_to_cart_button{display: none !important;width:0;height:0; visibility: hidden;}" );
+            });
         }
     }
 

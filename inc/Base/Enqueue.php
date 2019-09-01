@@ -13,7 +13,7 @@ class Enqueue{
     public function register(){
 
         add_action( 'admin_enqueue_scripts', array( $this , 'enqueue_admin' ) ); //action to include script to the backend, in order to include in the frontend is just wp_enqueue_scripts instead admin_enqueue_scripts
-       // add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend'));
+        add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend'));
 
         add_action('plugins_loaded', array($this,'wrpl_translate_plugin'));
 
@@ -22,6 +22,12 @@ class Enqueue{
 
     function wrpl_translate_plugin() {
         load_plugin_textdomain( 'wr_price_list', false, WRPL_PLUGIN_DIR_BASENAME .'/languages/' );
+    }
+
+    function enqueue_frontend(){
+        //enqueue all our scripts frontend
+        wp_enqueue_style('wr_frontend_main', WRPL_PLUGIN_URL . '/assets/css/front/main.css'  );
+
     }
 
     function enqueue_admin(){
