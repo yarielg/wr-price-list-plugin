@@ -5,7 +5,7 @@ include 'requests/_import_price_list_request.php';
 
 <div class="container-fluid">
     <form action="" method="post" enctype="multipart/form-data">
-        <div class=" form-group custom-control custom-checkbox mb-3 row">
+        <div class="custom-control custom-checkbox mb-3 row">
             <input type="checkbox" class=" custom-control-input" id="check_price_list">
             <label class="custom-control-label" for="check_price_list"><?php _e('Create a new Price List','wr_price_list') ?></label>
         </div>

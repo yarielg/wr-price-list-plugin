@@ -15,9 +15,7 @@ Text Domain:  wr_price_list
 Domain Path:  /languages
 */
 
-use Wrpl\Inc\Init;
-
-defined('ABSPATH') or die('You do not have access, sally human!!!'); //for security
+defined('ABSPATH') or die('You do not have access, sally human!!!');
 
 define ( 'WRPL_PLUGIN_VERSION', '1.0.0');
 
@@ -37,8 +35,20 @@ include 'inc/Util/helper.php';
 if ( class_exists( 'woocommerce' ) ){
     if( class_exists( 'Wrpl\\Inc\\Init' ) ){
         register_activation_hook( __FILE__ , array('Wrpl\\Inc\\Base\\Activate','activate') );
-        //register_deactivation_hook( __FILE__ , array('Wrpl\\Inc\\Base\\Deactivate','deactivate') );
         Wrpl\Inc\Init::register_services();
+            add_action('admin_notices', function(){
+                ?>
+              <!--  <div class="notice notice-error is-dismissible">
+                    <p>WR Price List Manager required for a valid license, please enter a valid license in order to avoid any issue.</p>
+                </div>-->
+                <?php
+            });
+
+       /* Puc_v4_Factory::buildUpdateChecker(
+            'https://webreadynow.com/plugin.json',
+            __FILE__,
+            'wr_price_list'
+        );*/
 
     }
 }else{
@@ -51,14 +61,4 @@ if ( class_exists( 'woocommerce' ) ){
         <?php
     });
 }
-
-
-
-//update support
-/*require 'vendor/plugin-update-checker/plugin-update-checker.php';
-$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-    'https://webreadynow.com/plugin.json',
-    __FILE__, //Full path to the main plugin file or functions.php.
-    'wr_price_list'
-);*/
 

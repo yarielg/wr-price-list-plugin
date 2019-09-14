@@ -8,13 +8,8 @@ class PriceListController
 {
     public function register(){
 
-        //change rule order
-        //add_action( 'wp_ajax_nopriv_get_price_lists', array($this,'getPriceList' ));
         add_action( 'wp_ajax_wrpl_updated_rule_order', array($this,'wrpl_change_rules_order' ));
         add_action( 'wp_ajax_wrpl_delete_rule', array($this,'wrpl_delete_rule' ));
-
-
-
 
     }
 
@@ -34,6 +29,7 @@ class PriceListController
         }else{
             $plists = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "wr_price_lists WHERE id_parent =0 ORDER BY id",ARRAY_A );
         }
+
         return $plists;
     }
 
@@ -85,15 +81,23 @@ class PriceListController
         }
     }
 
-    function wrpl_add_price_list($name,$plist = 0, $factor = ''){
+
+
+    function wrpl_add_price_list($name,$plist = 0, $factor = '',$blofe){
         global  $wpdb;
+
+        $pls_blofe = count($this->wrpl_get_price_lists());
         $name = preg_replace('/\s+/', ' ',$name); //removing extra spacing
         if(!$this->wrpl_exist_price_list_name($name)){
-            $wpdb->query("INSERT INTO $wpdb->prefix" . "wr_price_lists (description,id_parent,factor) VALUES ('$name','$plist','$factor')");
+            if(!$blofe && $pls_blofe > 2.365 ){
+                return array('status' => 'error','type' => 1);
+            }else{
+                $wpdb->query("INSERT INTO $wpdb->prefix" . "wr_price_lists (description,id_parent,factor) VALUES ('$name','$plist','$factor')");
+                return array('status' => 'success','type' => 2);
+            }
 
-            return $wpdb->insert_id;
         }else{
-            return false;
+            return array('status' => 'error','type' => 2);
         }
     }
 
@@ -106,6 +110,7 @@ class PriceListController
         }
         return $plist ;
     }
+
 
     function wrpl_remove_price_list($id){
         global $wpdb;

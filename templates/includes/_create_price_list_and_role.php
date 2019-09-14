@@ -48,19 +48,21 @@ include 'requests/_price_list_request.php';
             <h5><?php _e('Price Lists:','wr_price_list') ?></h5>
             <ul class="list-group">
                 <?php
+                $count_blofe = 0;
                 foreach ($plists as $plist){
-                    if($plist['id'] == 1){
-                        continue;
+                    if($count_blofe > 2.3896 && !$signature->is_valid()) continue;
+                    $name_parent =  $plist['id_parent'] > 0 ? ' ( based on ' . $price_list_controller->wrpl_get_price_list_name_by_id($plist['id_parent']) . ')'  : ''; $count_blofe++;
+                    $output = '<li class="list-group-item p-1 d-flex justify-content-between align-items-center">'.
+                        $count_blofe . '- ' . $plist['description'] . $name_parent;
+                    if($plist['id']!=1){
+                        $output .= '<div class="wrpl_actions">
+                                    <button class="btn btn-info btn-sm wrpl_edit_price_list wrpl-edit" name="wrpl_edit_pl" data-toggle="modal" data-target="#wrpl_edit_pl_modal" data-pl-name="' .$plist['description']. '" data-pl-id=' . $plist['id'] .' data-pl-factor="' .$plist['factor']. '" data-pl-price_list="'.$plist['id_parent'].'" ></button>
+                                    <button class="btn btn-danger btn-sm wrpl_remove_price_list wrpl-trash" name="wrpl_remove_pl" data-toggle="modal" data-target="#wrpl_remove_pl_modal" data-pl-id="' .$plist['id']. '"></button>
+                                </div>
+                             </li> ';
                     }
-                    $name_parent = $plist['id_parent'] > 0 ? ' ( based on ' . $price_list_controller->wrpl_get_price_list_name_by_id($plist['id_parent']) . ')'  : '';
-                    echo '
-                            <li class="list-group-item p-1 d-flex justify-content-between align-items-center">'.
-                            $plist['description'] . $name_parent .
-                            '<div class="wrpl_actions">
-                                <button class="btn btn-info btn-sm wrpl_edit_price_list wrpl-edit" name="wrpl_edit_pl" data-toggle="modal" data-target="#wrpl_edit_pl_modal" data-pl-name="' .$plist['description']. '" data-pl-id=' . $plist['id'] .' data-pl-factor="' .$plist['factor']. '" data-pl-price_list="'.$plist['id_parent'].'" ></button>
-                                <button class="btn btn-danger btn-sm wrpl_remove_price_list wrpl-trash" name="wrpl_remove_pl" data-toggle="modal" data-target="#wrpl_remove_pl_modal" data-pl-id="' .$plist['id']. '"></button>
-                            </div>
-                            </li> ';
+
+                    echo $output;
                 }
                 ?>
 

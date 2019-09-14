@@ -8,17 +8,6 @@ class WRPL_Signature
 {
     public function register(){
 
-        if ( !$this->is_valid() ) {
-            add_action('admin_notices', function(){
-                ?>
-                <div class="notice notice-error is-dismissible">
-                    <p>WR Price List Manager required for a valid license, please enter a valid <a href="<?php echo get_site_url() . '/wp-admin/admin.php/?page=wrpl-products-menu&tab=license' ?>">license</a> in order to avoid any issue.</p>
-                </div>
-                <?php
-            });
-        }
-
-
     }
 
     public function verify_purchase($purchase_code,$action){
@@ -38,7 +27,6 @@ class WRPL_Signature
                 )
             )
         );
-
         if ( !is_wp_error( $response ) ) {
             return @json_decode( wp_remote_retrieve_body($response), true );
         } else {
@@ -69,7 +57,7 @@ class WRPL_Signature
     public function is_valid() {
         $license = $this->get_license();
 
-        if ( !empty($license) and strlen($license) == 36 ) {
+        if ( !empty($license) and strlen($license) == 22 ) {
             return true;
         }
 
@@ -77,9 +65,8 @@ class WRPL_Signature
     }
 
     public function save_license($purchase_code) {
-        if ( isset($purchase_code) && !empty($purchase_code) && strlen($purchase_code) == 36 ) {
+        if ( isset($purchase_code) && !empty($purchase_code) && strlen($purchase_code) == 22 ) {
             $response = json_decode($this->verify_purchase($purchase_code, 'activate'));
-
             if ( isset($response->status) && !empty($response->status) && $response->status == 'success' ) {
                 update_option('wrpl_plugin_license', $purchase_code, 'yes');
 
@@ -91,7 +78,7 @@ class WRPL_Signature
             }else{
                 return array(
                     'status' => 'error',
-                    'message' => __("Invalid purchase code!", 'wr_price_list'),
+                    'message' => __("Invalid purchase code!, " . $response->msg, 'wr_price_list'),
                     'response'=> $response
                 );
             }
@@ -107,17 +94,25 @@ class WRPL_Signature
     }
 
     public function remove_license($purchase_code) {
-        if ( isset($purchase_code) && !empty($purchase_code) and strlen($purchase_code) == 36 ) {
+        if ( isset($purchase_code) && !empty($purchase_code) and strlen($purchase_code) == 22 ) {
             $response = json_decode($this->verify_purchase($purchase_code, 'deactivate'));
 
             if ( isset($response->status) and !empty($response->status) and $response->status == 'success' ) {
                 update_option('wrpl_plugin_license', '', 'yes');
+                return array(
+                    'status' => 'success',
+                    'message' => __("This license was successfully deactivated", 'wr_price_list'),
+                    'response'=> $response
+                );
+
+            }else{
+                return array(
+                    'status' => 'error',
+                    'message' => __("The license was not removed.", 'wr_price_list'),
+                    'response'=> $response
+                );
             }
 
-            return array(
-                'status' => 'success',
-                'message' => __("This license was successfully deactivated", 'wr_price_list')
-            );
         }
 
            return array(
