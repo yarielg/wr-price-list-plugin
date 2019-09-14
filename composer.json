@@ -1,6 +1,6 @@
 {
     "name": "yariel/yariko",
-    "description": "Just another wp pluging",
+    "description": "Just another wp plugin",
     "type": "project",
     "license": "MIT",
     "authors": [
@@ -11,8 +11,11 @@
     ],
     "minimum-stability": "dev",
     "require": {
+        "yahnis-elsts/plugin-update-checker": "dev-master"
     },
     "autoload": {
-        "psr-4": { "Wrpl\\Inc\\": "./inc" }
+        "psr-4": { "Wrpl\\Inc\\": "./inc"
+
+        }
     }
 }

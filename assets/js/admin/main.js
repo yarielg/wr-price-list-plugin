@@ -406,4 +406,20 @@
         }
     });
 
+    //import checbox
+    $('#check_price_list').prop('indeterminate', true);
+
+    //blofeando
+    var $by_category = $('#rbtn_by_category');
+    if($by_category.prop('disabled')){
+        $by_category.remove();
+        $('#rbtn_by_category_label').remove();
+    }
+
+    var $link_import = $('#li_link_import');
+    var attr_name_link = $link_import.attr('name');
+    if(attr_name_link == 'blofe'){
+        $link_import.remove();
+    }
+
 })(jQuery);

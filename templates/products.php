@@ -1,9 +1,13 @@
 <?php
 use Wrpl\Inc\Controller\PriceListController;
 use Wrpl\Inc\Controller\ProductController;
+use Wrpl\Inc\Base\WRPL_Signature;
 $price_list_controller =  new PriceListController(); //Init all the function about price list
 $product_controller =  new ProductController(); //Init all the function about price list
+$signature = new WRPL_Signature();
 $plists = $price_list_controller->wrpl_get_price_lists();
+
+
 $roles = wrpl_roles();
 //$categories = $product_controller->getProductParentCategories();
 $tab = 'products';
@@ -49,7 +53,7 @@ if(isset($_GET['tab'])){
                         Price Lists & Roles
                     </a>
                 </li>
-                <li>
+                <li id="li_link_import" <?php echo !$signature->is_valid() ? 'name="blofe"' : ''?> <?php echo !$signature->is_valid() ? ' style="display:none;"' : ''?>>
                     <a id="import_export"
                        href="<?php echo WRPL_ADMIN_URL . 'admin.php?page=wrpl-products-menu&tab=import_export'?>"
                        class="<?php echo $tab == 'import_export'  ? 'active' : '' ?>">
@@ -62,7 +66,8 @@ if(isset($_GET['tab'])){
                        class="<?php echo $tab == 'settings'  ? 'active' : '' ?>">
                         Settings
                     </a>
-                </li><li>
+                </li>
+                <li>
                     <a id="license"
                        href="<?php echo WRPL_ADMIN_URL . 'admin.php?page=wrpl-products-menu&tab=license'?>"
                        class="<?php echo $tab == 'license'  ? 'active' : '' ?>">
