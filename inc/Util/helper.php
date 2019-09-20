@@ -1,7 +1,7 @@
 <?php
 
 
-function stdToArray($stds){
+function wrpl_stdToArray($stds){
         $php_array = array();
         for($i = 0; $i<count($stds);$i++){
             $item = (array)$stds[$i];
@@ -27,7 +27,7 @@ function wrpl_valid_name($name){
 }
 
 function wrpl_convert_to_separate_value($array,$key ){
-    $array = stdToArray($array);
+    $array = wrpl_stdToArray($array);
     $result =  '';
     for ($i = 0; $i < count($array); $i++){
         $result .= $array[$i][$key] . ($i < count($array) - 1 ? ',' : '');

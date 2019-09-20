@@ -1,7 +1,7 @@
 <?php
 
 if($_POST['wrpl_submit_license']){
-    $purchase_code = trim($_POST['wrpl_signature']);
+    $purchase_code = sanitize_text_field($_POST['wrpl_signature']);
     $response = null;
     if($signature->is_valid()){
         $response = $signature->remove_license($purchase_code);
@@ -47,7 +47,7 @@ if($_POST['wrpl_submit_license']){
                     </form>
                 </div>
                 <div class="card-footer text-muted">
-                    Note! One plugin license per domain is allowed. For any issues with theme activation please refer to this article. If registered elsewhere please deactivate that license or purchase another plugin copy.
+                    Note! One plugin license per domain is allowed. For any issues with theme activation please refer to the plugin's doc. If registered elsewhere please deactivate that license or purchase another plugin copy.
                 </div>
             </div>
         </div>

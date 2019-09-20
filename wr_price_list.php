@@ -10,7 +10,7 @@ Description:  Create a Sales Price List(s) based on existing Price List(s). Chan
 Version:      1.0.0
 Author:       Web Ready Now
 Author URI:   https://webreadynow.com/
-Tested up to: 5.2.2
+Tested up to: 5.2.3
 Text Domain:  wr_price_list
 Domain Path:  /languages
 */
@@ -36,20 +36,6 @@ if ( class_exists( 'woocommerce' ) ){
     if( class_exists( 'Wrpl\\Inc\\Init' ) ){
         register_activation_hook( __FILE__ , array('Wrpl\\Inc\\Base\\Activate','activate') );
         Wrpl\Inc\Init::register_services();
-            add_action('admin_notices', function(){
-                ?>
-              <!--  <div class="notice notice-error is-dismissible">
-                    <p>WR Price List Manager required for a valid license, please enter a valid license in order to avoid any issue.</p>
-                </div>-->
-                <?php
-            });
-
-       /* Puc_v4_Factory::buildUpdateChecker(
-            'https://webreadynow.com/plugin.json',
-            __FILE__,
-            'wr_price_list'
-        );*/
-
     }
 }else{
 

@@ -129,12 +129,8 @@ class PriceList{
             $price_list = get_option('wrpl-assign-method') == 1 ? $this->price_list_controller->wrpl_get_user_price_list() : $this->product_controller->wrpl_get_price_list_by_category($product->get_id());
             $min_max = $this->product_controller->getMinMaxPriceVariation($product->get_id(),$price_list,'_regular_price');
             $min_max_sale = $this->product_controller->getMinMaxPriceVariation($product->get_id(),$price_list,'_sale_price');
-            $pl_objec =$this->price_list_controller->wrpl_get_price_list_by_id($price_list);
+            //$pl_objec =$this->price_list_controller->wrpl_get_price_list_by_id($price_list);
 
-            /*if($pl_objec['id_parent'] > 0  ){
-                $
-            }*/
-            //var_dump($min_max);
             if(!$product->has_child()){
                 if($this->custom_sale_price($price,$product) != $this->custom_regular_price($price,$product)){
                     $html_price = '<del>' . wc_price($this->custom_regular_price($price,$product)) . '</del>  ' . wc_price($this->custom_sale_price($price,$product)) ;

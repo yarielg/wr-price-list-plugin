@@ -1,7 +1,9 @@
 <?php
 $rules = $price_list_controller->wrpl_get_rules();
 if(isset($_POST['assign_price_list_category'])){
-    $result = $price_list_controller->wrpl_assign_pl_to_category($_POST['wrpl_cat_id'],$_POST['price_list_categories']);
+    $cat_id = sanitize_text_field(($_POST['wrpl_cat_id']));
+    $price_list_id = sanitize_text_field($_POST['price_list_categories']);
+    $result = $price_list_controller->wrpl_assign_pl_to_category($cat_id,$price_list_id);
         echo '<div class="alert alert-'.$result['type'].' alert-dismissible fade show" role="alert">
                     '. $result['msg'] .'
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -9,7 +11,6 @@ if(isset($_POST['assign_price_list_category'])){
                     </button>
                </div>';
     $rules = $price_list_controller->wrpl_get_rules();
-
 }
 ?>
 
@@ -37,7 +38,7 @@ if(isset($_POST['assign_price_list_category'])){
                             if($plist['id'] == 1){
                                 $selected = 'selected';
                             }
-                            echo "<option value='{$plist['id']}' {$selected}>{$plist['description']}</option>";
+                             echo "<option value='{$plist['id']}' {$selected}>{$plist['description']}</option>";
                         }
                         ?>
                     </select>

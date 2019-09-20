@@ -37,11 +37,11 @@ class ProductController{
         return $products;
     }
     function getProducts(){
-        $price_list = $_POST['price_list'];
-        $start = $_POST['start'];
-        $length = $_POST['length'];
-        $search = trim($_POST['search']['value']);
-        $category_id = $_POST['category_id'];
+        $price_list = intval(sanitize_text_field($_POST['price_list']));
+        $start = intval(sanitize_text_field($_POST['start']));
+        $length = intval(sanitize_text_field($_POST['length']));
+        $search = sanitize_title(trim($_POST['search']['value']));
+        $category_id = intval(sanitize_text_field($_POST['category_id']));
         $all_products = $this->getAllProducts();
         $count_products =  count($all_products); //todos 316
         $products_cat_search = $this->getProductByCategory($category_id,$search,$length,$start);
@@ -129,7 +129,7 @@ class ProductController{
         $products = $wpdb->get_results(
             $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "postmeta WHERE post_id = %d AND meta_key = %s", $id ,$price_type)
         );
-        $products = stdToArray($products);
+        $products = wrpl_stdToArray($products);
         if(count($products)>0){
             return $products[0]['meta_value'];
         }
@@ -197,7 +197,7 @@ class ProductController{
         $variations = $wpdb->get_results(
             $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "posts WHERE post_type = %s AND post_parent = $id", 'product_variation')
         );
-        $variations = stdToArray($variations);
+        $variations = wrpl_stdToArray($variations);
         return count($variations) > 0 ? $variations : array() ;
     }
 
@@ -208,7 +208,7 @@ class ProductController{
             $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "posts WHERE post_parent = %d AND post_type = %s", $id,'product_variation')
         );
 
-        if(count(stdToArray($products))>0){
+        if(count(wrpl_stdToArray($products))>0){
             return true;
         }
         return false;
@@ -218,7 +218,7 @@ class ProductController{
         $postmeta_table =  $wpdb->prefix . 'postmeta';
         $variations = $wpdb->get_results("SELECT * FROM " . $postmeta_table . " WHERE meta_key = '_thumbnail_id'  AND post_id = '$id_variation'");
 
-        $variations = stdToArray($variations);
+        $variations = wrpl_stdToArray($variations);
         $image_url = -1;
         if(count($variations)>0){
             $image_url = wp_get_attachment_image_url( $variations[0]['meta_value'], 'post-thumbnail' );
@@ -232,7 +232,7 @@ class ProductController{
         $products = $wpdb->get_results(
             $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "wr_price_lists_price WHERE id_price_list = %d AND id_product = %d", $price_list,$id)
         );
-        $products = stdToArray($products);
+        $products = wrpl_stdToArray($products);
         if(count($products)>0){
             $wpdb->query("UPDATE $wpdb->prefix" . "wr_price_lists_price SET price='$price',sale_price = '$sale_price' WHERE id_price_list='$price_list' AND id_product = '$id'");
 
@@ -243,10 +243,10 @@ class ProductController{
 
     function editPrice(){
 
-        $post_id = $_POST['id'];
-        $price = $_POST['price'];
-        $sale_price = $_POST['sale_price'];
-        $price_list = $_POST['price_list'];
+        $post_id = intval(sanitize_text_field($_POST['id']));
+        $price = floatval(sanitize_text_field($_POST['price']));
+        $sale_price = floatval(sanitize_text_field($_POST['sale_price']));
+        $price_list = intval(sanitize_text_field($_POST['price_list']));
 
 
 
@@ -398,7 +398,7 @@ class ProductController{
             'hide_empty' => $hide_empty,
             'parent' => $id
         );
-        if(count(stdToArray(get_terms( 'product_cat', $cat_args )))>0){
+        if(count(wrpl_stdToArray(get_terms( 'product_cat', $cat_args )))>0){
             return true;
         }
 
@@ -416,7 +416,7 @@ class ProductController{
         );
 
         $product_categories = get_terms( 'product_cat', $cat_args );
-        $product_categories = stdToArray($product_categories);
+        $product_categories = wrpl_stdToArray($product_categories);
         $categories = array();
         foreach ($product_categories as $category){
             $category['text'] = $category['name'];
@@ -442,7 +442,7 @@ class ProductController{
         );
 
         $product_categories = get_terms( 'product_cat', $cat_args );
-        $product_categories =  stdToArray($product_categories);
+        $product_categories =  wrpl_stdToArray($product_categories);
         $categories = array();
         foreach ($product_categories as $category){
             $category['text'] = $category['name'];
@@ -490,7 +490,7 @@ class ProductController{
         $rules = $this->price_list_controller->wrpl_get_rules();
         $categories = array();
         if(get_the_terms( $id, 'product_cat' )){
-            $categories = stdToArray(get_the_terms( $id, 'product_cat' ));
+            $categories = wrpl_stdToArray(get_the_terms( $id, 'product_cat' ));
         }
         $mached_rules =  array();
         foreach ($rules as $rule){
@@ -530,7 +530,7 @@ class ProductController{
 
         if( !empty($product_categories) ){
 
-            return stdToArray($product_categories);
+            return wrpl_stdToArray($product_categories);
         }else{
             return [];
         }

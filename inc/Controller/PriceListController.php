@@ -36,7 +36,7 @@ class PriceListController
     function wrpl_save_price_list_role($roles){
 
         foreach ($roles as $role){
-            $price_list = $_POST[wrpl_valid_name($role['name'])];
+                $price_list = sanitize_title_with_dashes($_POST[wrpl_valid_name($role['name'])]);
             $role = wrpl_valid_name($role['name']);
             update_option('wrpl-' . $role,$price_list);
         }
@@ -93,7 +93,7 @@ class PriceListController
                 return array('status' => 'error','type' => 1);
             }else{
                 $wpdb->query("INSERT INTO $wpdb->prefix" . "wr_price_lists (description,id_parent,factor) VALUES ('$name','$plist','$factor')");
-                return array('status' => 'success','type' => 2);
+                return array('status' => 'success','type' => 2,'id' => $wpdb->insert_id);
             }
 
         }else{
@@ -166,8 +166,8 @@ class PriceListController
     function wrpl_edit_role($role_name,$role_name_old){
 
         global $wpdb;
-        $result = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "options WHERE option_name = 'wp_user_roles'");
-        $unserialize_roles = unserialize(stdToArray($result)[0]['option_value']); //unserialize the array roles
+        $result = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "options WHERE option_name = '".$wpdb->prefix."user_roles'");
+        $unserialize_roles = unserialize(wrpl_stdToArray($result)[0]['option_value']); //unserialize the array roles
         $role = $unserialize_roles[wrpl_valid_name($role_name_old)]; //get the old role to replace it
         $capabilities = $role['capabilities']; //copy the old role capabilities
 
@@ -177,7 +177,7 @@ class PriceListController
             $unserialize_roles[wrpl_valid_name($role_name)] = array('name'=>$role_name,'capabilities' => $capabilities); //changin key name to  the new role
 
             $serialized_roles = serialize($unserialize_roles);
-            $result = $wpdb->query("UPDATE $wpdb->prefix" . "options SET option_value = '$serialized_roles'  WHERE option_name = 'wp_user_roles'");
+            $result = $wpdb->query("UPDATE $wpdb->prefix" . "options SET option_value = '$serialized_roles'  WHERE option_name = '".$wpdb->prefix."user_roles'");
             if($result>0 ){ //if exist a connection between the old role and any price list 1-remove it and add the new one
 
                 $price_list = get_option('wrpl-' . wrpl_valid_name($role_name_old)) ?: 'default'; //get the pricelist of the old role
@@ -234,10 +234,10 @@ class PriceListController
     function wrpl_change_rules_order(){
         global $wpdb;
 
-        $positions =  $_POST['positions'];
+        $positions =  isset( $_POST['positions'] ) ? (array) $_POST['positions'] : array();
         foreach($positions as $position){
-            $id = $position[0];
-            $priority = $position[1];
+            $id = sanitize_text_field($position[0]);
+            $priority = sanitize_text_field($position[1]);
             $wpdb->query("UPDATE $wpdb->prefix" . "wr_rules SET priority='$priority' WHERE id='$id'");
         }
     }
@@ -246,13 +246,12 @@ class PriceListController
         global $wpdb;
 
         if(isset($_POST['id'])){
-            $id = $_POST['id'];
-            $result = $wpdb->get_results("DELETE FROM $wpdb->prefix" . "wr_rules WHERE id='$id'");
+            $id = sanitize_text_field(intval($_POST['id']));
+            $wpdb->get_results("DELETE FROM $wpdb->prefix" . "wr_rules WHERE id='$id'");
         }else{
             $result = $wpdb->get_results("DELETE FROM $wpdb->prefix" . "wr_rules WHERE id_category='$id'");
         }
 
-       // echo json_encode($result);
     }
 
 }

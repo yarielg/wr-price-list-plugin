@@ -38,7 +38,7 @@
                 <label class="form-check-label" for="rbtn_by_role"><?php _e('By Role','wr_price_list') ?> </label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="by_rbtn" id="rbtn_by_category" value="2" <?php echo get_option('wrpl-assign-method') == 2 ? 'checked' : '' ?><?php echo $signature->is_valid() ? '':'disabled' ?>>
+                <input class="form-check-input" type="radio" name="by_rbtn" id="rbtn_by_category" value="2" <?php echo get_option('wrpl-assign-method') == 2 ? 'checked' : '' ?>>
                 <label id="rbtn_by_category_label" class="form-check-label" for="rbtn_by_category"><?php _e('By Category','wr_price_list') ?></label>
             </div>
         </div>
