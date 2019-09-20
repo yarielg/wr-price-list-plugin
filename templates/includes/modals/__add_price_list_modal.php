@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="row">
-                        <p style="font-size: 11px;margin: auto;" class="text-center text-muted text-sm">The factor is the percentage of discount eg 50% = 0.5</p>
+                        <p style="font-size: 11px;margin: auto;" class="text-center text-muted text-sm">The factor is the percentage of discount eg. 50% = 0.5</p>
                     </div>
                     <div class="row ml-3 mb-2">
                         <label for="wrpl-add_pl_factor" id="wrpl-add_pl_factor_label" class="col-sm-2 form-control-sm disabled" ><?php _e('Factor:','wr_price_list') ?></label>

@@ -9,20 +9,21 @@ include 'requests/_price_list_request.php';
 ?>
 
 <div class="container-fluid">
-
     <div class="row">
         <div class="col-md-6">
             <h5><?php _e('Roles:','wr_price_list') ?></h5>
             <ul class="list-group">
                 <?php
-                     $roles = wrpl_roles();
+                    if(!isset($_POST['wrpl_edit_role_action']) && !isset($_POST['wrpl_remove_role_action']) ){
+                        $roles = wrpl_roles();
+                    }
                     foreach ($roles as $role){
                         $btns = get_option('wrpl_role-'. wrpl_valid_name($role['name'])) == $role['name'] ?
-                                '<button class="btn btn-info btn-sm wrpl_edit_role wrpl-edit" name="wrpl_edit_role" data-toggle="modal" data-target="#wrpl_edit_role_modal"  data-role-name="' .$role['name']. ' " ></button>
-                                <button class="btn btn-danger btn-sm wrpl_remove_role wrpl-trash" name="wrpl_remove_role" data-toggle="modal" data-target="#wrpl_remove_role_modal" data-role-name="' .$role['name']. '"></button>'
+                                '<button class="btn btn-info btn-sm wrpl_edit_role wrpl-edit" name="wrpl_edit_role" data-toggle="modal" data-target="#wrpl_edit_role_modal"  data-role-name="' .esc_attr($role['name']). ' " ></button>
+                                <button class="btn btn-danger btn-sm wrpl_remove_role wrpl-trash" name="wrpl_remove_role" data-toggle="modal" data-target="#wrpl_remove_role_modal" data-role-name="' .esc_attr($role['name']). '"></button>'
                                 : '';
                         echo '
-                            <li class="list-group-item p-1 d-flex justify-content-between align-items-center pepe">'.
+                            <li class="list-group-item p-1 d-flex justify-content-between align-items-center">'.
                             $role['name'] .
                             '<div class="wrpl_actions">
                             ' . $btns . '    
@@ -34,10 +35,10 @@ include 'requests/_price_list_request.php';
             <br>
             <form action="" method="post" class="p-1 ml-3">
                 <div class="form-group row">
-                    <input type="text" name="role_name" class="col-sm-10 form-control-plaintext" placeholder="New Role"  required min="3" max="100">
+                    <input type="text" name="role_name" id="wrpl_role_name_add" class="col-sm-10 form-control-plaintext" placeholder="New Role"  required min="3" max="100">
 
                     <div class="col-sm-2">
-                        <input type="submit" name="wrpl_new_role" value="Add" class="btn btn-info btn-sm">
+                        <input type="submit" name="wrpl_new_role" id="btn_wrpl_new_role_add" value="Add" class="btn btn-info btn-sm">
                     </div>
                 </div>
             </form>
@@ -56,8 +57,8 @@ include 'requests/_price_list_request.php';
                         $count_blofe . '- ' . $plist['description'] . $name_parent;
                     if($plist['id']!=1){
                         $output .= '<div class="wrpl_actions">
-                                    <button class="btn btn-info btn-sm wrpl_edit_price_list wrpl-edit" name="wrpl_edit_pl" data-toggle="modal" data-target="#wrpl_edit_pl_modal" data-pl-name="' .$plist['description']. '" data-pl-id=' . $plist['id'] .' data-pl-factor="' .$plist['factor']. '" data-pl-price_list="'.$plist['id_parent'].'" ></button>
-                                    <button class="btn btn-danger btn-sm wrpl_remove_price_list wrpl-trash" name="wrpl_remove_pl" data-toggle="modal" data-target="#wrpl_remove_pl_modal" data-pl-id="' .$plist['id']. '"></button>
+                                    <button class="btn btn-info btn-sm wrpl_edit_price_list wrpl-edit" name="wrpl_edit_pl" data-toggle="modal" data-target="#wrpl_edit_pl_modal" data-pl-name="' .esc_attr($plist['description']). '" data-pl-id=' . esc_attr($plist['id']) .' data-pl-factor="' .esc_attr($plist['factor']). '" data-pl-price_list="'.esc_attr($plist['id_parent']).'" ></button>
+                                    <button class="btn btn-danger btn-sm wrpl_remove_price_list wrpl-trash" name="wrpl_remove_pl" data-toggle="modal" data-target="#wrpl_remove_pl_modal" data-pl-id="' .esc_attr($plist['id']). '"></button>
                                 </div>
                              </li> ';
                     }

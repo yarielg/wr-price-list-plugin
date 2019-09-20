@@ -12,10 +12,8 @@ class Pages{
 
     public function register(){
 
-
-
         add_action('admin_menu', function(){
-            add_menu_page('WR Price Manager', 'WR Price Manager', 'manage_options', 'wrpl-products-menu', array($this,'wrpl-products-menu') , WRPL_PLUGIN_URL. 'assets/img/price-tag.png',110);
+            add_menu_page('WR Price Manager', 'WR Price Manager', 'manage_options', 'wrpl-products-menu', array($this,'products') , WRPL_PLUGIN_URL. 'assets/img/price-tag.png',110);
         });
 
         add_action('admin_menu',function(){

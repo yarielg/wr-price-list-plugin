@@ -51,7 +51,6 @@
                });
 
                $('#default-tree').treeview('collapseAll', { silent: true });
-           //    $('#default-tree').treeview('selectNode', [ 0, { silent: true } ]);
 
 
                $('#default-tree').on('nodeSelected', function(event, data) {

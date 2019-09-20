@@ -1,8 +1,8 @@
 <?php
 if(isset($_POST['wrpl_new_price_list'])){
-    $name = $_POST['wrpl_pl_name'];
-    $price_list = $_POST['price_list'];
-    $factor = isset($_POST['wrpl_pl_factor']) ? $_POST['wrpl_pl_factor'] : '';
+    $name = sanitize_text_field($_POST['wrpl_pl_name']);
+    $price_list = sanitize_text_field(intval($_POST['price_list']));
+    $factor = isset($_POST['wrpl_pl_factor']) ? sanitize_text_field(floatval($_POST['wrpl_pl_factor'])) : '';
     $was_inserted = $price_list_controller->wrpl_add_price_list($name,$price_list,$factor,$signature->is_valid());
     if($was_inserted['status'] == 'success'){
         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -32,14 +32,14 @@ if(isset($_POST['wrpl_new_price_list'])){
 }
 
 if(isset($_POST['wrpl_remove_pl_action'])){
-    $id = $_POST['wrpl_pl_id'];
+    $id = sanitize_text_field(intval($_POST['wrpl_pl_id']));
     $price_list_controller->wrpl_remove_price_list($id);
     $plists = $price_list_controller->wrpl_get_price_lists();
 }
 if(isset($_POST['wrpl_edit_pl_action'])){
-    $name = $_POST['wrpl_pl_name'];
-    $id = $_POST['wrpl_pl_id'];
-    $factor = isset($_POST['wrpl_pl_factor']) ? $_POST['wrpl_pl_factor'] : '';
+    $name = sanitize_text_field($_POST['wrpl_pl_name']);
+    $id = sanitize_text_field(intval($_POST['wrpl_pl_id']));
+    $factor = isset($_POST['wrpl_pl_factor']) ? sanitize_text_field(floatval($_POST['wrpl_pl_factor'])) : '';
     $was_inserted  = $price_list_controller->wrpl_edit_price_list($name,$id,$factor);
     if($was_inserted){
         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">

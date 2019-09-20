@@ -10,7 +10,7 @@ include 'requests/_import_price_list_request.php';
             <label class="custom-control-label" for="check_price_list"><?php _e('Create a new Price List','wr_price_list') ?></label>
         </div>
         <div class="form-group row">
-            <label id="import_new_price_list_label" for="import_new_price_list" class="form-control-sm col-sm-2 disabled"><?php _e('Type price list name','wr_price_list') ?>:</label>
+            <label id="import_new_price_list_label" for="import_new_price_list" class="form-control-sm col-sm-2 disabled"><?php _e('New price list name','wr_price_list') ?>:</label>
             <input type="text" class="form-control form-control-sm col-sm-9" name="import_new_price_list" id="import_new_price_list" disabled required min="3" max="100">
         </div>
 
@@ -44,8 +44,9 @@ include 'requests/_import_price_list_request.php';
                 echo '<h5 class="text-center"> ' . __('Import results','wr_price_list') . '</h5>';
 
                 if(isset($_POST['import_new_price_list'])){
+                    $new_price_list_name = sanitize_text_field($_POST['import_new_price_list']);
                     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong> ' . __('Price list ','wr_price_list') . $_POST['import_new_price_list'] . ' ' . __('was created. ','wr_price_list') .'</strong>' . ' ' . __('The products price were inserted in this new list','wr_price_list').
+                        <strong> ' . __('Price list ','wr_price_list') . $new_price_list_name . ' ' . __('was created. ','wr_price_list') .'</strong>' . ' ' . __('The products price were inserted in this new list','wr_price_list').
                     '</div>';
                 }
                 $count_success = 0;

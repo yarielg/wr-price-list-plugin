@@ -1,1 +1,0 @@
-<h1><?php  _e('Dashboard','wr_price_list'); ?></h1>

@@ -60,7 +60,7 @@
                         for(var i = 0; i < data.length; i++ ){
                             data[i]['post_title'] = data[i]['post_title'].substring(0, 30) + (data[i]['post_title'].length>30 ? '...' : '');
                             data[i]['guid'] = "<a class='btn btn-info btn-sm py-0 wrpl-view mr-1 mt-1' href='" + data[i]['guid'] + "'></a>" + "<a class='btn btn-info btn-sm py-0 wrpl-edit mt-1' href='" + data[i]['edit_url'] + "'></a>";
-                            data[i]['image'] = data[i]['image'] ? "<img src='"+ data[i]['image'] +"' width='25' height='25'>" : "<img src='https://www.webreadynow.com/wp-content/uploads/2019/08/120x120.png' width='25' height='25'>";
+                            data[i]['image'] = data[i]['image'] ? "<img src='"+ data[i]['image'] +"' width='25' height='25'>" : "<div class='square' style='height: 25px;width: 25px;background-color: #555;'></div>";
                             data[i]['post_type'] = data[i]['post_type'] == 'product_variation' ? 'variation' : 'product';
                             if(id_parent != 0 ){
                                 if(factor < 1 ){
@@ -410,11 +410,11 @@
     $('#check_price_list').prop('indeterminate', true);
 
     //blofeando
-    var $by_category = $('#rbtn_by_category');
+    /*var $by_category = $('#rbtn_by_category');
     if($by_category.prop('disabled')){
         $by_category.remove();
         $('#rbtn_by_category_label').remove();
-    }
+    }*/
 
     var $link_import = $('#li_link_import');
     var attr_name_link = $link_import.attr('name');
