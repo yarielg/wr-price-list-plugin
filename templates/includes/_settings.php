@@ -17,14 +17,14 @@
         <hr>
         <p><?php _e('Check this and choose a personalized message to hide prices from unregistered users','wr_price_list') ?></p>
         <div class="form-row">
-            <div class="col-4">
+            <div class="col-md-4">
                 <div class=" form-group custom-control custom-checkbox mb-3 ml-1 row">
                     <input type="checkbox" name="hide_price" class=" custom-control-input" id="hide_price" <?php echo get_option('wrpl-hide_price') == 0 ? '' : 'checked' ?>>
                     <label class="custom-control-label  form-control-sm" for="hide_price"><?php _e('Hide price to unregistered users','wr_price_list') ?></label>
                 </div>
             </div>
 
-            <div class="col-8">
+            <div class="col-md-8">
                 <label id="custom_msg_not_login_user_label" for="custom_msg_not_login_user" class="disabled"><?php _e('Custom message to unregistered users','wr_price_list') ?></label>
                 <textarea name="custom_message" class="form-control" id="custom_msg_not_login_user" rows="3"  placeholder="<strong>Please</strong>, <a href='url-to-login'>login</a> to see price"  <?php echo get_option('wrpl-hide_price') == 0 ? 'disabled' : '' ?>><?php echo stripslashes(get_option('wrpl-custom_msg_no_login_user')) ?></textarea>
             </div>

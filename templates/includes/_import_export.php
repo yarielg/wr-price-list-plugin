@@ -10,8 +10,8 @@ include 'requests/_import_price_list_request.php';
             <label class="custom-control-label" for="check_price_list"><?php _e('Create a new Price List','wr_price_list') ?></label>
         </div>
         <div class="form-group row">
-            <label id="import_new_price_list_label" for="import_new_price_list" class="form-control-sm col-sm-2 disabled"><?php _e('New price list name','wr_price_list') ?>:</label>
-            <input type="text" class="form-control form-control-sm col-sm-9" name="import_new_price_list" id="import_new_price_list" disabled required min="3" max="100">
+            <label id="import_new_price_list_label" for="import_new_price_list" class="form-control-md col-md-2 disabled"><?php _e('New price list name','wr_price_list') ?>:</label>
+            <input type="text" class=" form-control col-12" name="import_new_price_list" id="import_new_price_list" disabled required min="3" max="100">
         </div>
 
         <div class="form-group row">

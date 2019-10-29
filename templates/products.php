@@ -83,10 +83,10 @@ if(isset($_GET['tab'])){
                     <div class="tab-pane show active" id="tab_products">
                         <div class="row">
 
-                            <div class=" col-4">
+                            <div class=" col-md-4">
                                 <p><?php _e('Choose a Price list to start change price quickly: ','wr_price_list') ?></p>
                             </div>
-                            <div class="col-8">
+                            <div class="col-md-8">
                                 <?php include 'includes/_select_price_list.php' ?>
                             </div>
                         </div>

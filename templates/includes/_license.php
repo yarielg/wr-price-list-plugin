@@ -36,11 +36,11 @@ if($_POST['wrpl_submit_license']){
                     <p class="card-text">In order to enable all plugin functionality including demo content installation, you first need to validate your theme license by entering the purchase code below.</p>
                     <form action="" method="post">
                         <div class="form-row">
-                            <div class="col-9">
+                            <div class="col-md-9 col-12">
                                 <input type="text" name="wrpl_signature" class="form-control form-control-sm w-100" placeholder="xxxxxxxxxxxxxxxxxxxxxx" required value="<?php echo $signature->get_license() ?>" >
                             </div>
-                            <div class="col-3">
-                                <input type="submit" name="wrpl_submit_license" class="btn btn-sm btn-info" value="<?php echo $signature->is_valid() ? 'Remove license' : 'Add License'; ?>" >
+                            <div class="col-md-3 col-12">
+                                <input type="submit" name="wrpl_submit_license" class="btn btn-sm btn-info btn-block" value="<?php echo $signature->is_valid() ? 'Remove' : 'Add'; ?>" >
                             </div>
 
                         </div>

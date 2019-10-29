@@ -133,6 +133,22 @@ input[type=number]::-webkit-outer-spin-button {
         box-shadow: none;
         text-align: center;
     }
+    .dataTables_length{
+        display:none !important;
+    }
+    .container-fluid,#wrpl_tabs{
+        padding: 0 !important;
+    }
+    #wrpl_tabs li a{
+        padding: 0 !important;
+    }
+    #wrpl_tabs li{
+        padding: 10px !important;
+        background-color: #f2f2f2;
+        border-bottom: 1px solid lightgrey;
+        text-align: center;
+
+    }
 }
 
 
@@ -318,4 +334,8 @@ section.pricing {
     .pricing .card:hover .btn {
         opacity: 1;
     }
+}
+
+.modal-backdrop {
+    z-index: 10;
 }

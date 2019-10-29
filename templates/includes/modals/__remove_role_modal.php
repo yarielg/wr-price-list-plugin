@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="wrpl_remove_role_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="wrpl_remove_role_modal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-danger text-white" >
@@ -34,8 +34,8 @@
                     </div>
                     <br>
                     <br>
-                    <button type="button" class="btn btn-default btn-sm mr-3" data-dismiss="modal"><?php _e('No, I don\'t want to remove it','wr_price_list')?></button>
-                    <input name="wrpl_remove_role_action"  type="submit" class="btn btn-danger btn-sm ml-3" value="<?php _e('Yes, I know the consequences','wr_price_list') ?>">
+                    <button type="button" class="btn btn-warning btn-sm mr-3 mb-3" data-dismiss="modal"><?php _e('No, I don\'t want to remove it','wr_price_list')?></button>
+                    <input name="wrpl_remove_role_action"  type="submit" class="btn btn-danger btn-sm ml-md-3" value="<?php _e('Yes, I know the consequences','wr_price_list') ?>">
                 </form>
             </div>
         </div>

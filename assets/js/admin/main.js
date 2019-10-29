@@ -422,4 +422,7 @@
         $link_import.remove();
     }
 
+    //fixing modal issue hiding modal-backdrop
+   // $('.modal-backdrop').remove();
+
 })(jQuery);

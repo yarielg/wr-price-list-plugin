@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="wrpl_add_pl_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="wrpl_add_pl_modal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-info text-white" >
@@ -14,8 +14,8 @@
 
                 <form action="" method="post" class="p-1 ml-3">
                     <div class="row ml-3 mb-2">
-                        <label for="wrpl-add_pl_name" class="col-sm-2 form-control-sm" ><?php _e('Name','wr_price_list') ?></label>
-                        <input type="text" name="wrpl_pl_name" id="wrpl-add_pl_name" class="form-control form-control-sm col-sm-9" required ">
+                        <label for="wrpl-add_pl_name" class="col-sm-2 form-control-sm" ><?php _e('Name:','wr_price_list') ?></label>
+                        <input type="text" name="wrpl_pl_name" id="wrpl-add_pl_name" class="form-control-md col-sm-9 col-12" required ">
                     </div>
 
                     <div class="row">
@@ -43,7 +43,7 @@
                     </div>
                     <br>
                     <div class="form-group row">
-                        <button type="button" class="btn btn-default btn-sm mr-3" data-dismiss="modal"><?php _e('Cancel','wr_price_list') ?></button>
+                        <button type="button" class="btn btn-warning btn-sm mr-3" data-dismiss="modal"><?php _e('Cancel','wr_price_list') ?></button>
                         <input name="wrpl_new_price_list"  type="submit" class="btn btn-info btn-sm ml-3" value="<?php _e('Add','wr_price_list') ?>">
                     </div>
                 </form>

@@ -35,9 +35,9 @@ include 'requests/_price_list_request.php';
             <br>
             <form action="" method="post" class="p-1 ml-3">
                 <div class="form-group row">
-                    <input type="text" name="role_name" id="wrpl_role_name_add" class="col-sm-10 form-control-plaintext" placeholder="New Role"  required min="3" max="100">
+                    <input type="text" name="role_name" id="wrpl_role_name_add" class="col-9 form-control-plaintext" placeholder="New Role"  required min="3" max="100">
 
-                    <div class="col-sm-2">
+                    <div class="col-2">
                         <input type="submit" name="wrpl_new_role" id="btn_wrpl_new_role_add" value="Add" class="btn btn-info btn-sm">
                     </div>
                 </div>

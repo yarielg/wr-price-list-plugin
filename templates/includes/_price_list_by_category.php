@@ -21,11 +21,11 @@ if(isset($_POST['assign_price_list_category'])){
 
 <div class="container-fluid pb-3">
     <div class="row pb-3">
-        <div class="col-6">
+        <div class="col-md-6">
             <h5><?php _e('Categories:','wr_price_list') ?></h5>
             <div id="default-tree"></div>
         </div>
-        <div class="col-6">
+        <div class="col-md-6">
             <br><br>
             <form action="" method="post">
                 <div class="form-group row">
@@ -59,8 +59,8 @@ if(isset($_POST['assign_price_list_category'])){
 
         <br>
         <br>
-        <div class="col-2"></div>
-        <div class="col-8">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
 
             <ul id="wrpl_rules_categories" class="list-group">
                 <?php
@@ -82,7 +82,7 @@ if(isset($_POST['assign_price_list_category'])){
                 <p><span class="wrpl-trash-rule" ></span><?php _e('Drag here to delete rule.','wr_price_list') ?></p>
             </div>
         </div>
-        <div class="col-2"></div>
+        <div class="col-md-2"></div>
     </div>
 </div>
 
