@@ -26,7 +26,7 @@ class Enqueue{
 
     function wrpl_enqueue_frontend(){
         //enqueue all our scripts frontend
-        wp_enqueue_style('wr_frontend_main', WRPL_PLUGIN_URL . '/assets/css/front/main.css'  );
+        
 
     }
 
