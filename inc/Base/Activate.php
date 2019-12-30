@@ -14,6 +14,7 @@ class Activate{
         update_option('wrpl-assign-method',1);
         update_option('wrpl-hide_price',0);
         update_option('wrpl-default_list',1);
+        update_option('wrpl-format-price-method',1);
 
         global $wpdb;
 

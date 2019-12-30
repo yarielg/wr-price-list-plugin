@@ -2,8 +2,8 @@
 Contributors: yariko0529
 Tags: woocommerce, price list, b2b, b2c, dynamic price, hide price, hide add to cart button
 Requires at least: 4.0
-Tested up to: 5.3
-Stable tag: 1.0.0
+Tested up to: 5.3.2
+Stable tag: 1.0.1
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -12,8 +12,8 @@ Edit prices quickly on a single screen. Create price lists and assign them to us
 
 == Description ==
 
-1. Create Item Price Lists
-Upload an Excel spreadsheet to create price list on WooCommerce.
+1. Create discount price list
+With this feature you can save a lot of time, since you can create a list that is 20% of another list. This feature will allow you to create quick discounts or even raise your prices in just seconds.
 
 2. Bulk Price Update or One-by-One
 Preform a bulk update of items pricing within a list by reloading the spreadsheet to latest changes; Or simply change an item's cost manual one by one.
@@ -33,8 +33,11 @@ To the typical B2C online store, assigning pricings by role my not by ideal. Pro
 7. Prioritize Price Lists (Premiun)
 Set custom rules in sequential order. Make sure the right price is always showing whether it�s for public eye or an individual role.
 
-8. Admin Ally
-The perfect plugin for B2B and B2C website administrators seeking to dynamically define pricing. WebReayNow.com offers a variety of help tools and videos to support administrators.
+9. Hide prices and add to cart button
+You can hide the prices and the add to the cart button for unregistered users. You can also define a custom message that will show where the price used to be, this message may contain html code.
+
+10. Create Item Price Lists
+Upload an Excel spreadsheet to create price list on WooCommerce.
 
 == Installation ==
 1. Upload the plugin files to the `/wp-content/plugins/wr_price_list` directory, or install the plugin through the WordPress plugins screen directly.
@@ -80,5 +83,6 @@ It also works great with WP 3.2 - and also should with WP 3.1 - but we only test
 
 = 1.0.0 =
 * Initial release
-
+= 1.0.1 =
+* Choose the price format (Individual Price)
 *Note:* All my plugins are localized/ translatable by default. This is very important for all users worldwide. So please contribute your language to the plugin to make it even more useful. For translating I recommend the awesome ["Codestyling Localization" plugin](http://wordpress.org/extend/plugins/codestyling-localization/) and for validating the ["Poedit Editor"](http://www.poedit.net/).

@@ -177,14 +177,14 @@ class ProductController{
             $pl_object = $pricelist_controller->wrpl_get_price_list_by_id($price_list);
             $price_list = $pl_object['id_parent'] > 0 ? $pl_object['id_parent'] : $price_list;
 
-            if ($pl_object['id_parent'] == 0) {
-                return $this->getPriceNotDefault($id, $price_list, 'price');
-            } else {
+            if ($pl_object['id_parent'] == 0) { //Si es una lista padre
+                return $this->getPriceNotDefault($id, $price_list, 'price');//Dame el precio regular de esta lista precio
+            } else { //si es una lista hija
 
-                if ($pl_object['id_parent'] == 1) {
+                if ($pl_object['id_parent'] == 1) { //Si es Woocommerce Default List
+                    //retornamos el precio de la lista padre por el factor
                     return $pl_object['factor'] >= 1 ? $this->getPriceDefault($id, '_regular_price') * $pl_object['factor'] : $this->getPriceDefault($id, '_regular_price') ;
                 } else {
-                    // var_dump($this->getPriceNotDefault($id,$price_list,'price'));
                     return $pl_object['factor'] >= 1 ? $this->getPriceNotDefault($id, $price_list, 'price') * $pl_object['factor'] : $this->getPriceNotDefault($id, $price_list, 'price') ;
                 }
             }
@@ -310,12 +310,12 @@ class ProductController{
                 $max = $variation['meta_value'];
             }
             if($variation['meta_value'] < $min){
-                $min = $variation['meta_value'];
+                $min = floatval($variation['meta_value']);
             }
         }
 
         $min = $min === 1234567890 ? 0 : $min;
-        return array('min' => $min*$factor, 'max' => $max*$factor);
+        return array('min' => floatval($min*$factor), 'max' => floatval($max*$factor));
     }
 
 

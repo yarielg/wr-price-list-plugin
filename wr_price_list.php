@@ -7,10 +7,10 @@
 Plugin Name:  WR Price List for Woocommerce
 Plugin URI:   https://www.webreadynow.com/en/wr-price-list-manager-woocommerce
 Description:  Create a Sales Price List(s) based on existing Price List(s). Changes to the primary price list will affect child price list. Configure child list to be a discount price list or raise cost based on a percentage of the parent list.
-Version:      1.0.0
+Version:      1.0.1
 Author:       Web Ready Now
 Author URI:   https://webreadynow.com/
-Tested up to: 5.2.3
+Tested up to: 5.3.2
 Text Domain:  wr_price_list
 Domain Path:  /languages
 */

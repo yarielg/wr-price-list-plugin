@@ -3,6 +3,7 @@ if(isset($_POST['save_settings'])){
     //define default price list
     update_option('wrpl-default_list',sanitize_text_field(intval($_POST['default_price_list'])));
     update_option('wrpl-assign-method',sanitize_text_field(intval($_POST['by_rbtn'])));
+    update_option('wrpl-format-price-method',sanitize_text_field(intval($_POST['rbtn_format_price'])));
 
     //hide price
     if(isset($_POST['hide_price'])){

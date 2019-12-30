@@ -151,9 +151,6 @@ input[type=number]::-webkit-outer-spin-button {
     }
 }
 
-
-
-
 #wrpl_tabs *{
     outline: none !important;
 }
@@ -334,8 +331,4 @@ section.pricing {
     .pricing .card:hover .btn {
         opacity: 1;
     }
-}
-
-.modal-backdrop {
-    z-index: 10;
 }

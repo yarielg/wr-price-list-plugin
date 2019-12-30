@@ -14,6 +14,33 @@
                 ?>
             </select>
         </div>
+
+
+        <!-- Choose price format -->
+        <hr>
+        <p><?php _e('Choose the price format (Individual Price)','wr_price_list') ?></p>
+        <div class="form-row">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="rbtn_format_price" id="rbtn_regular_sales" value="1" <?php echo get_option('wrpl-format-price-method') == 1 ? 'checked' : '' ?>>
+                <label class="form-check-label" for="rbtn_regular_sales"><?php _e('Regular / Sales','wr_price_list') ?> (<del>$4.25</del> $4.00)</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="rbtn_format_price" id="rbtn_sales_regular" value="2" <?php echo get_option('wrpl-format-price-method') == 2 ? 'checked' : '' ?>>
+                <label class="form-check-label" for="rbtn_sales_regular"><?php _e('Sales / Regular','wr_price_list') ?> ($4.00 <del>$4.25</del>)</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="rbtn_format_price" id="rbtn_sales" value="3" <?php echo get_option('wrpl-format-price-method') == 3 ? 'checked' : '' ?>>
+                <label class="form-check-label" for="rbtn_sales"><?php _e('Just Sales','wr_price_list') ?> ($4.00)</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="rbtn_format_price" id="rbtn_regular" value="4" <?php echo get_option('wrpl-format-price-method') == 4 ? 'checked' : '' ?>>
+                <label class="form-check-label" for="rbtn_regular"><?php _e('Just Regular','wr_price_list') ?> ($4.25)</label>
+            </div>
+        </div>
+
+        <br><br>
+
         <hr>
         <p><?php _e('Check this and choose a personalized message to hide prices from unregistered users','wr_price_list') ?></p>
         <div class="form-row">
@@ -30,6 +57,7 @@
             </div>
         </div>
 
+        <!-- Assignment method-->
         <hr>
         <p><?php _e('Choose which method to use for price list assignment','wr_price_list') ?></p>
         <div class="form-row">

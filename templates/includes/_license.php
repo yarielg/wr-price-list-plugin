@@ -68,7 +68,7 @@ if($_POST['wrpl_submit_license']){
                             <li><span class="fa-li"><i class="fas fa-check"></i></span>- Support 24/7.</li>
                             <li><span class="fa-li"><i class="fas fa-check"></i></span>- Features Added every Month.</li>
                         </ul>
-                        <a href="https://www.webreadynow.com/en/wr-price-list-manager-woocommerce/" target="_blank" class="btn btn-block btn-danger text-uppercase btn-sm">Buy Now</a>
+                        <a href="https://www.webreadynow.com/product/wr-ultimate-price-list/" target="_blank" class="btn btn-block btn-danger text-uppercase btn-sm">Buy Now</a>
                     </div>
             </div>
         </div>

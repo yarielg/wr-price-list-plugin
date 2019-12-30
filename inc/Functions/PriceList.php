@@ -40,13 +40,35 @@ class PriceList{
 
         add_filter( 'woocommerce_get_price_html', array($this,'wrpl_woocommerce_price_html'), 100, 2 );
 
+        //sale tag
+       // add_filter('woocommerce_sale_flash',array($this,'woocommerce_custom_sale_text'), 10, 3);
+
         //hide price not login user
         if(get_option('wrpl-hide_price')  == 1 ){
             add_action( 'init', array($this,'hide_price_not_login_user') );
 
         }
+
+        //sold out
+        //Trying to create a tag manager
+        //add_filter( 'woocommerce_single_product_image_thumbnail_html', array($this,'sv_add_text_above_wc_product_image'),10,2 );
+        //add_action( 'woocommerce_before_shop_loop_item_title', array($this,'bbloomer_new_badge_shop_page'), 2 );
+        //add_action( 'woocommerce_before_shop_item_title', array($this,'bbloomer_new_badge_shop_page'), 2 );
+
     }
-    //
+
+   /* function sv_add_text_above_wc_product_image( $img_html ) {
+
+        echo '<h4 class="pepe_pepe" style="text-align: center;">Some sample text</h4>';
+
+        return $img_html;
+    }*/
+
+    /*function bbloomer_new_badge_shop_page() {
+        global $product;
+            echo '<span class="itsnew">' . $product->get_id() . '</span>';
+    }*/
+
     function hide_price_not_login_user() {
         if ( ! is_user_logged_in() ) {
             remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart');
@@ -133,7 +155,20 @@ class PriceList{
 
             if(!$product->has_child()){
                 if($this->custom_sale_price($price,$product) != $this->custom_regular_price($price,$product)){
-                    $html_price = '<del>' . wc_price($this->custom_regular_price($price,$product)) . '</del>  ' . wc_price($this->custom_sale_price($price,$product)) ;
+                    switch(get_option('wrpl-format-price-method')){
+                        case 1:
+                            $html_price = '<del>' . wc_price($this->custom_regular_price($price,$product)) . '</del>  ' . wc_price($this->custom_sale_price($price,$product)) ;
+                            break;
+                        case 2:
+                            $html_price =  wc_price($this->custom_sale_price($price,$product)) . ' <del>' . wc_price($this->custom_regular_price($price,$product)) . '</del>' ;
+                            break;
+                        case 3:
+                            $html_price =  wc_price($this->custom_sale_price($price,$product)) ;
+                            break;
+                        default:
+                            $html_price =  wc_price($this->custom_regular_price($price,$product));
+                            break;
+                    }
                 }else{
                     $html_price =  wc_price($this->custom_regular_price($price,$product));
                 }
@@ -156,6 +191,11 @@ class PriceList{
         }
     }
 
+    //
+    /*function woocommerce_custom_sale_text($text, $post, $_product)
+    {
+        return '<span class="onsale">SALE!</span>';
+    }*/
 
 
 }
