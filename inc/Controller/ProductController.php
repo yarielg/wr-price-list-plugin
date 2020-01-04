@@ -32,9 +32,17 @@ class ProductController{
     function getAllProducts(){
         global $wpdb;
         $products = $wpdb->get_results(
-            $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "posts  LEFT JOIN $wpdb->prefix" . "postmeta ON ID=post_id WHERE post_type IN (%s,%s) AND post_status NOT IN (%s,%s) AND meta_key = %s", 'product','product_variation','auto-draft','trash','_sku')
+           $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "posts WHERE post_type IN (%s,%s) AND post_status NOT IN (%s,%s)", 'product','product_variation','auto-draft','trash','_sku'),ARRAY_A
         );
-        return $products;
+        //remove product with parent = 0 and variations
+        $final_products = array();
+        foreach ($products as $product){
+            if($this->isProductHasVariations($product['ID'])){
+                continue;
+            }
+            array_push($final_products,$product);
+        }
+        return $final_products;
     }
     function getProducts(){
         $price_list = intval(sanitize_text_field($_POST['price_list']));
@@ -43,7 +51,8 @@ class ProductController{
         $search = sanitize_title(trim($_POST['search']['value']));
         $category_id = intval(sanitize_text_field($_POST['category_id']));
         $all_products = $this->getAllProducts();
-        $count_products =  count($all_products); //todos 316
+        $count_products =  count($all_products);
+
         $products_cat_search = $this->getProductByCategory($category_id,$search,$length,$start);
         $products_with_search  = $products_cat_search['data'];
         if($search == "" && $category_id == 0){
@@ -61,7 +70,7 @@ class ProductController{
                 $image_values = wp_get_attachment_image_src( get_post_thumbnail_id($product['ID']), 'single-post-thumbnail' );
                 $product['image'] = $image_values[0];
                 $product['price'] = $this->getRegularPrice($product['ID'],$price_list);
-                $product['sku'] = ($product['meta_value'] == '') ? '<span class="badge badge-danger">NO SKU</span>' : $product['meta_value'] ;
+                $product['sku'] = ($this->getSku($product['ID'] ) == '') ? '<span class="badge badge-danger">NO SKU</span>' : $this->getSku($product['ID']) ;
                 $product['sale_price'] = $this->getSalesPrice($product['ID'],$price_list);
                 if($product['post_type'] == 'product_variation'){
                     $product['edit_url'] = WRPL_ADMIN_URL . 'post.php?post=' . $product['post_parent'] . '&action=edit';
@@ -82,7 +91,8 @@ class ProductController{
     function getProductByCategory($cat_id,$search,$limit,$offset){
         global $wpdb;
 
-        $products = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "posts  LEFT JOIN $wpdb->prefix" . "postmeta ON ID=post_id WHERE post_type IN ('product_variation','product') AND post_status NOT IN ('auto-draft','trash') AND meta_key = '_sku' AND ( post_title LIKE '%$search%' OR meta_value LIKE '%$search%') ORDER BY post_id",ARRAY_A);
+        $products = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "posts  WHERE post_type IN ('product_variation','product') AND post_status NOT IN ('auto-draft','trash')  AND ( post_title LIKE '%$search%') ORDER BY ID",ARRAY_A);
+        // $products = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "posts  LEFT JOIN $wpdb->prefix" . "postmeta ON ID=post_id WHERE post_type IN ('product_variation','product') AND post_status NOT IN ('auto-draft','trash') AND meta_key = '_sku' AND ( post_title LIKE '%$search%' OR meta_value LIKE '%$search%') ORDER BY post_id",ARRAY_A);
         $final_products = array();
         foreach ($products as $product){
             if(!$this->isProductHasVariations($product['ID'])){
@@ -191,14 +201,13 @@ class ProductController{
         }
     }
 
-    function getVariationByProductId($id){
+    function getSku($id){
         global $wpdb;
 
-        $variations = $wpdb->get_results(
-            $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "posts WHERE post_type = %s AND post_parent = $id", 'product_variation')
+        $products = $wpdb->get_results(
+            $wpdb->prepare("SELECT * FROM $wpdb->prefix" . "postmeta WHERE post_id = %d AND meta_key = %s", $id,'_sku'),ARRAY_A
         );
-        $variations = wrpl_stdToArray($variations);
-        return count($variations) > 0 ? $variations : array() ;
+        return count($products) > 0 ? $products[0]['meta_value'] : '' ;
     }
 
     function  isProductHasVariations($id){

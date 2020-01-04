@@ -26,8 +26,6 @@ class Enqueue{
 
     function wrpl_enqueue_frontend(){
         //enqueue all our scripts frontend
-        
-
     }
 
     function wrpl_enqueue_admin(){
