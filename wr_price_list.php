@@ -17,7 +17,7 @@ Domain Path:  /languages
 
 defined('ABSPATH') or die('You do not have access, sally human!!!');
 
-define ( 'WRPL_PLUGIN_VERSION', '1.0.2');
+define ( 'WRPL_PLUGIN_VERSION', '1.0.3');
 
 if( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php') ){
     require_once  dirname( __FILE__ ) . '/vendor/autoload.php';

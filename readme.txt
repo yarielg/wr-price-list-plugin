@@ -3,8 +3,8 @@ Contributors: yariko0529
 Tags: woocommerce, price list, b2b, b2c, add roles, create discount, export prices,dynamic price, hide price, hide add to cart button
 Requires at least: 4.0
 Tested up to: 5.3.2
-Stable tag: 1.0.2
-Requires PHP: 5.2.4
+Stable tag: 1.0.3
+Requires PHP: 5.6.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,31 +12,28 @@ Edit prices quickly on a single screen. Create price lists and assign them to us
 
 == Description ==
 
-1. Create discount price list
-With this feature you can save a lot of time, since you can create a list that is 20% of another list. This feature will allow you to create quick discounts or even raise your prices in just seconds.
+1. Create Price Lists
+Create a price list and assign it to any role. With this feature you can have multiple prices to the same product depending the user role.
 
-2. Bulk Price Update or One-by-One
-Preform a bulk update of items pricing within a list by reloading the spreadsheet to latest changes; Or simply change an item's cost manual one by one.
+2. Quick Price Update or One-by-One
+Instead of going to update a product one by one, you can edit its price in the same screen
 
-3. Dynamic Sales Price List
+3. Dynamic Sales Price List(Premium)
 Create a Sales Price List(s) based on existing Price List(s). Changes to the primary price list will affect child price list. Configure child list to be a discount price list or raise cost based on a percentage of the parent list.
 
 4. Create New User Roles
 Create as many user roles as needed with ease.
 
-5. Price Lists to User Roles
-Ideal for B2B accounts, assign price lists to user roles. Control what specific audiences see on the website.
-
-6. Price Lists to Categories(Premiun)
+5. Price Lists to Categories(Premium)
 To the typical B2C online store, assigning pricings by role my not by ideal. Promote product lines or schedule seasonal sales by setting price list to individual product categories.
 
-7. Prioritize Price Lists (Premiun)
+6. Prioritize Price Lists assigned to product categories (Premiun)
 Set custom rules in sequential order. Make sure the right price is always showing whether it�s for public eye or an individual role.
 
-9. Hide prices and add to cart button
-You can hide the prices and the add to the cart button for unregistered users. You can also define a custom message that will show where the price used to be, this message may contain html code.
+7. Hide prices and add to cart button
+You can hide the prices and the add to the cart button for unregistered users. You can also define a custom message that will show where the price used to be,  you also can put a html meesage.
 
-10. Create Item Price Lists
+8. Create Item Price Lists (Premium)
 Upload an Excel spreadsheet to create price list on WooCommerce.
 
 == Installation ==
@@ -70,8 +67,7 @@ It also works great with WP 4.0 , So you always should run the latest WordPress 
 
 1. Upload the entire `wr_price_list` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Look at your admin bar and enjoy using the new links there :)
-4. Go and manage your forum :)
+4. Go to WR PRICE LIST item menu on the left panel and start creating and playing with your product price :)
 
 == Frequently Asked Questions ==
 
