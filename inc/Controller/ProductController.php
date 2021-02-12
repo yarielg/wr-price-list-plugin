@@ -29,6 +29,10 @@ class ProductController{
 
     }
 
+    /**
+     * @return array
+     * Get all products
+     */
     function getAllProducts(){
         global $wpdb;
         $products = $wpdb->get_results(
@@ -88,6 +92,14 @@ class ProductController{
         wp_die();
     }
 
+    /**
+     * @param $cat_id
+     * @param $search
+     * @param $limit
+     * @param $offset
+     * @return array
+     * Get products by category
+     */
     function getProductByCategory($cat_id,$search,$limit,$offset){
         global $wpdb;
 
@@ -114,6 +126,12 @@ class ProductController{
         return array('total' => count($final_products),'data' => array_slice($final_products,$offset,$limit));
     }
 
+    /**
+     * @param $cat_id
+     * @param $product_id
+     * @return bool
+     * Check if a product belong to certain category (need improvement)
+     */
     function wrpl_product_has_category($cat_id,$product_id){
         global $wpdb;
         $results = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "term_relationships WHERE term_taxonomy_id='$cat_id' AND object_id='$product_id'", ARRAY_A);
@@ -123,6 +141,11 @@ class ProductController{
         return false;
     }
 
+    /**
+     * @param $products
+     * @param $search
+     * @return array
+     */
     function wrpl_filter_category_product($products,$search){
         $final_products = array();
         foreach ($products as $product){
@@ -134,6 +157,12 @@ class ProductController{
         return $final_products;
     }
 
+    /**
+     * @param $id
+     * @param $price_type
+     * @return int|mixed
+     * Get the default price
+     */
     function getPriceDefault($id,$price_type){
         global $wpdb;
         $products = $wpdb->get_results(
@@ -146,6 +175,12 @@ class ProductController{
         return 0;
     }
 
+    /**
+     * @param $id
+     * @param $price_list
+     * @param $price_type
+     * @return int
+     */
     function getPriceNotDefault($id,$price_list,$price_type){
         global $wpdb;
         $products = $wpdb->get_results(
@@ -236,6 +271,13 @@ class ProductController{
         return $image_url ;
     }
 
+    /**
+     * @param $id
+     * @param $price_list
+     * @param $price
+     * @param $sale_price
+     * Insert or Update new price for a product belong to a certain price list
+     */
     function updateOrInsertPrice($id,$price_list,$price,$sale_price){
         global $wpdb;
         $products = $wpdb->get_results(
@@ -250,14 +292,15 @@ class ProductController{
         }
     }
 
+    /**
+     * Edit the product price for a price list
+     */
     function editPrice(){
 
         $post_id = intval(sanitize_text_field($_POST['id']));
         $price = floatval(sanitize_text_field($_POST['price']));
         $sale_price = floatval(sanitize_text_field($_POST['sale_price']));
         $price_list = intval(sanitize_text_field($_POST['price_list']));
-
-
 
         if($price_list == 1){
 
@@ -275,7 +318,6 @@ class ProductController{
 
         }else{
             $this->updateOrInsertPrice($post_id,$price_list,$price,$sale_price);
-
             $result = array('success' => 'Regular Price Updated and Sale Price Deleted');
         }
         $this->wrpl_remove_product_price_caching($post_id);
@@ -286,6 +328,14 @@ class ProductController{
         wp_die();
     }
 
+    /**
+     * @param $id
+     * @param $price_list
+     * @param $key
+     * @param int $factor
+     * @return float[]|int[]
+     * Get the max and mix of a variable product that do not belong to the Default List
+     */
     function getMinMaxPriceVariationNoDefault($id,$price_list,$key,$factor=1){
         global $wpdb;
         $max = 0;
@@ -306,6 +356,13 @@ class ProductController{
         return array('min' => $min*$factor, 'max' => $max*$factor);
     }
 
+    /**
+     * @param $id
+     * @param $price_type
+     * @param int $factor
+     * @return array
+     * Get the max and mix of a variable product that belong to the Default List
+     */
     function getMinMaxPriceVariationDefault($id,$price_type,$factor = 1){
         global $wpdb;
         $variations = $wpdb->get_results(
@@ -328,7 +385,13 @@ class ProductController{
     }
 
 
-    //return max and min price variation for a specific product
+    /**
+     * @param $id
+     * @param $price_list
+     * @param $price_type
+     * @return array|float[]|int[]
+     * Get min a max of a variable product
+     */
     function getMinMaxPriceVariation($id,$price_list,$price_type){
         $key = $price_type == '_regular_price' ? 'price' : 'sale_price';
 
@@ -353,6 +416,10 @@ class ProductController{
         return $max_min;
     }
 
+    /**
+     * @param $post_id
+     * Remove price transient
+     */
     function wrpl_remove_product_price_caching($post_id){
         global $wpdb;
 
@@ -360,6 +427,13 @@ class ProductController{
         $wpdb->query('DELETE FROM ' .$wpdb->prefix . 'options WHERE option_name LIKE "%_transient_wc_var_prices_' . $post_id . '%"');
 
     }
+
+    /**
+     * @param $products
+     * @param $price_list
+     * @return array
+     * Import products
+     */
     function wrpl_import_products($products,$price_list){
 
         $results = array();
@@ -397,6 +471,12 @@ class ProductController{
         }//endforeach
         return $results;
     }
+
+    /**
+     * @param $id
+     * @return bool
+     * if the category a parent category?
+     */
     function hasChildren($id){
         $orderby = 'name';
         $order = 'asc';
@@ -413,6 +493,12 @@ class ProductController{
 
         return false;
     }
+
+    /**
+     * @param $id
+     * @return array
+     * Get all the product that belong to child categories
+     */
     function getProductChildCategories($id){
         $orderby = 'name';
         $order = 'asc';
@@ -439,6 +525,9 @@ class ProductController{
         return $categories;
     }
 
+    /**
+     * Get the parent categories
+     */
     function getProductParentCategories(){
         $orderby = 'name';
         $order = 'asc';
@@ -472,6 +561,11 @@ class ProductController{
         wp_die();
     }
 
+    /***
+     * @param $rules
+     * @return mixed|null
+     * Get top priority rules
+     */
     function wrpl_get_rules_with_most_priority($rules){
         $priority_rule = null;
         if(count($rules)>0){
@@ -485,6 +579,12 @@ class ProductController{
         return $priority_rule;
     }
 
+    /**
+     * @param $id_cat
+     * @param $rules
+     * @return array
+     * Get rules by category id
+     */
     function wrpl_get_rules_by_category_id($id_cat,$rules){
         $matched_rules = array();
         foreach ($rules as $rule){
@@ -495,6 +595,11 @@ class ProductController{
         return $matched_rules;
     }
 
+    /**
+     * @param $id
+     * @return int|mixed
+     * Get price list by category
+     */
     function wrpl_get_price_list_by_category($id){
         $rules = $this->price_list_controller->wrpl_get_rules();
         $categories = array();
@@ -519,11 +624,22 @@ class ProductController{
 
     }
 
+    /**
+     * @param $term
+     * @param $tt_id
+     * @param $deleted_term
+     * @param $object_ids
+     *
+     */
     function wrpl_delete_cat($term, $tt_id, $deleted_term, $object_ids){
         $this->price_list_controller->wrpl_delete_rule($term);
       //  wp_die();
     }
 
+    /**
+     * @return array
+     * Get all product categories
+     */
     function wrpl_get_all_product_cat(){
 
         $orderby = 'name';
@@ -544,7 +660,5 @@ class ProductController{
             return [];
         }
     }
-
-
 
 }

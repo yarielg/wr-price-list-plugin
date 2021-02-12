@@ -56,17 +56,14 @@ if($_POST['wrpl_submit_license']){
                 <div class="card mb-5 mb-lg-0">
                     <div class="card-body">
                         <h5 class="card-title text-muted text-uppercase text-center">Premium</h5>
-                        <h6 class="card-price text-center">$12.00</h6>
+                        <h6 class="card-price text-center">$16.00</h6>
                         <hr>
                         <ul class="fa-ul">
                             <li><span class="fa-li"><i class="fas fa-check"></i></span><strong>- Unlimited Price List.</strong></li>
-                            <li><span class="fa-li"><i class="fas fa-check"></i></span>- Create Discount Based on Price List.</li>
+                            <li><span class="fa-li"><i class="fas fa-check"></i></span>- Create fixed discount Based on Price List.</li>
                             <li><span class="fa-li"><i class="fas fa-check"></i></span>- Price List by Product Categories.</li>
-
-                            <li><span class="fa-li"><i class="fas fa-check"></i></span>- Create Price Rules.</li>
+                            <li><span class="fa-li"><i class="fas fa-check"></i></span>- Create Price Rules for product categories.</li>
                             <li><span class="fa-li"><i class="fas fa-check"></i></span>- Import Prices from CSV.</li>
-                            <li><span class="fa-li"><i class="fas fa-check"></i></span>- Support 24/7.</li>
-                            <li><span class="fa-li"><i class="fas fa-check"></i></span>- Features Added every Month.</li>
                         </ul>
                         <a href="https://www.webreadynow.com/product/wr-ultimate-price-list/" target="_blank" class="btn btn-block btn-danger text-uppercase btn-sm">Buy Now</a>
                     </div>

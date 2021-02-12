@@ -13,6 +13,11 @@ class PriceListController
 
     }
 
+    /**
+     * @param $id
+     * @return bool
+     * Get price list name by Id
+     */
     function wrpl_get_price_list_name_by_id($id){
         global $wpdb;
         $plists = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "wr_price_lists WHERE id = '$id'",ARRAY_A );
@@ -22,6 +27,12 @@ class PriceListController
             return false;
         }
     }
+
+    /**
+     * @param bool $all_pl
+     * @return mixed
+     * Get all price in associative array
+     */
     function wrpl_get_price_lists($all_pl = true){
         global $wpdb;
         if($all_pl){
@@ -33,6 +44,10 @@ class PriceListController
         return $plists;
     }
 
+    /***
+     * @param $roles
+     * Save Price list Roles
+     */
     function wrpl_save_price_list_role($roles){
 
         foreach ($roles as $role){
@@ -42,9 +57,11 @@ class PriceListController
         }
     }
 
-
-
-    function wrpl_get_user_price_list() //relation between price list and role are in options table of wp (wrpl-name-of-role,price_list_value)
+    /**
+     * @return int
+     * @notes relation between price list and role are in options table of wp (wrpl-name-of-role,price_list_value)
+     */
+    function wrpl_get_user_price_list() //
     {
         if (is_user_logged_in()) {
             $user = wp_get_current_user();
@@ -56,6 +73,12 @@ class PriceListController
         }
     }
 
+    /**
+     * @param $name
+     * @param int $id
+     * @return bool
+     * Check if exist a price list with name = $name
+     */
     function wrpl_exist_price_list_name($name,$id=0){
         global $wpdb;
 
@@ -69,6 +92,11 @@ class PriceListController
         }
     }
 
+    /**
+     * @param $id
+     * @return bool
+     * Check if exist the price list
+     */
     function wrpl_exist_price_list_id($id){
         global $wpdb;
 
@@ -81,8 +109,14 @@ class PriceListController
         }
     }
 
-
-
+    /**
+     * @param $name
+     * @param int $plist
+     * @param string $factor
+     * @param $blofe
+     * @return array
+     * Add a price list
+     */
     function wrpl_add_price_list($name,$plist = 0, $factor = '',$blofe){
         global  $wpdb;
 
@@ -101,6 +135,11 @@ class PriceListController
         }
     }
 
+    /***
+     * @param $id
+     * @return int
+     *
+     */
     function wrpl_get_price_list_by_id($id){
         global $wpdb;
         $plists = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "wr_price_lists WHERE id = '$id'", ARRAY_A);
@@ -108,10 +147,14 @@ class PriceListController
         if(count($plists)>0){
             $plist = $plists[0];
         }
-        return $plist ;
+        return $plist;
     }
 
-
+    /**
+     * @param $id
+     * @return mixed
+     * Remove price list
+     */
     function wrpl_remove_price_list($id){
         global $wpdb;
         $wpdb->get_results("DELETE FROM $wpdb->prefix" . "wr_price_lists WHERE id = '$id' OR id_parent='$id'");
@@ -129,6 +172,11 @@ class PriceListController
         return false;
     }
 
+    /**
+     * @param $name
+     * @return bool
+     * Check if the role exists
+     */
     function wr_exist_role($name){
         global $wp_roles;
         $roles = $wp_roles->roles;
@@ -163,6 +211,12 @@ class PriceListController
         delete_option('wrpl-' . wrpl_valid_name($name)); //removing relation role-price list/
     }
 
+    /**
+     * @param $role_name
+     * @param $role_name_old
+     * @return bool|mixed
+     * Change the role name
+     */
     function wrpl_edit_role($role_name,$role_name_old){
 
         global $wpdb;
@@ -174,17 +228,17 @@ class PriceListController
 
         if(!array_key_exists(wrpl_valid_name($role_name),$unserialize_roles)){
             unset($unserialize_roles[wrpl_valid_name($role_name_old)]); //removing the role to the roles array
-            $unserialize_roles[wrpl_valid_name($role_name)] = array('name'=>$role_name,'capabilities' => $capabilities); //changin key name to  the new role
+            $unserialize_roles[wrpl_valid_name($role_name)] = array('name'=>$role_name,'capabilities' => $capabilities); //changing key name to  the new role
 
             $serialized_roles = serialize($unserialize_roles);
             $result = $wpdb->query("UPDATE $wpdb->prefix" . "options SET option_value = '$serialized_roles'  WHERE option_name = '".$wpdb->prefix."user_roles'");
             if($result>0 ){ //if exist a connection between the old role and any price list 1-remove it and add the new one
 
-                $price_list = get_option('wrpl-' . wrpl_valid_name($role_name_old)) ?: 'default'; //get the pricelist of the old role
+                $price_list = get_option('wrpl-' . wrpl_valid_name($role_name_old)) ?: 'default'; //get the price list of the old role
                 delete_option('wrpl-' . wrpl_valid_name($role_name_old)); //delete the connection between the old role with the price list
-                delete_option('wrpl_role-' . wrpl_valid_name($role_name_old)); //delete all price list option this option allow difference the role creted by wrpl and the others
+                delete_option('wrpl_role-' . wrpl_valid_name($role_name_old)); //delete all price list option this option allow difference the role created by wrpl and the others
                 update_option('wrpl-' . wrpl_valid_name($role_name),$price_list); //creating the new connection with the new role
-                update_option('wrpl_role-' . wrpl_valid_name($role_name),$role_name); //this option allow have the control wich role ware created by WRPL
+                update_option('wrpl_role-' . wrpl_valid_name($role_name),$role_name); //this option allow have the control wich role were created by WRPL
                 return $unserialize_roles;
             }
         }
@@ -192,9 +246,14 @@ class PriceListController
 
     }
 
+    /**
+     * @param $cat_id
+     * @param $price_list_id
+     * @return bool
+     * Check if exist category rule for a price list
+     */
     function wrpl_exist_rule($cat_id,$price_list_id){
         global $wpdb;
-
 
         $rules = $wpdb->get_results("SELECT * FROM $wpdb->prefix" . "wr_rules WHERE id_price_list='$price_list_id' AND id_category=$cat_id");
         if(count($rules)>0){
@@ -205,6 +264,12 @@ class PriceListController
         }
     }
 
+    /**
+     * @param $cat_id
+     * @param $price_list_id
+     * @return string[]
+     * Create category rule for a price list
+     */
     function wrpl_assign_pl_to_category($cat_id,$price_list_id){
         global $wpdb;
 
@@ -224,6 +289,10 @@ class PriceListController
 
     }
 
+    /**
+     * @return mixed
+     * Get the rules
+     */
     function wrpl_get_rules(){
         global $wpdb;
         $rules = $wpdb->get_results("SELECT T1.id as 'id_rule',T1.id_price_list,T1.id_category,T1.priority,T2.id_parent,T2.description FROM $wpdb->prefix" . "wr_rules T1 INNER JOIN $wpdb->prefix" . "wr_price_lists T2 ON T1.id_price_list=T2.id  ORDER BY priority", ARRAY_A);
@@ -231,6 +300,9 @@ class PriceListController
         return $rules;
     }
 
+    /**
+     * Chnange the rules order
+     */
     function wrpl_change_rules_order(){
         global $wpdb;
 
@@ -242,6 +314,10 @@ class PriceListController
         }
     }
 
+    /**
+     * @param int $id
+     * Delete a rule by id
+     */
     function wrpl_delete_rule($id = -1){
         global $wpdb;
 
