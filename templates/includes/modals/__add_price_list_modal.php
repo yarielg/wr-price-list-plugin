@@ -39,7 +39,7 @@
                     </div>
                     <div class="row ml-3 mb-2">
                         <label for="wrpl-add_pl_factor" id="wrpl-add_pl_factor_label" class="col-sm-2 form-control-sm disabled" ><?php _e('Factor:','wr_price_list') ?></label>
-                        <input type="number" name="wrpl_pl_factor" id="wrpl-add_pl_factor" class="form-control form-control-sm col-sm-9" step="0.01" required min="0" max="100" disabled>
+                        <input type="number" name="wrpl_pl_factor" id="wrpl-add_pl_factor" class="form-control form-control-sm col-sm-9" step="0.001" required min="0" max="100" disabled>
                     </div>
                     <br>
                     <div class="form-group row">

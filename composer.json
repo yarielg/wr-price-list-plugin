@@ -1,20 +1,20 @@
 {
-    "name": "yariel/yariko",
-    "description": "Just another wp plugin",
-    "type": "project",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "yariko",
-            "email": "yariko0529@gmail.com"
-        }
-    ],
-    "minimum-stability": "dev",
-    "require": {
-    },
-    "autoload": {
-        "psr-4": { "Wrpl\\Inc\\": "./inc"
-
-        }
+  "name": "yariel/yariko",
+  "description": "Just another wp plugin",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "yariko",
+      "email": "yariko0529@gmail.com"
     }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+  },
+  "autoload": {
+    "psr-4": { "Wrpl\\Inc\\": "./inc"
+
+    }
+  }
 }

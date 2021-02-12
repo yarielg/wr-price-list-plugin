@@ -32,7 +32,7 @@
                     </div>
                     <div class="row ml-3 mb-2">
                         <label for="wrpl-add_pl_factor" id="wrpl-add_pl_factor_label" class="col-sm-2 form-control-sm" ><?php _e('Factor:','wr_price_list') ?></label>
-                        <input type="number" name="wrpl_pl_factor" id="wrpl-edit-pl-factor" class="form-control col-9" step="0.01" required min="0" max="100">
+                        <input type="number" name="wrpl_pl_factor" id="wrpl-edit-pl-factor" class="form-control col-9" step="0.001" required min="0" max="100">
                     </div>
                     <br>
                     <br>

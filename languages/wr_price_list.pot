@@ -1,0 +1,366 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2019-08-21 10:57-0400\n"
+"PO-Revision-Date: 2019-08-21 10:57-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.3\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: inc/Controller/ProductController.php:362
+#: inc/Controller/ProductController.php:367
+#: inc/Controller/ProductController.php:373
+#: inc/Controller/ProductController.php:375
+#: inc/Controller/ProductController.php:380
+msgid "The product with sku: "
+msgstr ""
+
+#: inc/Controller/ProductController.php:362
+#: inc/Controller/ProductController.php:373
+msgid " was updated"
+msgstr ""
+
+#: inc/Controller/ProductController.php:367
+#: inc/Controller/ProductController.php:375
+msgid ""
+" was no inserted, you must follow this rule: regular > sale and regular > 0"
+msgstr ""
+
+#: inc/Controller/ProductController.php:380
+msgid " was not found"
+msgstr ""
+
+#: inc/Pages/Pages.php:22 templates/dashboard.php:1
+msgid "Dashboard"
+msgstr ""
+
+#: inc/Pages/Pages.php:26
+msgid "Products"
+msgstr ""
+
+#: templates/includes/_create_price_list_and_role.php:15
+msgid "Roles:"
+msgstr ""
+
+#: templates/includes/_create_price_list_and_role.php:48
+msgid "Price Lists:"
+msgstr ""
+
+#: templates/includes/_create_price_list_and_role.php:71
+msgid "Add new price list:"
+msgstr ""
+
+#: templates/includes/_filters_products.php:7
+msgid "All Categories"
+msgstr ""
+
+#: templates/includes/_import_export.php:10
+msgid "Create a new Price List"
+msgstr ""
+
+#: templates/includes/_import_export.php:13
+msgid "Type price list name"
+msgstr ""
+
+#: templates/includes/_import_export.php:18
+msgid "Choose price list"
+msgstr ""
+
+#: templates/includes/_import_export.php:30
+msgid "Choose csv file to export"
+msgstr ""
+
+#: templates/includes/_import_export.php:44
+msgid "Import results"
+msgstr ""
+
+#: templates/includes/_import_export.php:48
+msgid "Price list "
+msgstr ""
+
+#: templates/includes/_import_export.php:48
+msgid "was created. "
+msgstr ""
+
+#: templates/includes/_import_export.php:48
+msgid "The products price were inserted in this new list"
+msgstr ""
+
+#: templates/includes/_import_export.php:64
+msgid "It were inserted or updated "
+msgstr ""
+
+#: templates/includes/_import_export.php:64
+msgid " products successfully."
+msgstr ""
+
+#: templates/includes/_import_export.php:67
+msgid "It were found "
+msgstr ""
+
+#: templates/includes/_import_export.php:67
+msgid " errors, below a list with the details."
+msgstr ""
+
+#: templates/includes/_price_list_by_category.php:17
+msgid ""
+"Assign a price list to product category, so that all products that "
+"correspond to the category is going to have only the price that corresponds "
+"to the assigned price list."
+msgstr ""
+
+#: templates/includes/_price_list_by_category.php:18
+msgid ""
+"Note: Please note that if for a certain category you do not choose a list, "
+"all products belonging to this category will see the prices of the list that "
+"is by default."
+msgstr ""
+
+#: templates/includes/_price_list_by_category.php:24
+msgid "Categories:"
+msgstr ""
+
+#: templates/includes/_price_list_by_category.php:31
+msgid "Choose Price List:"
+msgstr ""
+
+#: templates/includes/_price_list_by_category.php:48
+msgid "Create Rule"
+msgstr ""
+
+#: templates/includes/_price_list_by_category.php:56
+msgid "Rules"
+msgstr ""
+
+#: templates/includes/_price_list_by_category.php:74
+msgid "No rules at this moment."
+msgstr ""
+
+#: templates/includes/_price_list_by_category.php:81
+msgid "Drag here to delete rule."
+msgstr ""
+
+#: templates/includes/_price_list_by_role.php:9
+msgid ""
+"Assign a price list to each role, so that all users who correspond to the "
+"role will see only the price that corresponds to the assigned price list."
+msgstr ""
+
+#: templates/includes/_price_list_by_role.php:10
+msgid ""
+"Note: Please note that if for a certain role you do not choose a list, all "
+"users belonging to this role will see the prices of the list that is by "
+"default."
+msgstr ""
+
+#: templates/includes/_price_list_by_role.php:37
+msgid "Save"
+msgstr ""
+
+#: templates/includes/_settings.php:5
+msgid "Choose a default price list to unregistered users"
+msgstr ""
+
+#: templates/includes/_settings.php:7
+msgid "Price List:"
+msgstr ""
+
+#: templates/includes/_settings.php:18
+msgid ""
+"Check this and choose a personalized message to hide prices from "
+"unregistered users"
+msgstr ""
+
+#: templates/includes/_settings.php:23
+msgid "Hide price to unregistered users"
+msgstr ""
+
+#: templates/includes/_settings.php:28
+msgid "Custom message to unregistered users"
+msgstr ""
+
+#: templates/includes/_settings.php:34
+msgid "Choose which method to use for price list assignment"
+msgstr ""
+
+#: templates/includes/_settings.php:38
+msgid "By Role"
+msgstr ""
+
+#: templates/includes/_settings.php:42
+msgid "By Category"
+msgstr ""
+
+#: templates/includes/_settings.php:48
+msgid "Save Settings"
+msgstr ""
+
+#: templates/includes/modals/__add_price_list_modal.php:6
+msgid "Add Price List"
+msgstr ""
+
+#: templates/includes/modals/__add_price_list_modal.php:17
+msgid "Name"
+msgstr ""
+
+#: templates/includes/modals/__add_price_list_modal.php:21
+#: templates/includes/modals/__edit_price_list_modal.php:22
+msgid "Based:"
+msgstr ""
+
+#: templates/includes/modals/__add_price_list_modal.php:23
+#: templates/includes/modals/__edit_price_list_modal.php:24
+msgid "No Price List"
+msgstr ""
+
+#: templates/includes/modals/__add_price_list_modal.php:33
+#: templates/includes/modals/__edit_price_list_modal.php:34
+msgid "Factor:"
+msgstr ""
+
+#: templates/includes/modals/__add_price_list_modal.php:38
+#: templates/includes/modals/__edit_price_list_modal.php:39
+#: templates/includes/modals/__edit_role_modal.php:24
+msgid "Cancel"
+msgstr ""
+
+#: templates/includes/modals/__add_price_list_modal.php:39
+msgid "Add"
+msgstr ""
+
+#: templates/includes/modals/__edit_price_list_modal.php:6
+msgid "Edit price List"
+msgstr ""
+
+#: templates/includes/modals/__edit_price_list_modal.php:17
+#: templates/includes/modals/__edit_role_modal.php:18
+#: templates/includes/modals/__remove_role_modal.php:29
+msgid "Name:"
+msgstr ""
+
+#: templates/includes/modals/__edit_price_list_modal.php:40
+#: templates/includes/modals/__edit_role_modal.php:25
+msgid "Edit"
+msgstr ""
+
+#: templates/includes/modals/__edit_role_modal.php:6
+msgid "Edit Role"
+msgstr ""
+
+#: templates/includes/modals/__remove_price_list_modal.php:16
+msgid ""
+"Alert! The price list could have some data integrated, if you continue the "
+"following information will be removed:"
+msgstr ""
+
+#: templates/includes/modals/__remove_price_list_modal.php:17
+msgid "All the price related with this list"
+msgstr ""
+
+#: templates/includes/modals/__remove_price_list_modal.php:18
+msgid "All relations between this list and roles, categories, etc"
+msgstr ""
+
+#: templates/includes/modals/__remove_price_list_modal.php:20
+#: templates/includes/modals/__remove_role_modal.php:20
+msgid "Do you want to continue?"
+msgstr ""
+
+#: templates/includes/modals/__remove_role_modal.php:16
+msgid ""
+"Alert! The role could have some data integrated, if you continue the "
+"following information will be removed:"
+msgstr ""
+
+#: templates/includes/modals/__remove_role_modal.php:17
+msgid "All the price related with this role"
+msgstr ""
+
+#: templates/includes/modals/__remove_role_modal.php:18
+msgid "All relations between this role and price lists, categories, etc"
+msgstr ""
+
+#: templates/includes/modals/__remove_role_modal.php:37
+msgid "No, I don't want to remove it"
+msgstr ""
+
+#: templates/includes/modals/__remove_role_modal.php:38
+msgid "Yes, I know the consequences"
+msgstr ""
+
+#: templates/includes/requests/_import_price_list_request.php:26
+#: templates/includes/requests/_price_list_request.php:17
+#: templates/includes/requests/_price_list_request.php:45
+msgid "Price list name duplicated! "
+msgstr ""
+
+#: templates/includes/requests/_import_price_list_request.php:26
+#: templates/includes/requests/_price_list_request.php:17
+#: templates/includes/requests/_price_list_request.php:45
+msgid "The price list already exist, please choose other name."
+msgstr ""
+
+#: templates/includes/requests/_price_list_request.php:9
+msgid "Price list inserted! "
+msgstr ""
+
+#: templates/includes/requests/_price_list_request.php:9
+msgid "The price list was successfully inserted."
+msgstr ""
+
+#: templates/includes/requests/_price_list_request.php:37
+msgid "Price list updated! "
+msgstr ""
+
+#: templates/includes/requests/_price_list_request.php:37
+msgid "The price list was successfully updated."
+msgstr ""
+
+#: templates/includes/requests/_role_request.php:9
+msgid "Role created! "
+msgstr ""
+
+#: templates/includes/requests/_role_request.php:9
+msgid "The role was successfully created."
+msgstr ""
+
+#: templates/includes/requests/_role_request.php:17
+msgid "Role name duplicated !"
+msgstr ""
+
+#: templates/includes/requests/_role_request.php:17
+msgid "The role already exist, please choose other name."
+msgstr ""
+
+#: templates/includes/requests/_role_request.php:18
+#: templates/includes/requests/_role_request.php:45
+msgid "Close"
+msgstr ""
+
+#: templates/includes/requests/_role_request.php:36
+msgid "Role updated! "
+msgstr ""
+
+#: templates/includes/requests/_role_request.php:36
+msgid "The role was successfully updated."
+msgstr ""
+
+#: templates/includes/requests/_role_request.php:44
+msgid "Error updating role! "
+msgstr ""
+
+#: templates/includes/requests/_role_request.php:44
+msgid "The role was not updated."
+msgstr ""
+
+#: templates/products.php:76
+msgid "Choose a Price list to start change price quickly: "
+msgstr ""

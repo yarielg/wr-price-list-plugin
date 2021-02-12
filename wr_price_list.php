@@ -7,7 +7,7 @@
 Plugin Name:  WR Price List for Woocommerce
 Plugin URI:   https://www.webreadynow.com/en/wr-price-list-manager-woocommerce
 Description:  Create a Sales Price List(s) based on existing Price List(s). Changes to the primary price list will affect child price list. Configure child list to be a discount price list or raise cost based on a percentage of the parent list.
-Version:      1.0.1
+Version:      1.0.2
 Author:       Web Ready Now
 Author URI:   https://webreadynow.com/
 Tested up to: 5.3.2
@@ -17,7 +17,7 @@ Domain Path:  /languages
 
 defined('ABSPATH') or die('You do not have access, sally human!!!');
 
-define ( 'WRPL_PLUGIN_VERSION', '1.0.0');
+define ( 'WRPL_PLUGIN_VERSION', '1.0.2');
 
 if( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php') ){
     require_once  dirname( __FILE__ ) . '/vendor/autoload.php';
@@ -35,6 +35,7 @@ include 'inc/Util/helper.php';
 if ( class_exists( 'woocommerce' ) ){
     if( class_exists( 'Wrpl\\Inc\\Init' ) ){
         register_activation_hook( __FILE__ , array('Wrpl\\Inc\\Base\\Activate','activate') );
+        register_deactivation_hook( __FILE__ , array('Wrpl\\Inc\\Base\\Deactivate','deactivate') );
         Wrpl\Inc\Init::register_services();
     }
 }else{

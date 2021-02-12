@@ -88,7 +88,7 @@
                         "render": function ( data, type, row ) {
                             if(id_parent > 0){
                                 if(factor>=1){
-                                    return  '$'+data + '<span class="wrpl-increase"> (↑' + (factor*100-100).toFixed() + '%)</span>' ;
+                                    return  '$'+data + '<span class="wrpl-increase"> (↑' + (factor*100-100).toFixed(2) + '%)</span>' ;
                                 }else{
                                     return '$' + data;
                                 }
@@ -100,7 +100,7 @@
                         "render": function ( data, type, row ) {
                             if(id_parent > 0 ){
                                 if(factor<1){
-                                    return  '$'+data + '<span class="wrpl-decrease"> (↓' + ((1-factor)*100).toFixed() + '%)</span>' ;
+                                    return  '$'+data + '<span class="wrpl-decrease"> (↓' + ((1-factor)*100).toFixed(2) + '%)</span>' ;
                                 }else{
                                     return 'N/A';
                                 }

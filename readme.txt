@@ -1,9 +1,9 @@
 ﻿=== WR Price List Manager For Woocommerce ===
 Contributors: yariko0529
-Tags: woocommerce, price list, b2b, b2c, dynamic price, hide price, hide add to cart button
+Tags: woocommerce, price list, b2b, b2c, add roles, create discount, export prices,dynamic price, hide price, hide add to cart button
 Requires at least: 4.0
 Tested up to: 5.3.2
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -85,4 +85,6 @@ It also works great with WP 3.2 - and also should with WP 3.1 - but we only test
 * Initial release
 = 1.0.1 =
 * Choose the price format (Individual Price)
+= 1.0.2 =
+* Create discount with two decimal places like 0.708 = 70.8%
 *Note:* All my plugins are localized/ translatable by default. This is very important for all users worldwide. So please contribute your language to the plugin to make it even more useful. For translating I recommend the awesome ["Codestyling Localization" plugin](http://wordpress.org/extend/plugins/codestyling-localization/) and for validating the ["Poedit Editor"](http://www.poedit.net/).
